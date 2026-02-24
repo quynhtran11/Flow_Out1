@@ -26,10 +26,11 @@ public abstract class UIBase : BLBMono
         {
             bg.gameObject.SetActive(true);
         }
-        canvasGroup.alpha = 0;
         mainFrame.transform.localScale = Vector3.zero;
         mainFrame.transform.DOKill();
         mainFrame.transform.DOScale(Vector3.one, duration).SetEase(ease).SetDelay(delay);
+        if (canvasGroup == null) return;
+        canvasGroup.alpha = 0;
         canvasGroup.DOFade(1, duration);
     }
     public virtual void Close(float delay = .3f)
@@ -43,10 +44,11 @@ public abstract class UIBase : BLBMono
         {
             bg.gameObject.SetActive(false);
         }
-        canvasGroup.DOFade(0, duration);
         mainFrame.transform.DOScale(Vector3.zero, duration).SetEase(Ease.InBack).OnComplete(() =>
         {
             gameObject.SetActive(false);
         });
+        if (canvasGroup == null) return;
+        canvasGroup.DOFade(0, duration);
     }
 }

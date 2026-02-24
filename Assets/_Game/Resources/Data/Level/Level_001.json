@@ -1,0 +1,88 @@
+{
+  "levelID": 1,
+  "mode": 0,
+  "map": {
+    "x": 6,
+    "y": 6
+  },
+  "allBlocks": [
+    {
+      "id": 1,
+      "pos": {
+        "x": 0,
+        "y": 0
+      },
+      "hiddenProperties": {
+        "isHidden": false
+      },
+      "connectProperties": {
+        "idConnect": -1
+      }
+    },
+    {
+      "id": 2,
+      "pos": {
+        "x": 5,
+        "y": 5
+      },
+      "hiddenProperties": {
+        "isHidden": false
+      },
+      "connectProperties": {
+        "idConnect": -1
+      }
+    },
+    {
+      "id": 3,
+      "pos": {
+        "x": 1,
+        "y": 3
+      },
+      "hiddenProperties": {
+        "isHidden": false
+      },
+      "connectProperties": {
+        "idConnect": -1
+      }
+    },
+    {
+      "id": 4,
+      "pos": {
+        "x": 4,
+        "y": 2
+      },
+      "hiddenProperties": {
+        "isHidden": false
+      },
+      "connectProperties": {
+        "idConnect": -1
+      }
+    },
+    {
+      "id": 5,
+      "pos": {
+        "x": 2,
+        "y": 2
+      },
+      "hiddenProperties": {
+        "isHidden": false
+      },
+      "connectProperties": {
+        "idConnect": -1
+      }
+    },
+    {
+      "id": 6,
+      "pos": {
+        "x": 3,
+        "y": 4
+      },
+      "hiddenProperties": {
+        "isHidden": false
+      },
+      "connectProperties": {
+        "idConnect": -1
+      }
+    }
+  ]
+}

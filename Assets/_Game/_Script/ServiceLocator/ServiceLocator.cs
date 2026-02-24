@@ -7,6 +7,7 @@ public static class ServiceLocator
 
     public static void Installer() 
     {
+        Register(new SceneService());
     }
 
     public static void Proc()

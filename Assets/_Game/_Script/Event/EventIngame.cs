@@ -8,6 +8,7 @@ public struct OpenAppEvent : IEvenParam // call for tracking ..
 }
 public struct StartGameplayEvent : IEvenParam // call when play ingame
 {
+    public LevelInfor level;
 }
 public struct PauseGameEvent : IEvenParam // call when pause game
 {
@@ -35,3 +36,4 @@ public struct ChangeCoinEvent : IEvenParam // call when change coin
     public Action callBack;
     public bool isAnim;
 }
+
