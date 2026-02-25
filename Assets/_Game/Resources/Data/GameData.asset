@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   loadResouces: 1
+  clickRadius: 0.37
   soundData: {fileID: 11400000, guid: 3ad0abf10ad569d4c8921a8d867233ad, type: 2}

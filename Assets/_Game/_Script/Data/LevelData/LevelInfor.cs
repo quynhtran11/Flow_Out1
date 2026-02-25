@@ -11,6 +11,7 @@ public partial class LevelInfor
 public struct BlockData
 {
     public int id;
+    public int amount;
     public Vector2Int pos;
     public HiddenProperties hiddenProperties;
     public ConnectProperties connectProperties;

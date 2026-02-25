@@ -67,3 +67,18 @@ public enum TabHome
     Shop,
     Galery
 }
+public enum EColorType
+{
+    None,
+    Red,
+    Blue,
+    Yellow,
+    Green,
+    Purple,
+    Pink,
+    Brown,
+    Gray,
+    Orange,
+    White,
+    Black
+}

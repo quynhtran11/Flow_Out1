@@ -36,4 +36,8 @@ public struct ChangeCoinEvent : IEvenParam // call when change coin
     public Action callBack;
     public bool isAnim;
 }
+public struct TouchSuccessBlockEvent : IEvenParam // call when click success block 
+{
+    public BlockElement block;
+}
 

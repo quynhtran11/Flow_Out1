@@ -4,6 +4,7 @@ public abstract class UIBase : BLBMono
 {
     [Header("ANIMATION")]
     [SerializeField] protected float duration = .25f;
+    [SerializeField] protected float value = .75f;
     [SerializeField] protected Ease ease = Ease.OutBack;
     [Header("OBJECT")]
     [SerializeField] protected RectTransform bg;
@@ -26,7 +27,7 @@ public abstract class UIBase : BLBMono
         {
             bg.gameObject.SetActive(true);
         }
-        mainFrame.transform.localScale = Vector3.zero;
+        mainFrame.transform.localScale = Vector3.zero *value;
         mainFrame.transform.DOKill();
         mainFrame.transform.DOScale(Vector3.one, duration).SetEase(ease).SetDelay(delay);
         if (canvasGroup == null) return;
@@ -44,7 +45,7 @@ public abstract class UIBase : BLBMono
         {
             bg.gameObject.SetActive(false);
         }
-        mainFrame.transform.DOScale(Vector3.zero, duration).SetEase(Ease.InBack).OnComplete(() =>
+        mainFrame.transform.DOScale(Vector3.zero *value, duration).OnComplete(() =>
         {
             gameObject.SetActive(false);
         });

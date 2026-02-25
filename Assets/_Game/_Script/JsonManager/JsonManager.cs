@@ -18,7 +18,6 @@ public static class JsonManager
             string json = Resources.Load<TextAsset>(path).text;
             LevelInfor levelInfor = JsonUtility.FromJson<LevelInfor>(json);
             callBack?.Invoke(levelInfor);
-            Debug.LogError("1a_" + levelInfor.LevelID);
         }
         else
         { // load path 

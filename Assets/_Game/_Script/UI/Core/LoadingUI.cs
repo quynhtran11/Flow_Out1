@@ -22,7 +22,7 @@ public class LoadingUI : UIBase
         textProgress.text = "0%";
 
         float time = 0f;
-        float minTime = 2f;
+        float minTime = 1f;
 
         async.allowSceneActivation = false;
 
