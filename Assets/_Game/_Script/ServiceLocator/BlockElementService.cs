@@ -13,12 +13,9 @@ public class BlockElementService : BaseElementService<BlockElement>
     }
     private void OnTouchSuccessBlock(TouchSuccessBlockEvent param)
     {
-        Debug.LogError("1fsaf");
         if (allElements == null || allElements.Count <= 0
             || !allElements.Contains(param.block) || param.block.Matrix.y > 0) return;
-        Debug.LogError("2fsaf");
         CalculatorMatrix(param.block);
-
         allElements.Remove(param.block);
     }
     private void CalculatorMatrix(BlockElement block)
@@ -26,6 +23,7 @@ public class BlockElementService : BaseElementService<BlockElement>
         int row = block.Matrix.x;
         maxtrix[block.Matrix.x, block.Matrix.y] = null;
         block.gameObject.SetActive(false); // test
+        EventDispatcher.Dispatch(new ClearBlockEvent());
         Queue<BlockElement> queueBlocks = new Queue<BlockElement>();
         for (int i = 0; i < lenghtMatrix.y; i++)
         {

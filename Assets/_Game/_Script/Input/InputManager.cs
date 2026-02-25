@@ -51,7 +51,6 @@ public class InputManager : BLBMono
                 {
                     block = nearestBlock,
                 });
-                Debug.LogError("Block_" + nearestBlock.Data.id);
             }
         }
     }

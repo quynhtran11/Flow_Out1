@@ -40,4 +40,7 @@ public struct TouchSuccessBlockEvent : IEvenParam // call when click success blo
 {
     public BlockElement block;
 }
+public struct ClearBlockEvent : IEvenParam // call when clear 1 block
+{
 
+}
