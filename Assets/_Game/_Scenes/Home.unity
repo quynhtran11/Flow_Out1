@@ -827,6 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeUI
   duration: 0.25
+  value: 0.75
   ease: 27
   bg: {fileID: 0}
   mainFrame: {fileID: 0}

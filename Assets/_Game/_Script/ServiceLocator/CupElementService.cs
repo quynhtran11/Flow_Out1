@@ -1,30 +1,55 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
-public class BlockElementService : BaseElementService<BlockElement>
+public class CupElementService : BaseElementService<CupElement>
 {
-    private BlockElement[,] maxtrix;
+    private CupElement[,] maxtrix;
     private Vector3[,] centerPos;
     private Vector2Int lenghtMatrix;
     protected override void RegisterEvent()
     {
-        EventDispatcher.RemoveEvent<TouchSuccessBlockEvent>(OnTouchSuccessBlock);
-        EventDispatcher.RegisterEvent<TouchSuccessBlockEvent>(OnTouchSuccessBlock);
+        EventDispatcher.RemoveEvent<TouchSuccessCupEvent>(OnTouchSuccessCup);
+        EventDispatcher.RegisterEvent<TouchSuccessCupEvent>(OnTouchSuccessCup);
+        EventDispatcher.RemoveEvent<TouchFailedCupEvent>(OnTouchFailCup);
+        EventDispatcher.RegisterEvent<TouchFailedCupEvent>(OnTouchFailCup);
     }
-    private void OnTouchSuccessBlock(TouchSuccessBlockEvent param)
+    private void OnTouchSuccessCup(TouchSuccessCupEvent param)
     {
         if (allElements == null || allElements.Count <= 0
-            || !allElements.Contains(param.block) || param.block.Matrix.y > 0) return;
-        CalculatorMatrix(param.block);
-        allElements.Remove(param.block);
+            || !allElements.Contains(param.cup) || param.cup.Matrix.y > 0) return;
+        bool isFull = false;
+        //// check connect
+        //List<BlockElement> blocks = new List<BlockElement>();
+        //blocks.Add(param.block);
+        //for (int i = 0; i < allElements.Count; i++)
+        //{
+        //    if (allElements[i].Matrix.x-1 == param.block.Matrix.x &&
+        //        allElements[i].Matrix.y == param.block.Matrix.y)
+        //    {
+        //        blocks.Add(allElements[i]);
+        //        break;
+        //    }
+        //}
+        //Debug.LogError("value_" + blocks.Count);
+        //for (int i = 0; i < blocks.Count; i++)
+        //{
+        //    CalculatorMatrix(blocks[i]);
+        //    allElements.Remove(blocks[i]);
+        //}
+        CalculatorMatrix(param.cup);
+        allElements.Remove(param.cup);
     }
-    private void CalculatorMatrix(BlockElement block)
+    private void OnTouchFailCup(TouchFailedCupEvent param)
+    {
+
+    }
+    private void CalculatorMatrix(CupElement block)
     {
         int row = block.Matrix.x;
         maxtrix[block.Matrix.x, block.Matrix.y] = null;
-        block.gameObject.SetActive(false); // test
-        EventDispatcher.Dispatch(new ClearBlockEvent());
-        Queue<BlockElement> queueBlocks = new Queue<BlockElement>();
+        block.OutMatrix(); // test
+        Queue<CupElement> queueBlocks = new Queue<CupElement>();
         for (int i = 0; i < lenghtMatrix.y; i++)
         {
             var value = maxtrix[row, i];
@@ -49,13 +74,14 @@ public class BlockElementService : BaseElementService<BlockElement>
         var valueFinal = maxtrix[row, 0];
         if (valueFinal == null) return;
         valueFinal.SetBusy(false);
+
     }
     public override void InitElement(LevelInfor level)
     {
-        maxtrix = new BlockElement[level.Map.x, level.Map.y];
+        maxtrix = new CupElement[level.Map.x, level.Map.y];
         lenghtMatrix = new Vector2Int(level.Map.x, level.Map.y);
         centerPos = new Vector3[level.Map.x, level.Map.y];
-        Queue<BlockElement> stack = new Queue<BlockElement>();
+        Queue<CupElement> stack = new Queue<CupElement>();
         for (int i = 0; i < allElements.Count; i++)
         {
             stack.Enqueue(allElements[i]);
@@ -64,7 +90,7 @@ public class BlockElementService : BaseElementService<BlockElement>
         {
             for (int i = 0; i < level.Map.x; i++)
             {
-                BlockElement block = stack.Dequeue();
+                CupElement block = stack.Dequeue();
                 block.SetMatrix(new Vector2Int(i, j));
                 maxtrix[i, j] = block;
             }

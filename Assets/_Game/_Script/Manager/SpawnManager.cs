@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SpawnManager : BLBMono
 {
-    [SerializeField] private GameObject blockPrefab;
+    [SerializeField] private GameObject cupPrefab;
 
-    private BlockElementService blockService;
+    private CupElementService cupService;
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<StartGameplayEvent>(OnStartGame);
@@ -21,20 +21,20 @@ public class SpawnManager : BLBMono
     private void SpawnAllObject(LevelInfor lev)
     {
         LevelInfor lv = lev;
-        blockService = new BlockElementService();
-        for (int i = 0; i < lv.AllBlocks.Length; i++)
+        cupService = new CupElementService();
+        for (int i = 0; i < lv.AllCups.Length; i++)
         {
-            BlockElement block = SpanwObject<BlockElement>(blockPrefab);
-            block.gameObject.name = "Block_" + i;
-            Vector3 pos = new Vector3(lv.AllBlocks[i].pos.x, 0, lv.AllBlocks[i].pos.y);
-            block.Tf.position = pos;
-            block.Initilize(lv.AllBlocks[i]);
-            blockService.RegisterBlock(block);
+            CupElement cup = SpanwObject<CupElement>(cupPrefab);
+            cup.gameObject.name = "Block_" + i;
+            Vector3 pos = new Vector3(lv.AllCups[i].pos.x, 0, lv.AllCups[i].pos.y);
+            cup.Tf.position = pos;
+            cup.Initilize(lv.AllCups[i]);
+            cupService.RegisterBlock(cup);
         }
     }
     private void InitAllObject(LevelInfor level)
     {
-        this.blockService.InitElement(level);
+        this.cupService.InitElement(level);
     }
     private T SpanwObject<T>(GameObject go)
     {

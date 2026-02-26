@@ -5,25 +5,39 @@ public partial class LevelInfor
     [SerializeField] private int levelID;
     [SerializeField] private Vector2Int map;
     [SerializeField] private EModeType mode;
-    [SerializeField] private BlockData[] allBlocks;
+    [SerializeField] private CupData[] allCups;
+    [SerializeField] private WaterGroupData[] allWaterGroups;
 }
 [System.Serializable]
-public struct BlockData
+public struct CupData
 {
     public int id;
     public int amount;
+    public EColorType color;
     public Vector2Int pos;
-    public HiddenProperties hiddenProperties;
-    public ConnectProperties connectProperties;
+    public HiddenData hiddenData;
+    public ConnectData connectData;
 }
 [System.Serializable]
+public struct WaterGroupData
+{
+    public WaterData[] waterDatas;
+}
+[System.Serializable]
+public struct WaterData
+{
+    public int waterID;
+    public int waterGroupID;
+    public EColorType color;
+}
 
-public struct HiddenProperties
+[System.Serializable]
+public struct HiddenData
 {
     public bool isHidden;
 }
 [System.Serializable]
-public struct ConnectProperties
+public struct ConnectData
 {
     public int idConnect;
 }

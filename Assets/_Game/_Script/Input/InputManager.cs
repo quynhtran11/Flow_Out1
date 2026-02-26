@@ -28,13 +28,13 @@ public class InputManager : BLBMono
                 GameData.Instance.ClickRadius
             );
 
-            BlockElement nearestBlock = null;
+            CupElement nearestBlock = null;
             float nearestSqrDistance = float.MaxValue;
 
             foreach (var col in colliders)
             {
-                BlockElement block = col.GetComponent<BlockElement>();
-                if (block == null || block.IsBusy) continue;
+                CupElement block = col.GetComponent<CupElement>();
+                if (block == null) continue;
 
                 float sqrDist = (lastClickPos - col.transform.position).sqrMagnitude;
 
@@ -47,10 +47,26 @@ public class InputManager : BLBMono
 
             if (nearestBlock != null)
             {
-                EventDispatcher.Dispatch(new TouchSuccessBlockEvent()
+                bool isFull = false;
+                EventDispatcher.Dispatch(new CheckFullSlotConveyorEvent()
                 {
-                    block = nearestBlock,
+                    isFullSlot = (x) =>
+                    {
+                        isFull = x;
+                    }
                 });
+                if (nearestBlock.IsBusy || isFull)
+                {
+                    Debug.LogError("touchFail");
+                }
+                else
+                {
+                    EventDispatcher.Dispatch(new TouchSuccessCupEvent()
+                    {
+                        cup = nearestBlock,
+                    });
+                    Debug.LogError("touchSuccess");
+                }
             }
         }
     }

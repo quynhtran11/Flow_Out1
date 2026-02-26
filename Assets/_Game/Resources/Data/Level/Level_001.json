@@ -5,84 +5,111 @@
     "x": 3,
     "y": 2
   },
-  "allBlocks": [
+  "allCups": [
     {
       "id": 0,
+      "amount": 1,
+      "color": 1,
       "pos": {
         "x": 0,
         "y": 0
       },
-      "hiddenProperties": {
-        "isHidden": false
-      },
-      "connectProperties": {
-        "idConnect": -1
-      }
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
     },
     {
       "id": 1,
+      "amount": 1,
+      "color": 2,
       "pos": {
         "x": 1,
         "y": 0
       },
-      "hiddenProperties": {
-        "isHidden": false
-      },
-      "connectProperties": {
-        "idConnect": -1
-      }
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
     },
     {
       "id": 2,
+      "amount": 1,
+      "color": 3,
       "pos": {
         "x": 2,
         "y": 0
       },
-      "hiddenProperties": {
-        "isHidden": false
-      },
-      "connectProperties": {
-        "idConnect": -1
-      }
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
     },
     {
       "id": 3,
+      "amount": 1,
+      "color": 1,
       "pos": {
         "x": 0,
         "y": -1
       },
-      "hiddenProperties": {
-        "isHidden": false
-      },
-      "connectProperties": {
-        "idConnect": -1
-      }
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
     },
     {
       "id": 4,
+      "amount": 1,
+      "color": 5,
       "pos": {
         "x": 1,
         "y": -1
       },
-      "hiddenProperties": {
-        "isHidden": false
-      },
-      "connectProperties": {
-        "idConnect": -1
-      }
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
     },
     {
       "id": 5,
+      "amount": 1,
+      "color": 1,
       "pos": {
         "x": 2,
         "y": -1
       },
-      "hiddenProperties": {
-        "isHidden": false
-      },
-      "connectProperties": {
-        "idConnect": -1
-      }
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    }
+  ],
+  "allWaterGroups": [
+    {
+      "waterDatas": [
+        {
+          "waterID": 0,
+          "waterGroupID": 0,
+          "color": 1
+        },
+        {
+          "waterID": 1,
+          "waterGroupID": 0,
+          "color": 1
+        }
+      ]
+    },
+    {
+      "waterDatas": [
+        {
+          "waterID": 0,
+          "waterGroupID": 1,
+          "color": 2
+        },
+        {
+          "waterID": 1,
+          "waterGroupID": 1,
+          "color": 1
+        }
+      ]
+    },
+    {
+      "waterDatas": [
+        {
+          "waterID": 0,
+          "waterGroupID": 2,
+          "color": 3
+        }
+      ]
     }
   ]
 }

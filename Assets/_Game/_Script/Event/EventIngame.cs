@@ -36,11 +36,23 @@ public struct ChangeCoinEvent : IEvenParam // call when change coin
     public Action callBack;
     public bool isAnim;
 }
-public struct TouchSuccessBlockEvent : IEvenParam // call when click success block 
+public struct TouchSuccessCupEvent : IEvenParam // call when click success cup
 {
-    public BlockElement block;
+    public CupElement cup;
 }
-public struct ClearBlockEvent : IEvenParam // call when clear 1 block
+public struct TouchFailedCupEvent : IEvenParam // call when click failed cup
+{
+    public CupElement cup;
+}
+public struct ClearCupEvent : IEvenParam // call when clear 1 cup
 {
 
+}
+public struct CupToConveyorEvent : IEvenParam // call when cup to conveyor
+{
+    public CupElement cup;  
+}
+public struct CheckFullSlotConveyorEvent : IEvenParam // call check full slot
+{
+    public Action<bool> isFullSlot;
 }

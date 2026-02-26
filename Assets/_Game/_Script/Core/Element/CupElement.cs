@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BlockElement : BaseElement<BlockElementVisual,BlockData>
+public class CupElement : BaseElement<CupElementVisual,CupData>
 {
     protected Vector2Int matrix;
     public Vector2Int Matrix => matrix;
@@ -17,5 +17,14 @@ public class BlockElement : BaseElement<BlockElementVisual,BlockData>
     {
         SetMatrix(matrix);
         visual.MoveNextMatrix(pos);
+    }
+    public void OutMatrix()
+    {
+        visual.OutMatrix(); // test
+        EventDispatcher.Dispatch(new CupToConveyorEvent()
+        {
+            cup = this
+        });
+        EventDispatcher.Dispatch(new ClearCupEvent()); // test
     }
 }

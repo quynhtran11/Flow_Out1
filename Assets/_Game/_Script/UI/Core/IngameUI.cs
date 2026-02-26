@@ -22,9 +22,6 @@ public class IngameUI : UIBase
     private void ClickSetting()
     {
         // open setting ui 
-        // test
-        var service = ServiceLocator.Get<SceneService>();
-        if (service == null) return;
-        service.LoadScene(ESceneType.Home);
+        GameHUD.Instance.OpenUI<SettingUI>();
     }
 }

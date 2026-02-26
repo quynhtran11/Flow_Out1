@@ -23,12 +23,12 @@ public partial class LevelInfor
             mode = value;
         }
     }
-    public BlockData[] AllBlocks
+    public CupData[] AllCups
     {
-        get => allBlocks;
+        get => allCups;
         set
         {
-            allBlocks = value;
+            allCups = value;
         }
     }
 }

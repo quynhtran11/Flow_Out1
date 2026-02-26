@@ -6,11 +6,11 @@ public class LevelManager : BLBMono
     private int currentBlockAmount;
     private void OnEnable()
     {
-        EventDispatcher.RegisterEvent<ClearBlockEvent>(OnClearBlock);
+        EventDispatcher.RegisterEvent<ClearCupEvent>(OnClearBlock);
     }
     private void OnDisable()
     {
-        EventDispatcher.RemoveEvent<ClearBlockEvent>(OnClearBlock);
+        EventDispatcher.RemoveEvent<ClearCupEvent>(OnClearBlock);
     }
     private void Start()
     {
@@ -26,7 +26,7 @@ public class LevelManager : BLBMono
         });
     }
 
-    private void OnClearBlock(ClearBlockEvent param)
+    private void OnClearBlock(ClearCupEvent param)
     {
         currentBlockAmount++;
         if (currentBlockAmount >= maxBlockAmount)
@@ -37,6 +37,6 @@ public class LevelManager : BLBMono
     private void OnInit(LevelInfor level)
     {
         currentBlockAmount = 0;
-        maxBlockAmount = level.AllBlocks.Length;
+        maxBlockAmount = level.AllCups.Length;
     }
 }

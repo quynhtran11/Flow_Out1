@@ -1,10 +1,37 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
-public class BlockElementVisual : BaseElementVisual<BlockData>
+public class CupElementVisual : BaseElementVisual<CupData>
 {
+    [SerializeField] private TextMeshProUGUI textAmount;
+    [SerializeField] private MeshRenderer mesh;
+    private MaterialPropertyBlock matBlock;
+    private void LoadColor(EColorType type)
+    {
+        if(matBlock == null)
+        {
+            matBlock = new MaterialPropertyBlock();
+        }
+        mesh.GetPropertyBlock(matBlock);
+        Color c = GameData.Instance.ColorData.GetData(type).color;
+        matBlock.SetColor("_BaseColor", c);
+        mesh.SetPropertyBlock(matBlock);
+    }
+    private void ActiveTextAmount(bool isBusy)
+    {
+        if (isBusy)
+        {
+            textAmount.color = new Color(1, 1, 1, .3f);
+        }
+        else
+        {
+            textAmount.color = new Color(1, 1, 1, 1f);
+        }
+    }
     private void ActiveInteract(bool isBusy)
     {
+        ActiveTextAmount(isBusy);
         if (isBusy) return;
         float delay = (float)data.id * .05f;
         skin.DOKill();
@@ -16,6 +43,7 @@ public class BlockElementVisual : BaseElementVisual<BlockData>
     }
     public override void AfterInit()
     {
+        LoadColor(data.color);
         Tf.DOKill();
         Tf.position = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z - 10);
         float delay = (float)data.id * .05f;
@@ -30,5 +58,11 @@ public class BlockElementVisual : BaseElementVisual<BlockData>
     {
         Tf.DOKill();
         Tf.DOMove(pos, .5f);
+    }
+    public void OutMatrix() // test
+    {
+        //Tf.DOKill();
+        //Vector3 pos = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z + 5f);
+        //Tf.DOMove(pos, 1f);
     }
 }
