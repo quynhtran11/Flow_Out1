@@ -13,7 +13,7 @@ public class CameraGame : BLBMono
     }
     private void OnStartGame(StartGameplayEvent param)
     {
-        float value = (float)param.level.Map.x / 2f;
+        float value =GameUntilities. SizeMap(param.level.AllCups)/2f;
         Tf.position = new Vector3(value, Tf.position.y, Tf.position.z);
     }
 }

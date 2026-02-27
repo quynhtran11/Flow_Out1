@@ -5,7 +5,7 @@ public abstract class BaseElementService<A>
 {
     protected List<A> allElements = new List<A>();
     protected virtual void RegisterEvent() { }
-    public void RegisterBlock(A value)
+    public void RegisterObject(A value)
     {
         if (allElements.Contains(value)) return;
         allElements.Add(value);

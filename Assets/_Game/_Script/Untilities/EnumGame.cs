@@ -82,3 +82,11 @@ public enum EColorType
     White,
     Black
 }
+public enum EElementType
+{
+    None,
+    Cup,
+    Storage,
+    Water,
+    ConveyorSlot
+}

@@ -13,20 +13,22 @@ public class CupElementVisual : BaseElementVisual<CupData>
         {
             matBlock = new MaterialPropertyBlock();
         }
-        mesh.GetPropertyBlock(matBlock);
+        mesh.GetPropertyBlock(matBlock,0);
         Color c = GameData.Instance.ColorData.GetData(type).color;
         matBlock.SetColor("_BaseColor", c);
-        mesh.SetPropertyBlock(matBlock);
+        mesh.SetPropertyBlock(matBlock,0);
     }
     private void ActiveTextAmount(bool isBusy)
     {
         if (isBusy)
         {
             textAmount.color = new Color(1, 1, 1, .3f);
+            skin.transform.localEulerAngles = new Vector3(-180f, 0, 0);
         }
         else
         {
             textAmount.color = new Color(1, 1, 1, 1f);
+            skin.transform.localEulerAngles = new Vector3(-5f, 0, 0);
         }
     }
     private void ActiveInteract(bool isBusy)
@@ -35,11 +37,11 @@ public class CupElementVisual : BaseElementVisual<CupData>
         if (isBusy) return;
         float delay = (float)data.id * .05f;
         skin.DOKill();
-        Vector3 scaleInit = new Vector3(.975f, .95f, 1f);
-        Vector3 scaleAfter = new Vector3(1.025f, 1.05f, 1f);
+        Vector3 scaleInit = new Vector3(.98f, .95f, 1f);
+        Vector3 scaleAfter = new Vector3(1.03f, 1.05f, 1f);
         skin.transform.localScale = scaleInit;
         skin.DOScaleX(scaleAfter.x, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay);
-        skin.DOScaleY(scaleAfter.y, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay);
+        skin.DOScaleY(scaleAfter.y, 1.15f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay + .2f);
     }
     public override void AfterInit()
     {
@@ -64,5 +66,17 @@ public class CupElementVisual : BaseElementVisual<CupData>
         //Tf.DOKill();
         //Vector3 pos = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z + 5f);
         //Tf.DOMove(pos, 1f);
+    }
+    public void MoveToConveyor(Vector3 pos)
+    {
+        Tf.DOJump(pos, 1, 1, .4f).OnComplete(() =>
+        {
+            Tf.DOLocalMove(new Vector3(0, Tf.localPosition.y, Tf.localPosition.z), .3f);
+        }); // test
+    }
+    public void MoveFailed()
+    {
+        skin.DOKill();
+        skin.DOPunchRotation(Vector3.forward * 5.75f, .25f);
     }
 }

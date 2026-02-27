@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,5 +18,18 @@ public static class GameUntilities
     }
     return false;
 #endif
+    }
+    public static float SizeMap(CupData[] datas)
+    {
+        float size = float.MinValue;
+        for (int i = 0; i < datas.Length; i++)
+        {
+            float v = datas[i].pos.x;
+            if (v > size)
+            {
+                size = v;
+            }
+        }
+        return size;
     }
 }

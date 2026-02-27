@@ -31,4 +31,9 @@ public partial class LevelInfor
             allCups = value;
         }
     }
+    public StorageData[] AllStorages
+    {
+        get => allStorages;
+        set => allStorages = value;
+    }
 }

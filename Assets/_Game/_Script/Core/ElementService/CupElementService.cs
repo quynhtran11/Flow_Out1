@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
-
 public class CupElementService : BaseElementService<CupElement>
 {
     private CupElement[,] maxtrix;
@@ -42,7 +40,7 @@ public class CupElementService : BaseElementService<CupElement>
     }
     private void OnTouchFailCup(TouchFailedCupEvent param)
     {
-
+        param.cup.MoveFailed();
     }
     private void CalculatorMatrix(CupElement block)
     {

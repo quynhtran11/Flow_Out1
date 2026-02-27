@@ -27,4 +27,12 @@ public class CupElement : BaseElement<CupElementVisual,CupData>
         });
         EventDispatcher.Dispatch(new ClearCupEvent()); // test
     }
+    public void MoveToConveyor(Vector3 pos)
+    {
+        visual.MoveToConveyor(pos);
+    }
+    public void MoveFailed()
+    {
+        visual.MoveFailed();
+    }
 }

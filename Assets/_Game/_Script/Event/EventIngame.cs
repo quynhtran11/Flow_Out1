@@ -56,3 +56,11 @@ public struct CheckFullSlotConveyorEvent : IEvenParam // call check full slot
 {
     public Action<bool> isFullSlot;
 }
+public struct CheckFillWaterEvent : IEvenParam 
+{
+    // call check water qualified to cup
+    // 
+    public Action<WaterElement> callBack;
+    public Vector3 pos;
+    public EColorType color;
+}

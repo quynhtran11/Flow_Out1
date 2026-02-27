@@ -58,6 +58,10 @@ public class InputManager : BLBMono
                 if (nearestBlock.IsBusy || isFull)
                 {
                     Debug.LogError("touchFail");
+                    EventDispatcher.Dispatch(new TouchFailedCupEvent()
+                    {
+                        cup = nearestBlock,
+                    });
                 }
                 else
                 {

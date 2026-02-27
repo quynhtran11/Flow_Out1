@@ -1,12 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
-[System.Serializable]
-public class ConveyorSlot
-{
-    public int idSlot;
-    public Vector3 slotPostion;
-}
 public class Conveyor : BLBMono
 {
     [SerializeField] private ConveyorVisual visual;
@@ -14,8 +8,9 @@ public class Conveyor : BLBMono
     [SerializeField] private Transform endPoint;
     private int maxSlot;
     private int currentSlot;
-    private List<CupElement> allItems = new List<CupElement>();
-    private List<ConveyorSlot> allSlots = new List<ConveyorSlot>();
+    private bool isBusy;
+    private List<ConveyorSlotElement> maxAllSlots = new List<ConveyorSlotElement>();
+    private List<ConveyorSlotElement> currentAllSlots = new List<ConveyorSlotElement>();
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<StartGameplayEvent>(OnStartGame);
@@ -28,32 +23,72 @@ public class Conveyor : BLBMono
         EventDispatcher.RemoveEvent<CupToConveyorEvent>(OnCupToConveyor);
         EventDispatcher.RemoveEvent<CheckFullSlotConveyorEvent>(OnCheckFullSlotConveyor);
     }
+    private void Update()
+    {
+        if (isBusy) return;
+        for (int i = maxAllSlots.Count-1; i >= 0; i--)
+        {
+            if (maxAllSlots[i] == null) continue;
+            maxAllSlots[i].OnUpdate(startPoint.position,endPoint.position);
+        }
+    }
     private void OnInit()
     {
+        isBusy = true;
+        visual.OnInit();
         maxSlot = GameData.Instance.InitSlot;
         currentSlot = 0;
-        allItems = new List<CupElement>();
         CalculatorSlot();
     }
     private void CalculatorSlot()
     {
-        allSlots = new List<ConveyorSlot>();
-        float size = endPoint.position.x - startPoint.position.x;
-        float offset = size / (float)maxSlot;
+        maxAllSlots = new List<ConveyorSlotElement>();
+        currentAllSlots = new List<ConveyorSlotElement>();
+        float startX = startPoint.position.x;
+        float endX = endPoint.position.x;
+
+        float size = endX - startX;
+        float offset = size / (maxSlot);
+
         for (int i = 0; i < maxSlot; i++)
         {
-            ConveyorSlot conveyorSlot = new ConveyorSlot();
-            conveyorSlot.idSlot = i;
-            float posX = startPoint.position.x + (offset * (i));
-            Vector3 pos = new Vector3(posX, endPoint.position.y,endPoint.position.z);
-            conveyorSlot.slotPostion = pos;
-            allSlots.Add(conveyorSlot);
+            ConveyorSlotElement conveyorSlot = Instantiate(GameData.Instance.ElementInfor.GetData(EElementType.ConveyorSlot)
+                .prefab, transform).GetComponent<ConveyorSlotElement>();
+
+            float posX = startX + offset * 0.5f + offset * i;
+
+            Vector3 pos = new Vector3(
+                posX,
+                startPoint.position.y,
+                startPoint.position.z
+            );
+            conveyorSlot.OnInit(i);
+            conveyorSlot.transform.position = pos;
+            maxAllSlots.Add(conveyorSlot);
         }
+        isBusy = false;
     }
     private bool IsFullSlot()
     {
         if (currentSlot >= maxSlot) return true;
         return false;
+    }
+    private ConveyorSlotElement GetConveyorSlotQualified()
+    {
+        float x = float.MaxValue;
+        ConveyorSlotElement c = null;
+        for (int i = 0; i < maxAllSlots.Count; i++)
+        {
+            if (maxAllSlots[i].Tf.position.x <= startPoint.position.x ||
+                maxAllSlots[i].IsBusy) continue;
+            float distance = maxAllSlots[i].Tf.position.x - startPoint.position.x;
+            if (distance < x)
+            {
+                x = distance;
+                c = maxAllSlots[i];
+            }
+        }
+        return c;
     }
     private void OnStartGame(StartGameplayEvent param)
     {
@@ -61,11 +96,15 @@ public class Conveyor : BLBMono
     }
     private void OnCupToConveyor(CupToConveyorEvent param)
     {
-        if (allItems.Contains(param.cup) || IsFullSlot()) return;
+        if (IsFullSlot()) return;
         param.cup.DOKill();
-        param.cup.transform.DOMove(allSlots[currentSlot].slotPostion, .4f); // test
+        ConveyorSlotElement c = GetConveyorSlotQualified();
+        c.RegisterObject(param.cup);
+        Vector3 pos = new Vector3(c.Tf.position.x, c.Tf.position.y + .5f,
+            c.Tf.position.z);
+        param.cup.MoveToConveyor(pos);
         currentSlot++;
-        allItems.Add(param.cup);
+        currentAllSlots.Add(c);
     }
     private void OnCheckFullSlotConveyor(CheckFullSlotConveyorEvent param)
     {

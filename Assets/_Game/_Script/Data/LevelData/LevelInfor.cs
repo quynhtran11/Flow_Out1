@@ -6,7 +6,7 @@ public partial class LevelInfor
     [SerializeField] private Vector2Int map;
     [SerializeField] private EModeType mode;
     [SerializeField] private CupData[] allCups;
-    [SerializeField] private WaterGroupData[] allWaterGroups;
+    [SerializeField] private StorageData[] allStorages;
 }
 [System.Serializable]
 public struct CupData
@@ -19,7 +19,7 @@ public struct CupData
     public ConnectData connectData;
 }
 [System.Serializable]
-public struct WaterGroupData
+public struct StorageData
 {
     public WaterData[] waterDatas;
 }
