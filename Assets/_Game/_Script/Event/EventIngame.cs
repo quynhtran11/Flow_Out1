@@ -46,7 +46,7 @@ public struct TouchFailedCupEvent : IEvenParam // call when click failed cup
 }
 public struct ClearCupEvent : IEvenParam // call when clear 1 cup
 {
-
+    public CupElementVisual cup;
 }
 public struct CupToConveyorEvent : IEvenParam // call when cup to conveyor
 {

@@ -1,5 +1,8 @@
 using DG.Tweening;
+using NUnit.Framework.Interfaces;
+using System;
 using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class CupElementVisual : BaseElementVisual<CupData>
@@ -7,6 +10,20 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private TextMeshProUGUI textAmount;
     [SerializeField] private MeshRenderer mesh;
     private MaterialPropertyBlock matBlock;
+    private void OnEnable()
+    {
+        EventDispatcher.RegisterEvent<ClearCupEvent>(OnClearCup);
+    }
+    private void OnDisable()
+    {
+        EventDispatcher.RemoveEvent<ClearCupEvent>(OnClearCup);
+    }
+    private void OnClearCup(ClearCupEvent param)
+    {
+        if (param.cup != this) return;
+        Tf.DOKill();
+        Tf.DOScale(Vector3.zero, .4f).SetEase(Ease.InBack);
+    }
     private void LoadColor(EColorType type)
     {
         if(matBlock == null)
@@ -17,6 +34,10 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Color c = GameData.Instance.ColorData.GetData(type).color;
         matBlock.SetColor("_BaseColor", c);
         mesh.SetPropertyBlock(matBlock,0);
+    }
+    private void ChangeTextAmount(string text)
+    {
+        textAmount.SetText(text);
     }
     private void ActiveTextAmount(bool isBusy)
     {
@@ -46,6 +67,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     public override void AfterInit()
     {
         LoadColor(data.color);
+        ChangeTextAmount(data.amount.ToString());
         Tf.DOKill();
         Tf.position = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z - 10);
         float delay = (float)data.id * .05f;
@@ -67,12 +89,12 @@ public class CupElementVisual : BaseElementVisual<CupData>
         //Vector3 pos = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z + 5f);
         //Tf.DOMove(pos, 1f);
     }
-    public void MoveToConveyor(Vector3 pos)
+    public void MoveToConveyor(Vector3 pos, Action callBack)
     {
-        Tf.DOJump(pos, 1, 1, .4f).OnComplete(() =>
-        {
-            Tf.DOLocalMove(new Vector3(0, Tf.localPosition.y, Tf.localPosition.z), .3f);
-        }); // test
+            Tf.DOLocalMove(new Vector3(0, .5f, 0), .3f).OnComplete(() =>
+            {
+                callBack?.Invoke();
+            });
     }
     public void MoveFailed()
     {

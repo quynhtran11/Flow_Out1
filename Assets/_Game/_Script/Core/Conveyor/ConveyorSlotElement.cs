@@ -1,10 +1,20 @@
+using System;
 using UnityEngine;
 
 public class ConveyorSlotElement : BLBMono
 {
     private int idSlot;
     private CupElement objectOwner = null;
-    public bool IsBusy => objectOwner != null;
+    public CupElement ObjectOwner => objectOwner;
+    public bool IsBusy()
+    {
+        if(objectOwner != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void OnInit(int id)
     {
         this.idSlot = id;
@@ -26,23 +36,22 @@ public class ConveyorSlotElement : BLBMono
         {
             Tf.position = new Vector3(start.x, start.y, Tf.position.z);
         }
-        if (!IsBusy ) return;
-
+        if (this.objectOwner == null) return;
+        if (!this.objectOwner.IsCheck || this.objectOwner.IsBusy) return;
         EventDispatcher.Dispatch(new CheckFillWaterEvent()
         {
             callBack = (x) =>
             {
-                WaterFillCup(x);
+                WaterFillCup(x,objectOwner);
             },
             pos = Tf.position,
             color = this.objectOwner.Data.color
         });
     }
-    private void WaterFillCup(WaterElement water)
+    private void WaterFillCup(WaterElement water,CupElement cup)
     {
-        Debug.LogError("11");
-
         if (water == null) return;
+        water.WaterFill(cup);
         Debug.LogError("fill_" + water.Data.color + "ID" + water.Data.waterID);
     }
 }

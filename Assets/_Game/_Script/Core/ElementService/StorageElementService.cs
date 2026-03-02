@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class StorageElementService : BaseElementService<StorageElement>
 {
@@ -9,16 +10,17 @@ public class StorageElementService : BaseElementService<StorageElement>
     }
     private void OnCheckFillWater(CheckFillWaterEvent param)
     {
-        if(allElements == null || allElements.Count<=0)  return;
-        Debug.LogError("12");
-        for (int i = 0; i < allElements.Count; i++) {
-            if (param.pos.x - allElements[i].Tf.position.x > .1f) continue;
+        if (allElements == null || allElements.Count <= 0) return;
+        for (int i = 0; i < allElements.Count; i++)
+        {
+            if (allElements[i] == null) continue;
+            if (Mathf.Abs( param.pos.x - allElements[i].Tf.position.x) > .5f) continue;
             param.callBack.Invoke(allElements[i].GetWaterFill(param.color));
         }
     }
     public override void InitElement(LevelInfor level)
     {
-        foreach(var storage in allElements)
+        foreach (var storage in allElements)
         {
             storage.OnInit();
         }

@@ -8,7 +8,7 @@
   "allCups": [
     {
       "id": 0,
-      "amount": 1,
+      "amount": 2,
       "color": 1,
       "pos": {
         "x": 0,
@@ -19,7 +19,7 @@
     },
     {
       "id": 1,
-      "amount": 1,
+      "amount": 3,
       "color": 2,
       "pos": {
         "x": 3,
@@ -30,7 +30,7 @@
     },
     {
       "id": 2,
-      "amount": 1,
+      "amount": 3,
       "color": 3,
       "pos": {
         "x": 6,
@@ -41,7 +41,7 @@
     },
     {
       "id": 3,
-      "amount": 1,
+      "amount": 3,
       "color": 1,
       "pos": {
         "x": 0,
@@ -52,7 +52,7 @@
     },
     {
       "id": 4,
-      "amount": 1,
+      "amount": 3,
       "color": 5,
       "pos": {
         "x": 3,
@@ -63,7 +63,7 @@
     },
     {
       "id": 5,
-      "amount": 1,
+      "amount": 3,
       "color": 1,
       "pos": {
         "x": 6,
@@ -85,6 +85,26 @@
           "waterID": 1,
           "waterGroupID": 0,
           "color": 1
+        },
+        {
+          "waterID": 2,
+          "waterGroupID": 0,
+          "color": 1
+        },
+        {
+          "waterID": 3,
+          "waterGroupID": 0,
+          "color": 3
+        },
+        {
+          "waterID": 4,
+          "waterGroupID": 0,
+          "color": 3
+        },
+        {
+          "waterID": 5,
+          "waterGroupID": 0,
+          "color": 5
         }
       ]
     },
@@ -99,6 +119,26 @@
           "waterID": 1,
           "waterGroupID": 1,
           "color": 1
+        },
+        {
+          "waterID": 2,
+          "waterGroupID": 1,
+          "color": 2
+        },
+        {
+          "waterID": 3,
+          "waterGroupID": 1,
+          "color": 1
+        },
+        {
+          "waterID": 4,
+          "waterGroupID": 2,
+          "color": 1
+        },
+        {
+          "waterID": 5,
+          "waterGroupID": 1,
+          "color": 5
         }
       ]
     },
@@ -108,6 +148,26 @@
           "waterID": 0,
           "waterGroupID": 2,
           "color": 3
+        },
+        {
+          "waterID": 1,
+          "waterGroupID": 2,
+          "color": 2
+        },
+        {
+          "waterID": 2,
+          "waterGroupID": 0,
+          "color": 5
+        },
+        {
+          "waterID": 3,
+          "waterGroupID": 2,
+          "color": 1
+        },
+        {
+          "waterID": 4,
+          "waterGroupID": 2,
+          "color": 1
         }
       ]
     }

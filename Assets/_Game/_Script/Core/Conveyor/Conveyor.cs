@@ -16,20 +16,24 @@ public class Conveyor : BLBMono
         EventDispatcher.RegisterEvent<StartGameplayEvent>(OnStartGame);
         EventDispatcher.RegisterEvent<CupToConveyorEvent>(OnCupToConveyor);
         EventDispatcher.RegisterEvent<CheckFullSlotConveyorEvent>(OnCheckFullSlotConveyor);
+        EventDispatcher.RegisterEvent<ClearCupEvent>(OnClearCup);
+
     }
     private void OnDisable()
     {
         EventDispatcher.RemoveEvent<StartGameplayEvent>(OnStartGame);
         EventDispatcher.RemoveEvent<CupToConveyorEvent>(OnCupToConveyor);
         EventDispatcher.RemoveEvent<CheckFullSlotConveyorEvent>(OnCheckFullSlotConveyor);
+        EventDispatcher.RemoveEvent<ClearCupEvent>(OnClearCup);
+
     }
     private void Update()
     {
         if (isBusy) return;
-        for (int i = maxAllSlots.Count-1; i >= 0; i--)
+        for (int i = maxAllSlots.Count - 1; i >= 0; i--)
         {
             if (maxAllSlots[i] == null) continue;
-            maxAllSlots[i].OnUpdate(startPoint.position,endPoint.position);
+            maxAllSlots[i].OnUpdate(startPoint.position, endPoint.position);
         }
     }
     private void OnInit()
@@ -80,7 +84,7 @@ public class Conveyor : BLBMono
         for (int i = 0; i < maxAllSlots.Count; i++)
         {
             if (maxAllSlots[i].Tf.position.x <= startPoint.position.x ||
-                maxAllSlots[i].IsBusy) continue;
+                maxAllSlots[i].IsBusy()) continue;
             float distance = maxAllSlots[i].Tf.position.x - startPoint.position.x;
             if (distance < x)
             {
@@ -109,5 +113,18 @@ public class Conveyor : BLBMono
     private void OnCheckFullSlotConveyor(CheckFullSlotConveyorEvent param)
     {
         param.isFullSlot.Invoke(IsFullSlot());
+    }
+    private void OnClearCup(ClearCupEvent param)
+    {
+        ConveyorSlotElement c = null;
+        for (int i = 0; i < currentAllSlots.Count; i++)
+        {
+            if (currentAllSlots[i].ObjectOwner == null || currentAllSlots[i].ObjectOwner.Visual != param.cup) continue;
+            c = currentAllSlots[i];
+            break;
+        }
+        currentSlot--;
+        c.UnRegisterObject();
+        currentAllSlots.Remove(c);
     }
 }
