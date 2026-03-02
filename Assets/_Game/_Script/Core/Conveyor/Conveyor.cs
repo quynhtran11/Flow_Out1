@@ -29,6 +29,7 @@ public class Conveyor : BLBMono
     }
     private void Update()
     {
+        if (GameManager.Instance.GameState != EGameState.Playing) return;
         if (isBusy) return;
         for (int i = maxAllSlots.Count - 1; i >= 0; i--)
         {

@@ -1,6 +1,4 @@
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86.Avx;
-
 public class CupElement : BaseElement<CupElementVisual, CupData>
 {
     protected Vector2Int matrix;
@@ -48,6 +46,7 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     public void WaterFill()
     {
         currentWater++;
+        visual.WaterFill();
         if (currentWater >= Data.amount)
         {
             isBusy = true;

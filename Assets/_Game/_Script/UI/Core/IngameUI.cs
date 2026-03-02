@@ -23,5 +23,9 @@ public class IngameUI : UIBase
     {
         // open setting ui 
         GameHUD.Instance.OpenUI<SettingUI>();
+        EventDispatcher.Dispatch(new PauseGameEvent()
+        {
+            isSetting = true
+        });
     }
 }

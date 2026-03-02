@@ -32,5 +32,8 @@ public class SettingUI : UIBase
     private void ClickExit()
     {
         GameHUD.Instance.CloseUI<SettingUI>();
+        EventDispatcher.Dispatch(new ContinueGameEvent()
+        {
+        });
     }
 }

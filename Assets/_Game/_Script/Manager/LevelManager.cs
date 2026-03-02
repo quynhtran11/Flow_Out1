@@ -31,7 +31,11 @@ public class LevelManager : BLBMono
         currentBlockAmount++;
         if (currentBlockAmount >= maxBlockAmount)
         {
-            Debug.LogError("win");
+            EventDispatcher.Dispatch(new EndGameEvent()
+            {
+                isWin = true,
+                loseType = ELoseType.None
+            });
         }
     }
     private void OnInit(LevelInfor level)

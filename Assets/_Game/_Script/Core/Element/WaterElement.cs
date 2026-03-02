@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class WaterElement : BaseElement<WaterElementVisual, WaterData>
 {
-
-    public void WaterFill(CupElement cup)
+    public void RegisterTarget(Transform tf)
     {
-        Tf.SetParent(cup.Tf);
-        cup.WaterFill();
-        //cup.StopCheck();
-                 cup.CheckClearCup();
-        Tf.DOLocalMove(Vector3.zero, 0.5f).OnComplete(() =>
-             {
-                 // test
-             });
+        visual.RegisterTarget(tf);
+    }
+    public void WaterFill()
+    {
+        visual.WaterFill();
     }
 }

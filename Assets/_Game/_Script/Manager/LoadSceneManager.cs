@@ -10,6 +10,10 @@ public class LoadSceneManager :Singleton<LoadSceneManager>
     {
         AsyncOperation ope = SceneManager.LoadSceneAsync((int)sceneType);
         if (load == null) return;
+        EventDispatcher.Dispatch(new ChangeSceneEvent()
+        {
+            sceneType = sceneType,
+        });
         load.gameObject.SetActive(true);
         load.Open();
         load.Loading(ope);

@@ -51,7 +51,10 @@ public class ConveyorSlotElement : BLBMono
     private void WaterFillCup(WaterElement water,CupElement cup)
     {
         if (water == null) return;
-        water.WaterFill(cup);
+        water.WaterFill();
+        cup.WaterFill();
+        //cup.StopCheck();
+        cup.CheckClearCup();
         Debug.LogError("fill_" + water.Data.color + "ID" + water.Data.waterID);
     }
 }

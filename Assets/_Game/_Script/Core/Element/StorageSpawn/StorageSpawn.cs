@@ -1,14 +1,18 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StorageSpawn
 {
     private Transform tf;
+    private Transform targetEnd;
     private List<WaterElement> allWaters = new List<WaterElement>();
     public List<WaterElement> AllWaters => allWaters;
-    public StorageSpawn(Transform tf)
+    private List<Vector3> allPos = new List<Vector3>();
+    public StorageSpawn(Transform tf, Transform targetEnd)
     {
         this.tf = tf;
+        this.targetEnd = targetEnd;
     }
     public void OnInit(StorageData data)
     {
@@ -17,17 +21,19 @@ public class StorageSpawn
     }
     public void SpawnWater(StorageData data)
     {
-        float spacing = 2;
+        float spacing = 8;
         for (int i = 0; i < data.waterDatas.Length; i++)
         {
             WaterElement water = GameObject
-                .Instantiate(GameData.Instance.ElementInfor.GetData(EElementType.Water).prefab,tf).GetComponent<WaterElement>();
+                .Instantiate(GameData.Instance.ElementInfor.GetData(EElementType.Water).prefab, tf).GetComponent<WaterElement>();
             water.gameObject.name = "Water_" + i;
             water.Initilize(data.waterDatas[i]);
             //water.Tf.position = // TODO
-            float size = spacing * i;
-            water.Tf.position = new Vector3(tf.position.x, tf.position.y, tf.position.z + size);
+            float size = spacing * (i);
+            Vector3 pos = new Vector3(tf.position.x, tf.position.y, tf.position.z + size);
+            water.Tf.position = pos;
             allWaters.Add(water);
+            allPos.Add(pos);
         }
     }
     public void InitWater()
@@ -35,6 +41,19 @@ public class StorageSpawn
         for (int i = 0; i < allWaters.Count; i++)
         {
             allWaters[i].OnInit();
+            allWaters[i].RegisterTarget(targetEnd);
+        }
+    }
+    public void CalculatorPosition()
+    {
+        float delay = 0;
+        for (int i = 0; i < allWaters.Count; i++)
+        {
+            //delay += ((float)i * .05f);
+            Debug.LogError("dewlau_" + delay);
+            allWaters[i].DOKill();
+            float value = GameData.Instance.SpeedWaterFill;
+            allWaters[i].Tf.DOMove(allPos[i], value).SetDelay(delay)/*.SetEase(Ease.OutBack)*/;
         }
     }
 }

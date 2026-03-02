@@ -6,6 +6,8 @@ public partial class GameData
     [SerializeField] private int initSlot;
     [SerializeField] private float clickRadius;
     [SerializeField] private float speedConveyor;
+    [SerializeField] private float coinLevelReward;
+    [SerializeField] private float speedWaterFill;
     [SerializeField] private SoundInfor soundData;
     [SerializeField] private ColorInfor colorData;
     [SerializeField] private ElementInfor elementInfor;
@@ -16,6 +18,8 @@ public partial class GameData
     public bool LoadResouces=>loadResouces;
     public float ClickRadius => clickRadius;
     public float SpeedConveyor => speedConveyor;
+    public float CoinLevelReward => coinLevelReward;
+    public float SpeedWaterFill => speedWaterFill;
     public int InitSlot => initSlot;
 
     #endregion

@@ -1,8 +1,6 @@
 using DG.Tweening;
-using NUnit.Framework.Interfaces;
 using System;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class CupElementVisual : BaseElementVisual<CupData>
@@ -10,6 +8,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private TextMeshProUGUI textAmount;
     [SerializeField] private MeshRenderer mesh;
     private MaterialPropertyBlock matBlock;
+    private int amount;
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<ClearCupEvent>(OnClearCup);
@@ -26,14 +25,14 @@ public class CupElementVisual : BaseElementVisual<CupData>
     }
     private void LoadColor(EColorType type)
     {
-        if(matBlock == null)
+        if (matBlock == null)
         {
             matBlock = new MaterialPropertyBlock();
         }
-        mesh.GetPropertyBlock(matBlock,0);
+        mesh.GetPropertyBlock(matBlock, 0);
         Color c = GameData.Instance.ColorData.GetData(type).color;
         matBlock.SetColor("_BaseColor", c);
-        mesh.SetPropertyBlock(matBlock,0);
+        mesh.SetPropertyBlock(matBlock, 0);
     }
     private void ChangeTextAmount(string text)
     {
@@ -67,7 +66,8 @@ public class CupElementVisual : BaseElementVisual<CupData>
     public override void AfterInit()
     {
         LoadColor(data.color);
-        ChangeTextAmount(data.amount.ToString());
+        amount = data.amount;
+        ChangeTextAmount(amount.ToString());
         Tf.DOKill();
         Tf.position = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z - 10);
         float delay = (float)data.id * .05f;
@@ -91,14 +91,19 @@ public class CupElementVisual : BaseElementVisual<CupData>
     }
     public void MoveToConveyor(Vector3 pos, Action callBack)
     {
-            Tf.DOLocalMove(new Vector3(0, .5f, 0), .3f).OnComplete(() =>
-            {
-                callBack?.Invoke();
-            });
+        Tf.DOLocalMove(new Vector3(0, .5f, 0), .3f).OnComplete(() =>
+        {
+            callBack?.Invoke();
+        });
     }
     public void MoveFailed()
     {
         skin.DOKill();
-        skin.DOPunchRotation(Vector3.forward * 5.75f, .25f);
+        skin.DOPunchRotation(Vector3.forward * 15.75f, .25f);
+    }
+    public void WaterFill()
+    {
+        amount--;
+        ChangeTextAmount(amount.ToString());
     }
 }

@@ -20,6 +20,7 @@ public struct ContinueGameEvent : IEvenParam // call when from pause game
 }
 public struct EndGameEvent : IEvenParam // call when end game maybe win or lose
 {
+    public bool isWin;
     public ELoseType loseType;
 }
 public struct LoseGameEvent : IEvenParam // lose game 
@@ -35,6 +36,10 @@ public struct ChangeCoinEvent : IEvenParam // call when change coin
     public int oldCoin;
     public Action callBack;
     public bool isAnim;
+}
+public struct ChangeSceneEvent : IEvenParam  // call when changescene
+{
+    public ESceneType sceneType;
 }
 public struct TouchSuccessCupEvent : IEvenParam // call when click success cup
 {
