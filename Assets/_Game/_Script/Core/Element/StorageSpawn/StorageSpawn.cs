@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StorageSpawn
 {
+    private float speed;
     private Transform tf;
     private Transform targetEnd;
     private List<WaterElement> allWaters = new List<WaterElement>();
@@ -53,6 +54,19 @@ public class StorageSpawn
             allWaters[i].DOKill();
             float value = GameData.Instance.SpeedWaterFill;
             allWaters[i].Tf.DOMove(allPos[i], value).SetDelay(delay)/*.SetEase(Ease.OutBack)*/;
+        }
+    }
+    public void ClearWater(WaterElement water)
+    {
+        if (allWaters == null || allWaters.Count <= 0) return;
+        if (!allWaters.Contains(water)) return;
+        allWaters.Remove(water);
+    }
+    public void ChangeSpeedWater()
+    {
+        for (int i = 0; i < allWaters.Count; i++)
+        {
+            allWaters[i].ChangeSpeedWater();
         }
     }
 }

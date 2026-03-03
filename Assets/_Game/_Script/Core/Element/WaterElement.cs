@@ -12,4 +12,8 @@ public class WaterElement : BaseElement<WaterElementVisual, WaterData>
     {
         visual.WaterFill();
     }
+    public void ChangeSpeedWater()
+    {
+        visual.ChangeSpeedWater();
+    }
 }

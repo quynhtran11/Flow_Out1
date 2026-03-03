@@ -20,6 +20,8 @@ public class Conveyor : BLBMono
         EventDispatcher.RegisterEvent<CheckFullSlotConveyorEvent>(OnCheckFullSlotConveyor);
         EventDispatcher.RegisterEvent<ClearCupEvent>(OnClearCup);
         EventDispatcher.RegisterEvent<CheckLoseEvent>(OnCheckLoseEvent);
+        EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
+        EventDispatcher.RegisterEvent<IncreaseSpeedGameEvent>(OnIncreaseSpeedGame);
     }
     private void OnDisable()
     {
@@ -28,6 +30,8 @@ public class Conveyor : BLBMono
         EventDispatcher.RemoveEvent<CheckFullSlotConveyorEvent>(OnCheckFullSlotConveyor);
         EventDispatcher.RemoveEvent<ClearCupEvent>(OnClearCup);
         EventDispatcher.RemoveEvent<CheckLoseEvent>(OnCheckLoseEvent);
+        EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
+        EventDispatcher.RemoveEvent<IncreaseSpeedGameEvent>(OnIncreaseSpeedGame);
     }
     private void Update()
     {
@@ -136,7 +140,6 @@ public class Conveyor : BLBMono
     private void CheckAllFillQualified()
     {
         if(!IsFullSlot()) return; // check them dieu kien neu day conveyor nhung co cocs dang dc fill thif phari bo qua 
-        Debug.LogError("test1");
         List<CupElement> allCups = new List<CupElement>();
         for (int i = 0; i < currentAllSlots.Count; i++)
         {
@@ -150,5 +153,38 @@ public class Conveyor : BLBMono
     private void OnCheckLoseEvent(CheckLoseEvent param) 
     {
         CheckAllFillQualified();
+    }
+    private void OnReviveGame(ReviveGameEvent param)
+    {
+        Debug.LogError("revive");
+        CupElement cup = null;
+        ConveyorSlotElement conveyorSlot = null;
+        int math = int.MinValue;
+
+        // tim cup dang gan fill het 
+        for (int i = 0; i < currentAllSlots.Count; i++)
+        {
+            if (currentAllSlots[i].ObjectOwner.CurrentWater > math)
+            {
+                cup = currentAllSlots[i].ObjectOwner;
+                math = currentAllSlots[i].ObjectOwner.CurrentWater;
+                conveyorSlot = currentAllSlots[i];
+            }
+        }
+        // lay mau cup va clear water va clear cup 
+        EventDispatcher.Dispatch(new ReviveStorageEvent()
+        {
+            cup = cup,
+            conveyorSlot = conveyorSlot
+        });
+    }
+    private void OnIncreaseSpeedGame(IncreaseSpeedGameEvent param)
+    {
+        if (param.amount > maxSlot) return;
+        for (int i = 0; i < maxAllSlots.Count; i++)
+        {
+            maxAllSlots[i].ChangeSpeed(GameData.Instance.SpeedConveyorEndGame);
+        }
+        EventDispatcher.Dispatch(new IncreaseSpeedWaterEvent() { });
     }
 }

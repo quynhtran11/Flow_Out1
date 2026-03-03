@@ -8,6 +8,7 @@ public class IngameUI : UIBase
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<StartGameplayEvent>(OnStartGame);
+        EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
         EventDispatcher.RegisterEvent<EndGameEvent>(OnEndGame);
         btnSetting.onClick.AddListener(ClickSetting);
     }
@@ -15,11 +16,16 @@ public class IngameUI : UIBase
     {
         EventDispatcher.RemoveEvent<StartGameplayEvent>(OnStartGame);
         EventDispatcher.RemoveEvent<EndGameEvent>(OnEndGame);
+        EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
         btnSetting.onClick.RemoveListener(ClickSetting);
     }
     private void OnStartGame(StartGameplayEvent param)
     {
-        textLevel.text = "Level_"+param.level.LevelID.ToString();
+        textLevel.text = "Level_" + param.level.LevelID.ToString();
+        btnSetting.interactable = true;
+    }
+    private void OnReviveGame(ReviveGameEvent param)
+    {
         btnSetting.interactable = true;
     }
     private void OnEndGame(EndGameEvent param)

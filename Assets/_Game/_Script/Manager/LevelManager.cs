@@ -38,6 +38,10 @@ public class LevelManager : BLBMono
                 loseType = ELoseType.None
             });
         }
+        EventDispatcher.Dispatch(new IncreaseSpeedGameEvent()
+        {
+            amount = maxBlockAmount - currentBlockAmount
+        });
     }
     private void OnInit(LevelInfor level)
     {

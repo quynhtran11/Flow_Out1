@@ -5,6 +5,7 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
 {
     [SerializeField] private SpriteRenderer mesh;
     private Transform targetEnd;
+    private float speed;
     private void LoadColor(EColorType type)
     {
         Color c = GameData.Instance.ColorData.GetData(type).color;
@@ -18,6 +19,7 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
         Tf.DOKill();
         float delay = (data.waterID * .1f) + .2f;
         Tf.DOMove(centerPos, .5f).SetDelay(delay).SetEase(Ease.OutBack, .3f);
+        speed = Mathf.Clamp(GameData.Instance.SpeedWaterFill, 0, GameData.Instance.SpeedWaterFill);
     }
     public void RegisterTarget(Transform tf)
     {
@@ -25,12 +27,14 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     }
     public void WaterFill()
     {
-        float value = Mathf.Clamp(GameData.Instance.SpeedWaterFill, 0, GameData.Instance.SpeedWaterFill);
-
-        Tf.DOMove(targetEnd.position, value).OnComplete(() =>
+        Tf.DOMove(targetEnd.position, speed).OnComplete(() =>
         {
             // test
             mesh.gameObject.SetActive(false);
         });
+    }
+    public void ChangeSpeedWater()
+    {
+        speed = Mathf.Clamp(GameData.Instance.SpeedWaterFillEndGame, 0, GameData.Instance.SpeedWaterFillEndGame);
     }
 }

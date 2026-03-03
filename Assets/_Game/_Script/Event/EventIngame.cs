@@ -77,3 +77,18 @@ public struct CheckLoseEvent : IEvenParam// call check when check lose
 {
 
 }
+public struct ReviveGameEvent : IEvenParam // call when revive game
+{ 
+}
+public struct ReviveStorageEvent : IEvenParam // call when revive 
+{
+    public CupElement cup;
+    public ConveyorSlotElement conveyorSlot;
+}
+public struct IncreaseSpeedGameEvent : IEvenParam // call when add speed game
+{
+    public int amount;
+}
+public struct IncreaseSpeedWaterEvent : IEvenParam // call when add speed game
+{
+}

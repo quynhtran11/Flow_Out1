@@ -6,6 +6,7 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     private bool isCheck = false;
     public bool IsCheck => isCheck;
     private int currentWater = 0;
+    public int CurrentWater => currentWater;
     public void SetMatrix(Vector2Int matrix)
     {
         this.matrix = matrix;
@@ -57,6 +58,11 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
 
         EventDispatcher.Dispatch(new CheckLoseEvent() { });
         }
+    }
+    public int RemainingWater()
+    {
+        int remain = data.amount - currentWater;
+        return remain;
     }
     private void CheckClearCup()
     {

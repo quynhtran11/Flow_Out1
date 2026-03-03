@@ -10,6 +10,7 @@ public partial class UserData
     public static void InCreaseLevel( int amount = 1, int defaultValue = 1)
     {
         int value = PlayerPrefs.GetInt(Constans.KeyCurrentLevelUnlock, defaultValue);
+        if (value >= GameData.Instance.MaxLevel) return;
         PlayerPrefs.SetInt(Constans.KeyCurrentLevelUnlock, value + amount);
     }
     public static void SetLevel(int amount = 1)

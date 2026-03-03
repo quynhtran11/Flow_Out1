@@ -1,0 +1,281 @@
+{
+  "levelID": 3,
+  "mode": 0,
+  "map": {
+    "x": 4,
+    "y": 3
+  },
+  "allCups": [
+    {
+      "id": 0,
+      "amount": 2,
+      "color": 1,
+      "pos": {
+        "x": 0,
+        "y": 0
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 1,
+      "amount": 2,
+      "color": 2,
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 2,
+      "amount": 2,
+      "color": 3,
+      "pos": {
+        "x": 6,
+        "y": 0
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 3,
+      "amount": 2,
+      "color": 4,
+      "pos": {
+        "x": 9,
+        "y": 0
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+
+    {
+      "id": 4,
+      "amount": 2,
+      "color": 5,
+      "pos": {
+        "x": 0,
+        "y": -3
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 5,
+      "amount": 2,
+      "color": 6,
+      "pos": {
+        "x": 3,
+        "y": -3
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 6,
+      "amount": 2,
+      "color": 7,
+      "pos": {
+        "x": 6,
+        "y": -3
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 7,
+      "amount": 2,
+      "color": 8,
+      "pos": {
+        "x": 9,
+        "y": -3
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+
+    {
+      "id": 8,
+      "amount": 2,
+      "color": 1,
+      "pos": {
+        "x": 0,
+        "y": -6
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 9,
+      "amount": 2,
+      "color": 2,
+      "pos": {
+        "x": 3,
+        "y": -6
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 10,
+      "amount": 2,
+      "color": 3,
+      "pos": {
+        "x": 6,
+        "y": -6
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 11,
+      "amount": 2,
+      "color": 4,
+      "pos": {
+        "x": 9,
+        "y": -6
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    }
+  ],
+  "allStorages": [
+    {
+      "waterDatas": [
+        {
+          "waterID": 0,
+          "waterGroupID": 0,
+          "color": 1
+        },
+        {
+          "waterID": 0,
+          "waterGroupID": 0,
+          "color": 5
+        },
+
+        {
+          "waterID": 1,
+          "waterGroupID": 0,
+          "color": 2
+        },
+        {
+          "waterID": 1,
+          "waterGroupID": 0,
+          "color": 6
+        },
+
+        {
+          "waterID": 2,
+          "waterGroupID": 0,
+          "color": 3
+        },
+        {
+          "waterID": 2,
+          "waterGroupID": 0,
+          "color": 7
+        },
+
+        {
+          "waterID": 3,
+          "waterGroupID": 0,
+          "color": 4
+        },
+        {
+          "waterID": 3,
+          "waterGroupID": 0,
+          "color": 8
+        },
+
+        {
+          "waterID": 4,
+          "waterGroupID": 0,
+          "color": 5
+        },
+        {
+          "waterID": 4,
+          "waterGroupID": 0,
+          "color": 1
+        },
+
+        {
+          "waterID": 5,
+          "waterGroupID": 0,
+          "color": 6
+        },
+        {
+          "waterID": 5,
+          "waterGroupID": 0,
+          "color": 2
+        },
+
+        {
+          "waterID": 6,
+          "waterGroupID": 0,
+          "color": 7
+        },
+        {
+          "waterID": 6,
+          "waterGroupID": 0,
+          "color": 3
+        },
+
+        {
+          "waterID": 7,
+          "waterGroupID": 0,
+          "color": 8
+        },
+        {
+          "waterID": 7,
+          "waterGroupID": 0,
+          "color": 4
+        },
+
+        {
+          "waterID": 8,
+          "waterGroupID": 0,
+          "color": 1
+        },
+        {
+          "waterID": 8,
+          "waterGroupID": 0,
+          "color": 1
+        },
+
+        {
+          "waterID": 9,
+          "waterGroupID": 0,
+          "color": 2
+        },
+        {
+          "waterID": 9,
+          "waterGroupID": 0,
+          "color": 2
+        },
+
+        {
+          "waterID": 10,
+          "waterGroupID": 0,
+          "color": 3
+        },
+        {
+          "waterID": 10,
+          "waterGroupID": 0,
+          "color": 3
+        },
+
+        {
+          "waterID": 11,
+          "waterGroupID": 0,
+          "color": 4
+        },
+        {
+          "waterID": 11,
+          "waterGroupID": 0,
+          "color": 4
+        }
+      ]
+    }
+  ]
+}

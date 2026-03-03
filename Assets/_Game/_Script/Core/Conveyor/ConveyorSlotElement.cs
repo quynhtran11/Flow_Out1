@@ -4,20 +4,25 @@ using UnityEngine;
 public class ConveyorSlotElement : BLBMono
 {
     private int idSlot;
+    private float speed;
     private CupElement objectOwner = null;
     public CupElement ObjectOwner => objectOwner;
     public bool IsBusy()
     {
-        if(objectOwner != null)
+        if (objectOwner != null)
         {
             return true;
         }
         return false;
     }
-
+    public void ChangeSpeed( float speed )
+    {
+        this.speed = speed;
+    }
     public void OnInit(int id)
     {
         this.idSlot = id;
+        speed = GameData.Instance.SpeedConveyor;
     }
     public void RegisterObject(CupElement cup)
     {
@@ -30,8 +35,8 @@ public class ConveyorSlotElement : BLBMono
     }
     public void OnUpdate(Vector2 start, Vector2 end)
     {
-        Vector2 speed = Vector2.right * GameData.Instance.SpeedConveyor * Time.deltaTime;
-        Tf.Translate(speed);
+        Vector2 calculatorSpeed = Vector2.right * this.speed * Time.deltaTime;
+        Tf.Translate(calculatorSpeed);
         if (Tf.position.x >= end.x)
         {
             Tf.position = new Vector3(start.x, start.y, Tf.position.z);
@@ -42,13 +47,13 @@ public class ConveyorSlotElement : BLBMono
         {
             callBack = (x) =>
             {
-                WaterFillCup(x,objectOwner);
+                WaterFillCup(x, objectOwner);
             },
             pos = Tf.position,
             color = this.objectOwner.Data.color
         });
     }
-    private void WaterFillCup(WaterElement water,CupElement cup)
+    public void WaterFillCup(WaterElement water, CupElement cup)
     {
         if (water == null) return;
         water.WaterFill();

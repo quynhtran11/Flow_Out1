@@ -6515,6 +6515,7 @@ MonoBehaviour:
   mainFrame: {fileID: 1632253313}
   canvasGroup: {fileID: 1632253314}
   btnBuy: {fileID: 658018876}
+  btnExit: {fileID: 1203887343}
 --- !u!1 &1416974180
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,11 +6,13 @@ public class GameHUD : HUD
     {
         EventDispatcher.RegisterEvent<WinGameEvent>(OnWinGame);
         EventDispatcher.RegisterEvent<LoseGameEvent>(OnLoseGame);
+        EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
     }
     private void OnDisable()
     {
         EventDispatcher.RemoveEvent<WinGameEvent>(OnWinGame);
         EventDispatcher.RemoveEvent<LoseGameEvent>(OnLoseGame);
+        EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
     }
     private void DelayOpenWinUI()
     {
@@ -33,5 +35,9 @@ public class GameHUD : HUD
     {
         float t = GameData.Instance.DelayCallLoseUI;
         Invoke(nameof(DelayOpenLoseUI), t);
+    }
+    private void OnReviveGame(ReviveGameEvent param)
+    {
+        GameHUD.Instance.CloseUI<LoseGameUI>();
     }
 }

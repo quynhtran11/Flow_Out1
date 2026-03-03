@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.RegisterEvent<PauseGameEvent>(OnPauseGame);
         EventDispatcher.RegisterEvent<EndGameEvent>(OnEndGame);
         EventDispatcher.RegisterEvent<ChangeSceneEvent>(OnChangeScene);
+        EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
     }
     private void OnDisable()
     {
@@ -23,6 +24,7 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.RemoveEvent<PauseGameEvent>(OnPauseGame);
         EventDispatcher.RemoveEvent<EndGameEvent>(OnEndGame);
         EventDispatcher.RemoveEvent<ChangeSceneEvent>(OnChangeScene);
+        EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
     }
     void Start()
     {
@@ -72,5 +74,9 @@ public class GameManager : Singleton<GameManager>
                 loseType = param.loseType
             });
         }
+    }
+    private void OnReviveGame(ReviveGameEvent param)
+    {
+        ChangeGameState(EGameState.Playing);
     }
 }

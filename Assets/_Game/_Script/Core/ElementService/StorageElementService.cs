@@ -1,16 +1,17 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-
 public class StorageElementService : BaseElementService<StorageElement>
 {
     protected override void RegisterEvent()
     {
         EventDispatcher.RemoveEvent<CheckFillWaterEvent>(OnCheckFillWater);
         EventDispatcher.RemoveEvent<CheckAllQualifiedFillEvent>(OnCheckAllQualifiedFill);
+        EventDispatcher.RemoveEvent<ReviveStorageEvent>(OnReviveStorage);
+        EventDispatcher.RemoveEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedWater);
         EventDispatcher.RegisterEvent<CheckFillWaterEvent>(OnCheckFillWater);
         EventDispatcher.RegisterEvent<CheckAllQualifiedFillEvent>(OnCheckAllQualifiedFill);
+        EventDispatcher.RegisterEvent<ReviveStorageEvent>(OnReviveStorage);
+        EventDispatcher.RegisterEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedWater);
     }
     private void OnCheckFillWater(CheckFillWaterEvent param)
     {
@@ -56,6 +57,50 @@ public class StorageElementService : BaseElementService<StorageElement>
         foreach (var storage in allElements)
         {
             storage.OnInit();
+        }
+    }
+    public void OnReviveStorage(ReviveStorageEvent param)
+    {
+        if (param.cup == null) return;
+        int remainWater = param.cup.RemainingWater();
+        List<WaterElement> allWaters = new List<WaterElement>();
+        for (int i = 0; i < allElements.Count; i++)
+        {
+            if (allElements[i].IsBusy) continue;
+            for (int j = 0; j < allElements[i].AllWater().Count; j++)
+            {
+                var value = allElements[i].AllWater()[j];
+                if(value == null ) continue;
+                if (allElements[i].AllWater()[j].IsBusy) continue;
+                if(value.Data.color == param.cup.Data.color)
+                {
+                    allWaters.Add(value);
+                }
+            }
+        }
+        allWaters.Sort((a, b) =>a.transform.position.y.CompareTo(b.transform.position.y));
+        if (allWaters.Count < remainWater) return;
+        for (int i = 0; i < remainWater; i++)
+        {
+            var value = allWaters[i];
+            for (int j = 0; j < allElements.Count; j++)
+            {
+                allElements[j].ClearWater(value);
+            }
+            param.conveyorSlot.WaterFillCup(value, param.cup);
+        }
+        for (int i = 0; i < allElements.Count; i++)
+        {
+            allElements[i].AllCalculatorPosition();
+        }
+        param.conveyorSlot.UnRegisterObject();
+
+    }
+    private void OnIncreaseSpeedWater(IncreaseSpeedWaterEvent param)
+    {
+        for (int a = 0; a < allElements.Count; a++)
+        {
+            allElements[a].ChangeSpeedWater();
         }
     }
 }

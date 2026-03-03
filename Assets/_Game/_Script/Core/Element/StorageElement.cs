@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StorageElement : BaseElement<StorageElementVisual, StorageData>
@@ -31,5 +32,21 @@ public class StorageElement : BaseElement<StorageElementVisual, StorageData>
         if (storageSpawn.AllWaters == null || storageSpawn.AllWaters.Count <= 0) return null;
         if (isBusy) return null;
         return storageSpawn.AllWaters[0];
+    }
+    public void ClearWater(WaterElement water)
+    {
+        storageSpawn.ClearWater(water);
+    }
+    public List<WaterElement> AllWater()
+    {
+        return storageSpawn.AllWaters;
+    }
+    public void AllCalculatorPosition()
+    {
+        storageSpawn.CalculatorPosition();
+    }
+    public void ChangeSpeedWater()
+    {
+        storageSpawn.ChangeSpeedWater();
     }
 }
