@@ -11,13 +11,15 @@ public class Conveyor : BLBMono
     private bool isBusy;
     private List<ConveyorSlotElement> maxAllSlots = new List<ConveyorSlotElement>();
     private List<ConveyorSlotElement> currentAllSlots = new List<ConveyorSlotElement>();
+
+    public int CurrentSlot => currentSlot;
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<StartGameplayEvent>(OnStartGame);
         EventDispatcher.RegisterEvent<CupToConveyorEvent>(OnCupToConveyor);
         EventDispatcher.RegisterEvent<CheckFullSlotConveyorEvent>(OnCheckFullSlotConveyor);
         EventDispatcher.RegisterEvent<ClearCupEvent>(OnClearCup);
-
+        EventDispatcher.RegisterEvent<CheckLoseEvent>(OnCheckLoseEvent);
     }
     private void OnDisable()
     {
@@ -25,7 +27,7 @@ public class Conveyor : BLBMono
         EventDispatcher.RemoveEvent<CupToConveyorEvent>(OnCupToConveyor);
         EventDispatcher.RemoveEvent<CheckFullSlotConveyorEvent>(OnCheckFullSlotConveyor);
         EventDispatcher.RemoveEvent<ClearCupEvent>(OnClearCup);
-
+        EventDispatcher.RemoveEvent<CheckLoseEvent>(OnCheckLoseEvent);
     }
     private void Update()
     {
@@ -40,10 +42,10 @@ public class Conveyor : BLBMono
     private void OnInit()
     {
         isBusy = true;
-        visual.OnInit();
         maxSlot = GameData.Instance.InitSlot;
         currentSlot = 0;
         CalculatorSlot();
+        visual.OnInit(currentSlot,maxSlot);
     }
     private void CalculatorSlot()
     {
@@ -110,6 +112,8 @@ public class Conveyor : BLBMono
         param.cup.MoveToConveyor(pos);
         currentSlot++;
         currentAllSlots.Add(c);
+        visual.ChangeTextAmount(currentSlot, maxSlot);
+        CheckAllFillQualified(); // check lose
     }
     private void OnCheckFullSlotConveyor(CheckFullSlotConveyorEvent param)
     {
@@ -125,7 +129,26 @@ public class Conveyor : BLBMono
             break;
         }
         currentSlot--;
+        visual.ChangeTextAmount(currentSlot, maxSlot);
         c.UnRegisterObject();
         currentAllSlots.Remove(c);
+    }
+    private void CheckAllFillQualified()
+    {
+        if(!IsFullSlot()) return; // check them dieu kien neu day conveyor nhung co cocs dang dc fill thif phari bo qua 
+        Debug.LogError("test1");
+        List<CupElement> allCups = new List<CupElement>();
+        for (int i = 0; i < currentAllSlots.Count; i++)
+        {
+            allCups.Add(currentAllSlots[i].ObjectOwner);
+        }
+        EventDispatcher.Dispatch(new CheckAllQualifiedFillEvent()
+        {
+            cups = allCups
+        });
+    }
+    private void OnCheckLoseEvent(CheckLoseEvent param) 
+    {
+        CheckAllFillQualified();
     }
 }

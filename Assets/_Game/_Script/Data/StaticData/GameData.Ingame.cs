@@ -8,6 +8,8 @@ public partial class GameData
     [SerializeField] private float speedConveyor;
     [SerializeField] private float coinLevelReward;
     [SerializeField] private float speedWaterFill;
+    [SerializeField] private float delayCallWinUI;
+    [SerializeField] private float delayCallLoseUI;
     [SerializeField] private SoundInfor soundData;
     [SerializeField] private ColorInfor colorData;
     [SerializeField] private ElementInfor elementInfor;
@@ -20,6 +22,8 @@ public partial class GameData
     public float SpeedConveyor => speedConveyor;
     public float CoinLevelReward => coinLevelReward;
     public float SpeedWaterFill => speedWaterFill;
+    public float DelayCallWinUI => delayCallWinUI;
+    public float DelayCallLoseUI => delayCallLoseUI;
     public int InitSlot => initSlot;
 
     #endregion

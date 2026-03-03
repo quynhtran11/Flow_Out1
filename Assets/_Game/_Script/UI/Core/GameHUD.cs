@@ -15,16 +15,23 @@ public class GameHUD : HUD
     private void DelayOpenWinUI()
     {
         Debug.LogError("winui");
-
         OpenUI<WinGameUI>();
+    }
+    private void DelayOpenLoseUI()
+    {
+        Debug.LogError("loseui");
+
+        OpenUI<LoseGameUI>();
 
     }
     private void OnWinGame(WinGameEvent param)
     {
-        Invoke(nameof(DelayOpenWinUI), 1f);
+        float t = GameData.Instance.DelayCallWinUI;
+        Invoke(nameof(DelayOpenWinUI), t);
     }
     private void OnLoseGame(LoseGameEvent param)
     {
-        OpenUI<LoseGameUI>();
+        float t = GameData.Instance.DelayCallLoseUI;
+        Invoke(nameof(DelayOpenLoseUI), t);
     }
 }

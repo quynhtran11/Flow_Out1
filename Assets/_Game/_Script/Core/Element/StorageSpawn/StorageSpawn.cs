@@ -50,7 +50,6 @@ public class StorageSpawn
         for (int i = 0; i < allWaters.Count; i++)
         {
             //delay += ((float)i * .05f);
-            Debug.LogError("dewlau_" + delay);
             allWaters[i].DOKill();
             float value = GameData.Instance.SpeedWaterFill;
             allWaters[i].Tf.DOMove(allPos[i], value).SetDelay(delay)/*.SetEase(Ease.OutBack)*/;

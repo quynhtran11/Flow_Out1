@@ -50,9 +50,15 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
         if (currentWater >= Data.amount)
         {
             isBusy = true;
+            CheckClearCup();
+        }
+        else
+        {
+
+        EventDispatcher.Dispatch(new CheckLoseEvent() { });
         }
     }
-    public void CheckClearCup()
+    private void CheckClearCup()
     {
         if (currentWater < Data.amount) return;
         EventDispatcher.Dispatch(new ClearCupEvent()

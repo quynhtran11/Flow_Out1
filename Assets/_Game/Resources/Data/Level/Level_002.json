@@ -1,0 +1,180 @@
+{
+  "levelID": 2,
+  "mode": 0,
+  "map": {
+    "x": 3,
+    "y": 2
+  },
+  "allCups": [
+    {
+      "id": 0,
+      "amount": 2,
+      "color": 3,
+      "pos": {
+        "x": 0,
+        "y": 0
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 1,
+      "amount": 3,
+      "color": 5,
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 2,
+      "amount": 3,
+      "color": 7,
+      "pos": {
+        "x": 6,
+        "y": 0
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 3,
+      "amount": 4,
+      "color": 8,
+      "pos": {
+        "x": 0,
+        "y": -3
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 4,
+      "amount": 3,
+      "color": 7,
+      "pos": {
+        "x": 3,
+        "y": -3
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    },
+    {
+      "id": 5,
+      "amount": 3,
+      "color": 5,
+      "pos": {
+        "x": 6,
+        "y": -3
+      },
+      "hiddenData": { "isHidden": false },
+      "connectData": { "idConnect": -1 }
+    }
+  ],
+  "allStorages": [
+    {
+      "waterDatas": [
+        {
+          "waterID": 0,
+          "waterGroupID": 0,
+          "color": 5
+        },
+        {
+          "waterID": 1,
+          "waterGroupID": 0,
+          "color": 5
+        },
+        {
+          "waterID": 2,
+          "waterGroupID": 0,
+          "color": 8
+        },
+        {
+          "waterID": 3,
+          "waterGroupID": 0,
+          "color": 7
+        },
+        {
+          "waterID": 4,
+          "waterGroupID": 0,
+          "color": 7
+        },
+        {
+          "waterID": 5,
+          "waterGroupID": 0,
+          "color": 5
+        }
+      ]
+    },
+    {
+      "waterDatas": [
+        {
+          "waterID": 0,
+          "waterGroupID": 1,
+          "color": 7
+        },
+        {
+          "waterID": 1,
+          "waterGroupID": 1,
+          "color": 5
+        },
+        {
+          "waterID": 2,
+          "waterGroupID": 1,
+          "color": 5
+        },
+        {
+          "waterID": 3,
+          "waterGroupID": 1,
+          "color": 8
+        },
+        {
+          "waterID": 4,
+          "waterGroupID": 2,
+          "color": 8
+        },
+        {
+          "waterID": 5,
+          "waterGroupID": 1,
+          "color": 7
+        }
+      ]
+    },
+    {
+      "waterDatas": [
+        {
+          "waterID": 0,
+          "waterGroupID": 2,
+          "color": 3
+        },
+        {
+          "waterID": 1,
+          "waterGroupID": 2,
+          "color": 7
+        },
+        {
+          "waterID": 2,
+          "waterGroupID": 0,
+          "color": 8
+        },
+        {
+          "waterID": 3,
+          "waterGroupID": 2,
+          "color": 3
+        },
+        {
+          "waterID": 4,
+          "waterGroupID": 2,
+          "color": 7
+        },
+        {
+          "waterID": 5,
+          "waterGroupID": 0,
+          "color": 5
+        }
+      ]
+    }
+  ]
+}

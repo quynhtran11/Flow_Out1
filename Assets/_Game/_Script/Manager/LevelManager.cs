@@ -15,7 +15,8 @@ public class LevelManager : BLBMono
     private void Start()
     {
         LevelInfor level = new LevelInfor();
-        LevelDataLoader.GetLevelInfor(1, (levelData) =>
+        int levelIndex = UserData.CurrentLevel();
+        LevelDataLoader.GetLevelInfor(levelIndex, (levelData) =>
         {
             level = levelData;
             EventDispatcher.Dispatch(new StartGameplayEvent()

@@ -54,7 +54,6 @@ public class ConveyorSlotElement : BLBMono
         water.WaterFill();
         cup.WaterFill();
         //cup.StopCheck();
-        cup.CheckClearCup();
-        Debug.LogError("fill_" + water.Data.color + "ID" + water.Data.waterID);
+        //Debug.LogError("fill_" + water.Data.color + "ID" + water.Data.waterID);
     }
 }

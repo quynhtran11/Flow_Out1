@@ -1,10 +1,16 @@
+using TMPro;
 using UnityEngine;
 
 public class ConveyorVisual : MonoBehaviour
 {
     [SerializeField] private MeshRenderer mesh;
-    public void OnInit()
+    [SerializeField] private TextMeshProUGUI textAmount;
+    public void OnInit(int amount, int maxAmount)
     {
-
+        ChangeTextAmount(amount, maxAmount);
+    }
+    public void ChangeTextAmount(int amount,int maxAmount)
+    {
+        textAmount.text = amount.ToString() + "/" + maxAmount;
     }
 }

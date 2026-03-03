@@ -26,14 +26,21 @@ public class WinGameUI : UIBase
     }
     private void ClickContinue()
     {
-        var service = ServiceLocator.Get<SceneService>();
-        if (service == null) return;
-        service.LoadScene(ESceneType.Ingame);
+        UserData.InCreaseLevel();
+        ClaimReward((int)GameData.Instance.CoinLevelReward);
     }
     private void ClickAds()
     {
-        var service = ServiceLocator.Get<SceneService>();
-        if (service == null) return;
-        service.LoadScene(ESceneType.Ingame);
+        float valueCoin = GameData.Instance.CoinLevelReward * 2f;
+        ClaimReward((int)valueCoin);
+    }
+    private void ClaimReward(int coin)
+    {
+        UserData.InCreaseCoin(coin, callBack: () =>
+        {
+            var service = ServiceLocator.Get<SceneService>();
+            if (service == null) return;
+            service.LoadScene(ESceneType.Ingame);
+        });
     }
 }

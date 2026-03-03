@@ -69,3 +69,11 @@ public struct CheckFillWaterEvent : IEvenParam
     public Vector3 pos;
     public EColorType color;
 }
+public struct CheckAllQualifiedFillEvent : IEvenParam // call check when full cup in conveyor
+{
+    public List<CupElement> cups;
+}
+public struct CheckLoseEvent : IEvenParam// call check when check lose
+{
+
+}

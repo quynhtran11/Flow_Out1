@@ -7,7 +7,7 @@ public enum EGameState {
 public enum ELoseType
 {
     None,
-    OutOfTime,
+    OutOfSpace,
 }
 public enum EModeType
 {
