@@ -19,8 +19,8 @@ MonoBehaviour:
   coinLevelReward: 30
   speedConveyor: 6
   speedWaterFill: 0.4
-  speedWaterFillEndGame: 8
-  speedConveyorEndGame: 0.25
+  speedWaterFillEndGame: 0.25
+  speedConveyorEndGame: 10
   delayCallWinUI: 1
   delayCallLoseUI: 1.2
   soundData: {fileID: 11400000, guid: 3ad0abf10ad569d4c8921a8d867233ad, type: 2}

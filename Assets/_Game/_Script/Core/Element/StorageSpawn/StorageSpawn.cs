@@ -52,8 +52,7 @@ public class StorageSpawn
         {
             //delay += ((float)i * .05f);
             allWaters[i].DOKill();
-            float value = GameData.Instance.SpeedWaterFill;
-            allWaters[i].Tf.DOMove(allPos[i], value).SetDelay(delay)/*.SetEase(Ease.OutBack)*/;
+            allWaters[i].Tf.DOMove(allPos[i], speed).SetDelay(delay)/*.SetEase(Ease.OutBack)*/;
         }
     }
     public void ClearWater(WaterElement water)

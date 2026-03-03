@@ -43,13 +43,13 @@ public class Conveyor : BLBMono
             maxAllSlots[i].OnUpdate(startPoint.position, endPoint.position);
         }
     }
-    private void OnInit()
+    private void OnInit(LevelInfor level)
     {
         isBusy = true;
         maxSlot = GameData.Instance.InitSlot;
         currentSlot = 0;
         CalculatorSlot();
-        visual.OnInit(currentSlot,maxSlot);
+        visual.OnInit(currentSlot,maxSlot,level.Map.x);
     }
     private void CalculatorSlot()
     {
@@ -103,7 +103,7 @@ public class Conveyor : BLBMono
     }
     private void OnStartGame(StartGameplayEvent param)
     {
-        OnInit();
+        OnInit(param.level);
     }
     private void OnCupToConveyor(CupToConveyorEvent param)
     {
