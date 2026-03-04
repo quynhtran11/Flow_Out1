@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class CupElementVisual : BaseElementVisual<CupData>
 {
+    [SerializeField] private Transform parentVfx;
     [SerializeField] private TextMeshProUGUI textAmount;
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private MeshRenderer mesh2;
     private MaterialPropertyBlock matBlock;
     private MaterialPropertyBlock matBlock2;
+    private Transform parent;
     private int amount;
     private void OnEnable()
     {
@@ -22,15 +24,24 @@ public class CupElementVisual : BaseElementVisual<CupData>
     private void OnClearCup(ClearCupEvent param)
     {
         if (param.cup != this) return;
+        CancelInvoke();
+        Invoke(nameof(DelayClear), GameData.Instance.TimeActiveFill);
+    }
+    private void DelayClear()
+    {
         Tf.DOKill();
-        Tf.DOScale(Vector3.zero, .4f).SetEase(Ease.InBack).OnComplete(() =>
+        Tf.parent = parent;
+        Tf.transform.DOJump(new Vector3(Tf.position.x, Tf.position.y, Tf.position.z + 2f), 3, 1, .3f).OnComplete(() =>
         {
-            ClearCup();
+            Tf.DOScale(Vector3.zero, .4f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                ClearCup();
+            });
         });
     }
     private void ClearCup()
     {
-        GameObject go = VFXManager.Instance.GetObject(EVfxType.VFX_Explode);
+        ParticleSystem go = VFXManager.Instance.GetObject(EVfxType.VFX_Explode);
         go.transform.position = Tf.position;
     }
     private void LoadColor(EColorType type)
@@ -91,6 +102,8 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Tf.position = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z - 10);
         float delay = (float)data.id * .05f;
         Tf.DOMove(centerPos, .5f).SetEase(Ease.OutBack, .4f).SetDelay(delay);
+        parent = Tf.parent;
+        elementCollider.enabled = true;
     }
     public override void SetBusy(bool isBusy)
     {
@@ -110,7 +123,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     }
     public void MoveToConveyor(Vector3 pos, Action callBack)
     {
-
+        elementCollider.enabled = false;
         skin.transform.DOLocalRotate(new Vector3(10, 0, 0), .5f).SetEase(Ease.OutBack);
         skin.transform.DOPunchScale(new Vector3(0,.25f,0), .5f).SetDelay(.05f);
         Tf.DOLocalJump(new Vector3(0, .5f, 0),3,1, .5f).OnComplete(() =>
@@ -128,6 +141,11 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         amount--;
         ChangeTextAmount(amount.ToString());
+        ParticleSystem go = VFXManager.Instance.GetObject(EVfxType.VFX_WaterBolling);
+        go.transform.SetParent(Tf);
+        go.transform.position = parentVfx.position;
+        var v = go.emission;
+        v.enabled = false;
     }
 
 }

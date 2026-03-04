@@ -46,7 +46,7 @@ public class SpawnManager : BLBMono
             StorageElement storage = SpanwObject<StorageElement>(storagePrefab);
             storage.gameObject.name = "Storage_" + i;
             float x = center- totalWidth / 2f+ storageWidth / 2f+ i * (storageWidth + spacing);
-            storage.Tf.position = new Vector3(x, 0, 17f);
+            storage.Tf.position = new Vector3(x, 0, 22f);
             storage.Initilize(lev.AllStorages[i]);
             storageService.RegisterObject(storage);
         }

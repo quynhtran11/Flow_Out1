@@ -18,7 +18,8 @@ public enum EModeType
 public enum EVfxType { 
     Total,
     VFX_WaterFill,
-    VFX_Explode
+    VFX_Explode,
+    VFX_WaterBolling,
 }
 public enum ESceneType
 {

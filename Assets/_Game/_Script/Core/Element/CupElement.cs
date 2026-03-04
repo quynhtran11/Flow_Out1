@@ -31,6 +31,7 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     }
     public void MoveToConveyor(Vector3 pos)
     {
+        
         visual.MoveToConveyor(pos, () =>
         {
             isCheck = true;

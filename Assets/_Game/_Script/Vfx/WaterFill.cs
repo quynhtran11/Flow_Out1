@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WaterFill : BLBMono
+public class WaterFill : BaseVFX
 {
     [SerializeField] protected float speedOffset = 2.5f;
     [SerializeField] protected LineRenderer line;
@@ -23,7 +23,7 @@ public class WaterFill : BLBMono
     }
     private void OnChangeScene(ChangeSceneEvent param)
     {
-        VFXManager.Instance.ReturnObject(EVfxType.VFX_WaterFill, gameObject);
+        VFXManager.Instance.ReturnObject(EVfxType.VFX_WaterFill, vfx);
     }
     public void OnInit(Transform tf, Transform tf2,float t,Color c)
     {
@@ -43,11 +43,34 @@ public class WaterFill : BLBMono
     }
     IEnumerator DeActive()
     {
+        float retractTime = 0.05f; 
         float t = 0;
-        while (t<maxTime) {
-            t+=Time.deltaTime;
+        while (t < maxTime - retractTime)
+        {
+            t += Time.deltaTime;
             yield return null;
         }
-        VFXManager.Instance.ReturnObject(EVfxType.VFX_WaterFill, gameObject);
+
+        float rt = 0;
+
+        Vector3 startPos = line.GetPosition(0);
+        Vector3 endPos = line.GetPosition(1);
+
+        while (rt < retractTime)
+        {
+            rt += Time.deltaTime;
+            float percent = rt / retractTime;
+
+            percent = Mathf.SmoothStep(0, 1, percent);
+
+            Vector3 newPos = Vector3.Lerp(startPos, endPos, percent);
+            line.SetPosition(0, newPos);
+
+            yield return null;
+        }
+
+        line.SetPosition(0, endPos);
+
+        VFXManager.Instance.ReturnObject(EVfxType.VFX_WaterFill, vfx);
     }
 }

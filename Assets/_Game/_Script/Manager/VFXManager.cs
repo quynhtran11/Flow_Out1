@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class VFXManager : Singleton<VFXManager>
 {
-    private Dictionary<EVfxType, Queue<GameObject>> allVfx = new Dictionary<EVfxType, Queue<GameObject>>();
+    private Dictionary<EVfxType, Queue<ParticleSystem>> allVfx = new Dictionary<EVfxType, Queue<ParticleSystem>>();
 
     protected override bool dondestroy => true;
     private void OnEnable()
@@ -33,23 +33,24 @@ public class VFXManager : Singleton<VFXManager>
             }
         }
     }
-    public GameObject GetObject(EVfxType vfxType)
+    public ParticleSystem GetObject(EVfxType vfxType)
     {
         if (!allVfx.ContainsKey(vfxType)) return null;
-        GameObject go = null;
+        ParticleSystem go = null;
         if (allVfx[vfxType].Count <= 0)
         {
             var value = GameData.Instance.VfxInfor;
-            go = SpawnObject(value.GetData(vfxType).prefab);
+            go = SpawnObject(value.GetData(vfxType).prefab).GetComponent<ParticleSystem>();
         }
         else
         {
             go = allVfx[vfxType].Dequeue();
+            if (go == null) return null;
             go.gameObject.SetActive(true);
         }
         return go;
     }
-    public void ReturnObject(EVfxType vfxType,GameObject go)
+    public void ReturnObject(EVfxType vfxType, ParticleSystem go)
     {
         allVfx[vfxType].Enqueue(go);
         go.gameObject.SetActive(false);
@@ -59,10 +60,10 @@ public class VFXManager : Singleton<VFXManager>
         var value = GameData.Instance.VfxInfor;
         for (int i = 0; i < value.Data.Length; i++)
         {
-            Queue<GameObject> obj = new Queue<GameObject>();
+            Queue<ParticleSystem> obj = new Queue<ParticleSystem>();
             for (int j = 0; j < 5; j++)
             {
-                GameObject go = SpawnObject(value.Data[i].prefab);
+                ParticleSystem go = SpawnObject(value.Data[i].prefab).GetComponent<ParticleSystem>();
                 obj.Enqueue(go);
                 go.gameObject.SetActive(false);
             }

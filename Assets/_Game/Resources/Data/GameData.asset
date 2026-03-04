@@ -17,14 +17,14 @@ MonoBehaviour:
   initSlot: 5
   clickRadius: 0.37
   coinLevelReward: 30
-  speedConveyor: 4
-  speedWaterFill: 0.51
-  speedWaterFillEndGame: 0.3
-  speedConveyorEndGame: 8
+  speedConveyor: 3
+  speedWaterFill: 0.4
+  speedWaterFillEndGame: 0.2
+  speedConveyorEndGame: 5
   delayCallWinUI: 1
   delayCallLoseUI: 1.2
   distanceCheckFill: 1
-  timeActiveFill: 0.5
+  timeActiveFill: 0.4
   timeActiveFillEndGame: 0.3
   soundData: {fileID: 11400000, guid: 3ad0abf10ad569d4c8921a8d867233ad, type: 2}
   colorData: {fileID: 11400000, guid: 73fca6e8f53d47c46b9bfc192623fdce, type: 2}
