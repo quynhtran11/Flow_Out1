@@ -13,13 +13,18 @@ public partial class GameData
     [SerializeField] private float speedConveyorEndGame;
     [SerializeField] private float delayCallWinUI;
     [SerializeField] private float delayCallLoseUI;
+    [SerializeField] private float distanceCheckFill;
+    [SerializeField] private float timeActiveFill;
+    [SerializeField] private float timeActiveFillEndGame;
     [SerializeField] private SoundInfor soundData;
     [SerializeField] private ColorInfor colorData;
     [SerializeField] private ElementInfor elementInfor;
+    [SerializeField] private VFXInfor vfxInfor;
     #region Properties
     public SoundInfor SoundData => soundData;
     public ColorInfor ColorData => colorData;
     public ElementInfor ElementInfor => elementInfor;
+    public VFXInfor VfxInfor => vfxInfor;
     public bool LoadResouces=>loadResouces;
     public float ClickRadius => clickRadius;
     public float CoinLevelReward => coinLevelReward;
@@ -29,6 +34,9 @@ public partial class GameData
     public float SpeedWaterFillEndGame => speedWaterFillEndGame;
     public float DelayCallWinUI => delayCallWinUI;
     public float DelayCallLoseUI => delayCallLoseUI;
+    public float DistanceCheckFill => distanceCheckFill;
+    public float TimeActiveFill => timeActiveFill;
+    public float TimeActiveFillEndGame => timeActiveFillEndGame;
     public int InitSlot => initSlot;
     public int MaxLevel => maxLevel;
 

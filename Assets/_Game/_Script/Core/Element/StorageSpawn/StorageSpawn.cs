@@ -22,7 +22,7 @@ public class StorageSpawn
     }
     public void SpawnWater(StorageData data)
     {
-        float spacing = 8;
+        float spacing = 4;
         for (int i = 0; i < data.waterDatas.Length; i++)
         {
             WaterElement water = GameObject

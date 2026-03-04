@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     {
+        Application.targetFrameRate = 120;
         ServiceLocator.Installer();
         var scene = ServiceLocator.Get<SceneService>();
         scene.LoadScene(ESceneType.Home);

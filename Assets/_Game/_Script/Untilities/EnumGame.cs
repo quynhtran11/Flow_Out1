@@ -16,7 +16,9 @@ public enum EModeType
     Hard
 }
 public enum EVfxType { 
-    Total
+    Total,
+    VFX_WaterFill,
+    VFX_Explode
 }
 public enum ESceneType
 {

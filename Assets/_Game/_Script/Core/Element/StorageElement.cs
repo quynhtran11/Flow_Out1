@@ -25,6 +25,7 @@ public class StorageElement : BaseElement<StorageElementVisual, StorageData>
         {
             isBusy = true;
         }
+        visual.WaterFills(currentWater);
         return currentWater;
     }
     public WaterElement FirstWater()
