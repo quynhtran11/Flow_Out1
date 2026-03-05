@@ -15,7 +15,7 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     public override void AfterInit()
     {
         LoadColor(data.color);
-        Tf.position = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z + 10f);
+        Tf.position = new Vector3(Tf.position.x, Tf.position.y + 10f, Tf.position.z );
         Tf.DOKill();
         float delay = (data.waterID * .1f) + .2f;
         Tf.DOMove(centerPos, .5f).SetDelay(delay).SetEase(Ease.OutBack, .3f);
@@ -27,7 +27,7 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     }
     public void WaterFill()
     {
-        Tf.DOMove(targetEnd.position, speed).OnComplete(() =>
+        Tf.DOMove(targetEnd.position, speed+.1f).OnComplete(() =>
         {
             // test
             mesh.gameObject.SetActive(false);

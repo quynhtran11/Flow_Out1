@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3303099422509966461}
   - component: {fileID: 6806162981356889720}
   - component: {fileID: 6433115975531655548}
+  - component: {fileID: 5092115273304463286}
   m_Layer: 0
   m_Name: VFX_Explode
   m_TagString: Untagged
@@ -4896,6 +4897,21 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &5092115273304463286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881243621084556784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476c0517e0605e641ac939f69948f369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BubleFIll
+  activeTime: 1.1
+  type: 2
+  vfx: {fileID: 6806162981356889720}
 --- !u!1 &6172179496566321848
 GameObject:
   m_ObjectHideFlags: 0

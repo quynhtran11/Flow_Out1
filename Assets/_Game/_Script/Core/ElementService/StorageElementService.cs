@@ -19,6 +19,7 @@ public class StorageElementService : BaseElementService<StorageElement>
         for (int i = 0; i < allElements.Count; i++)
         {
             if (allElements[i] == null) continue;
+            if (param.pos.x > allElements[i].Tf.position.x) continue;
             if (Mathf.Abs( param.pos.x - allElements[i].Tf.position.x) > GameData.Instance.DistanceCheckFill) continue;
             param.callBack.Invoke(allElements[i].GetWaterFill(param.color));
         }

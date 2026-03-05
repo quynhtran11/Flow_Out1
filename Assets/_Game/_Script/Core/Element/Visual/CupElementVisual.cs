@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -9,10 +10,13 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private TextMeshProUGUI textAmount;
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private MeshRenderer mesh2;
+    [SerializeField] private MeshRenderer waterMesh;
     private MaterialPropertyBlock matBlock;
     private MaterialPropertyBlock matBlock2;
+    private MaterialPropertyBlock matWater;
     private Transform parent;
     private int amount;
+    private Vector3 currentPos;
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<ClearCupEvent>(OnClearCup);
@@ -25,13 +29,13 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         if (param.cup != this) return;
         CancelInvoke();
-        Invoke(nameof(DelayClear), GameData.Instance.TimeActiveFill);
+        Invoke(nameof(DelayClear), GameData.Instance.TimeActiveFill+.15f);
     }
     private void DelayClear()
     {
         Tf.DOKill();
-        Tf.parent = parent;
-        Tf.transform.DOJump(new Vector3(Tf.position.x, Tf.position.y, Tf.position.z + 2f), 3, 1, .3f).OnComplete(() =>
+            Tf.parent = parent;
+        Tf.transform.DOJump(new Vector3(Tf.position.x, Tf.position.y + 3, Tf.position.z), 1, 1, .3f).OnComplete(() =>
         {
             Tf.DOScale(Vector3.zero, .4f).SetEase(Ease.InBack).OnComplete(() =>
             {
@@ -50,9 +54,13 @@ public class CupElementVisual : BaseElementVisual<CupData>
         {
             matBlock = new MaterialPropertyBlock();
         }
-        if(matBlock2 == null)
+        if (matBlock2 == null)
         {
             matBlock2 = new MaterialPropertyBlock();
+        }
+        if (matWater == null)
+        {
+            matWater = new MaterialPropertyBlock();
         }
         Color c = GameData.Instance.ColorData.GetData(type).color;
         mesh.GetPropertyBlock(matBlock, 0);
@@ -62,6 +70,13 @@ public class CupElementVisual : BaseElementVisual<CupData>
         mesh2.GetPropertyBlock(matBlock2, 0);
         matBlock2.SetColor("_BaseColor", c);
         mesh2.SetPropertyBlock(matBlock2, 0);
+
+        waterMesh.GetPropertyBlock(matWater);
+        matWater.SetColor("Color_E9C3FC1D", c); // top color 
+        matWater.SetColor("Color_1B2A4228", c * 0.8f); // bottom color 
+        matWater.SetColor("Color_12DEDFED", Color.white);// foam color
+        matWater.SetFloat("Vector1_86B367DE", 2f); // fill 
+        waterMesh.SetPropertyBlock(matWater);
 
     }
     private void ChangeTextAmount(string text)
@@ -73,12 +88,21 @@ public class CupElementVisual : BaseElementVisual<CupData>
         if (isBusy)
         {
             textAmount.color = new Color(1, 1, 1, .3f);
-            skin.transform.localEulerAngles = new Vector3(-180f, 0, 0);
+            Tf.DORotate(new Vector3(-240f, 0, 0), .3f).OnComplete(() =>
+            {
+                currentPos = Tf.transform.localEulerAngles;
+            });
+            //skin.transform.localEulerAngles =new Vector3(-240f, 0, 0), .3f) ;
         }
         else
         {
             textAmount.color = new Color(1, 1, 1, 1f);
-            skin.transform.localEulerAngles = new Vector3(10f, 0, 0);
+            Tf.DORotate(new Vector3(-50f, 0, 0), .3f).OnComplete(() =>
+            {
+                currentPos = Tf.transform.localEulerAngles;
+            }); ;
+
+            //skin.transform.localEulerAngles = new Vector3(-50f, 0, 0);
         }
     }
     private void ActiveInteract(bool isBusy)
@@ -86,12 +110,27 @@ public class CupElementVisual : BaseElementVisual<CupData>
         ActiveTextAmount(isBusy);
         if (isBusy) return;
         float delay = (float)data.id * .05f;
-        skin.DOKill();
+        //skin.DOKill();
         Vector3 scaleInit = new Vector3(.98f, .95f, 1f);
         Vector3 scaleAfter = new Vector3(1.03f, 1.05f, 1f);
         skin.transform.localScale = scaleInit;
         skin.DOScaleX(scaleAfter.x, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay);
         skin.DOScaleY(scaleAfter.y, 1.15f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay + .2f);
+    }
+    IEnumerator FillWater(float target)
+    {
+        waterMesh.GetPropertyBlock(matWater);
+        float current = matWater.GetFloat("Vector1_86B367DE");
+
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * 3f;
+            float value = Mathf.Lerp(current, target, t);
+            matWater.SetFloat("Vector1_86B367DE", value);
+            waterMesh.SetPropertyBlock(matWater);
+            yield return null;
+        }
     }
     public override void AfterInit()
     {
@@ -99,11 +138,12 @@ public class CupElementVisual : BaseElementVisual<CupData>
         amount = data.amount;
         ChangeTextAmount(amount.ToString());
         Tf.DOKill();
-        Tf.position = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z - 10);
+        Tf.position = new Vector3(Tf.position.x, Tf.position.y - 10, Tf.position.z);
         float delay = (float)data.id * .05f;
         Tf.DOMove(centerPos, .5f).SetEase(Ease.OutBack, .4f).SetDelay(delay);
         parent = Tf.parent;
         elementCollider.enabled = true;
+        currentPos = Tf.transform.localEulerAngles;
     }
     public override void SetBusy(bool isBusy)
     {
@@ -113,7 +153,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     public void MoveNextMatrix(Vector3 pos)
     {
         Tf.DOKill();
-        Tf.DOMove(pos, .5f);
+        Tf.DOMove(pos, .5f).SetEase(Ease.InOutBack);
     }
     public void OutMatrix() // test
     {
@@ -124,28 +164,77 @@ public class CupElementVisual : BaseElementVisual<CupData>
     public void MoveToConveyor(Vector3 pos, Action callBack)
     {
         elementCollider.enabled = false;
-        skin.transform.DOLocalRotate(new Vector3(10, 0, 0), .5f).SetEase(Ease.OutBack);
-        skin.transform.DOPunchScale(new Vector3(0,.25f,0), .5f).SetDelay(.05f);
-        Tf.DOLocalJump(new Vector3(0, .5f, 0),3,1, .5f).OnComplete(() =>
+
+        Tf.DOKill();
+        Tf.localScale = Vector3.one;
+
+        float startY = Tf.localPosition.y;
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(
+            Tf.DOScale(new Vector3(1.1f, 0.85f, 1.1f), 0.08f)
+              .SetEase(Ease.OutQuad)
+        );
+
+        //seq.Join(
+        //    Tf.DOLocalMoveY(startY - 0.15f, 0.08f)
+        //      .SetEase(Ease.InQuad)
+        //);
+
+        seq.Append(
+            Tf.DOScale(new Vector3(0.9f, 1.15f, 0.9f), 0.1f)
+              .SetEase(Ease.OutQuad)
+        );
+
+        seq.Join(
+            Tf.DOLocalMoveY(startY, 0.1f)
+              .SetEase(Ease.OutQuad)
+        );
+        seq.Append(
+            Tf.DOLocalJump(new Vector3(0,2,0), 2.5f, 1, 0.45f)
+              .SetEase(Ease.OutCubic)
+        );
+        seq.Join(
+    Tf.DOLocalRotate(new Vector3(35, 0, 0), .3f));
+
+        seq.Insert(seq.Duration() - 0.12f,
+            Tf.DOScale(new Vector3(1.15f, 0.85f, 1.15f), 0.1f)
+              .SetEase(Ease.InQuad)
+        );
+
+        seq.Append(
+            Tf.DOScale(Vector3.one, 0.15f)
+              .SetEase(Ease.OutBack)
+        );
+
+        seq.OnComplete(() =>
         {
             callBack?.Invoke();
-        }).SetEase(Ease.OutBack);
+        });
     }
     public void MoveFailed()
     {
-        skin.DOKill();
-        skin.transform.localEulerAngles = new Vector3(10, 0, 0);
-        skin.DOPunchRotation(Vector3.forward * 15.75f, .25f);
+        Tf.DOKill();
+        Tf.localEulerAngles = currentPos;
+        Tf.DOShakeRotation(.25f,39,7);
     }
     public void WaterFill()
     {
         amount--;
         ChangeTextAmount(amount.ToString());
+
         ParticleSystem go = VFXManager.Instance.GetObject(EVfxType.VFX_WaterBolling);
         go.transform.SetParent(Tf);
         go.transform.position = parentVfx.position;
+
         var v = go.emission;
         v.enabled = false;
-    }
 
+        float t = (float)(data.amount - amount) / data.amount;
+
+        float shaderValue = Mathf.Lerp(2f, -1f, t);
+        StopAllCoroutines();
+        StartCoroutine(FillWater(shaderValue));
+    }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 36904385ad5e1ac46ba5fb6e3311af5b
+guid: 95794274b36689245b10673d251c2191
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,18 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 1
-    second: {fileID: 2100000, guid: 95fe7b0e3c19e1a4e9e1bcea257e8335, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: coc
-    second: {fileID: 2100000, guid: 9805f7911c5433e4aabe2a10fa5b4d1d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: glass
-    second: {fileID: 2100000, guid: 5a84dca40a4219848ae2044cddf9267c, type: 2}
+      name: water
+    second: {fileID: 2100000, guid: 743185255eb5e0b49a94a223175d67f7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
