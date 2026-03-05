@@ -63,9 +63,17 @@ public class CupElementVisual : BaseElementVisual<CupData>
             matWater = new MaterialPropertyBlock();
         }
         Color c = GameData.Instance.ColorData.GetData(type).color;
-        mesh.GetPropertyBlock(matBlock, 0);
+        matBlock.Clear();
         matBlock.SetColor("_BaseColor", c);
         mesh.SetPropertyBlock(matBlock, 0);
+        matBlock.Clear();
+        var colorR = Mathf.Lerp(Color.white.r,c.r,.4f);
+        var colorG = Mathf.Lerp(Color.white.g,c.g,.4f);
+        var colorB = Mathf.Lerp(Color.white.b,c.b,.4f);
+        Color color = c;
+        color.a = .4f;
+        matBlock.SetColor("_BaseColor", color);
+        mesh.SetPropertyBlock(matBlock, 1);
 
         mesh2.GetPropertyBlock(matBlock2, 0);
         matBlock2.SetColor("_BaseColor", c);
@@ -73,8 +81,9 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         waterMesh.GetPropertyBlock(matWater);
         matWater.SetColor("Color_E9C3FC1D", c); // top color 
-        matWater.SetColor("Color_1B2A4228", c * 0.8f); // bottom color 
-        matWater.SetColor("Color_12DEDFED", Color.white);// foam color
+
+        matWater.SetColor("Color_1B2A4228", c*.8f); // bottom color 
+        matWater.SetColor("Color_12DEDFED", c);// foam color
         matWater.SetFloat("Vector1_86B367DE", 2f); // fill 
         waterMesh.SetPropertyBlock(matWater);
 

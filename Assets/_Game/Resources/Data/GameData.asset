@@ -20,8 +20,8 @@ MonoBehaviour:
   speedConveyor: 2.5
   speedWaterFill: 0.3
   timeActiveFill: 0.3
-  distanceCheckFill: 0.73
-  speedConveyorEndGame: 4.5
+  distanceCheckFill: 0.48
+  speedConveyorEndGame: 4
   speedWaterFillEndGame: 0.2
   timeActiveFillEndGame: 0.1
   delayCallWinUI: 1.5

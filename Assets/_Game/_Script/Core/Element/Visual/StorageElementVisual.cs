@@ -36,4 +36,8 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
         Color c = GameData.Instance.ColorData.GetData(waterFill.Data.color).color;
         water.OnInit(storageFillStart, storageFillEnd,speed,c);
     }
+    public void CompleteStorage()
+    {
+        Debug.LogError("CompleteStorage");
+    }
 }

@@ -118,6 +118,11 @@ public class Conveyor : BLBMono
         currentAllSlots.Add(c);
         visual.ChangeTextAmount(currentSlot, maxSlot);
         CheckAllFillQualified(); // check lose
+        if (currentSlot == (maxSlot - 1))
+        {
+            // warning
+
+        }
     }
     private void OnCheckFullSlotConveyor(CheckFullSlotConveyorEvent param)
     {
@@ -186,5 +191,12 @@ public class Conveyor : BLBMono
             maxAllSlots[i].ChangeSpeed(GameData.Instance.SpeedConveyorEndGame);
         }
         EventDispatcher.Dispatch(new IncreaseSpeedWaterEvent() { });
+    }
+    private void WarningConveyor()
+    {
+        for (int i = 0; i < maxAllSlots.Count; i++)
+        {
+            maxAllSlots[i].WarningConveyor();
+        }
     }
 }

@@ -24,6 +24,7 @@ public class StorageElement : BaseElement<StorageElementVisual, StorageData>
         if (storageSpawn.AllWaters.Count <= 0)
         {
             isBusy = true;
+            visual.CompleteStorage();
         }
         visual.WaterFills(currentWater);
         return currentWater;

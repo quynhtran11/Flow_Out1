@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ConveyorSlotElement : BLBMono
 {
+    [SerializeField] private ConveyorSlotElementVisual visual;
     private int idSlot;
     private float speed;
     private CupElement objectOwner = null;
@@ -60,5 +61,9 @@ public class ConveyorSlotElement : BLBMono
         water.WaterFill();
         //cup.StopCheck();
         //Debug.LogError("fill_" + water.Data.color + "ID" + water.Data.waterID);
+    }
+    public void WarningConveyor()
+    {
+        visual.WarningConveyor();
     }
 }
