@@ -226,11 +226,11 @@ public class CupElementVisual : BaseElementVisual<CupData>
               .SetEase(Ease.OutQuad)
         );
         seq.Append(
-            Tf.DOLocalJump(new Vector3(0,2,0), 2.5f, 1, 0.45f)
+            Tf.DOLocalJump(new Vector3(0,1.5f,-.5f), 2.5f, 1, 0.45f)
               .SetEase(Ease.OutCubic)
         );
         seq.Join(
-    Tf.DOLocalRotate(new Vector3(35, 0, 0), .3f));
+    Tf.DOLocalRotate(new Vector3(20, 0, 0), .3f));
 
         seq.Insert(seq.Duration() - 0.12f,
             Tf.DOScale(new Vector3(1.15f, 0.85f, 1.15f), 0.1f)

@@ -5,7 +5,6 @@ public class ConveyorSlotElement : BLBMono
 {
     [SerializeField] private ConveyorSlotElementVisual visual;
     private int idSlot;
-    private float speed;
     private CupElement objectOwner = null;
     public CupElement ObjectOwner => objectOwner;
     public bool IsBusy()
@@ -16,14 +15,9 @@ public class ConveyorSlotElement : BLBMono
         }
         return false;
     }
-    public void ChangeSpeed( float speed )
-    {
-        this.speed = speed;
-    }
     public void OnInit(int id,float delay)
     {
         this.idSlot = id;
-        speed = GameData.Instance.GetSpeedConveyor();
         visual.OnInit(delay);
     }
     public void RegisterObject(CupElement cup)
@@ -37,7 +31,7 @@ public class ConveyorSlotElement : BLBMono
     }
     public void OnUpdate(Vector2 start, Vector2 end)
     {
-        Vector2 calculatorSpeed = Vector2.right * this.speed * Time.deltaTime;
+        Vector2 calculatorSpeed = Vector2.right * GameData.Instance.GetSpeedConveyor() * Time.deltaTime;
         Tf.Translate(calculatorSpeed);
         if (Tf.position.x >= end.x)
         {

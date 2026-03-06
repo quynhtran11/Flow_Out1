@@ -6,13 +6,13 @@ public class Conveyor : BLBMono
     [SerializeField] private ConveyorVisual visual;
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
+    [SerializeField] private List<ConveyorBowElement> allConveyorBows = new List<ConveyorBowElement>();
     private int maxSlot;
     private int currentSlot;
     private bool isBusy;
     private bool isPause;
     private List<ConveyorSlotElement> maxAllSlots = new List<ConveyorSlotElement>();
     private List<ConveyorSlotElement> currentAllSlots = new List<ConveyorSlotElement>();
-
     public int CurrentSlot => currentSlot;
     private void OnEnable()
     {
@@ -45,6 +45,11 @@ public class Conveyor : BLBMono
             if (maxAllSlots[i] == null) continue;
             maxAllSlots[i].OnUpdate(startPoint.position, endPoint.position);
         }
+        for (int i = allConveyorBows.Count-1; i >= 0; i--)
+        {
+            if (allConveyorBows[i] == null) return;
+            allConveyorBows[i].OnUpdate(startPoint.position, endPoint.position);
+        }
     }
     private void OnInit(LevelInfor level)
     {
@@ -53,6 +58,7 @@ public class Conveyor : BLBMono
         maxSlot = GameData.Instance.InitSlot;
         currentSlot = 0;
         CalculatorSlot();
+        CalculatorBow();
         visual.OnInit(currentSlot, maxSlot, level.Map.x);
     }
     private ConveyorSlotElement SpawnConveyor()
@@ -60,6 +66,24 @@ public class Conveyor : BLBMono
         ConveyorSlotElement conveyorSlot = Instantiate(GameData.Instance.ElementInfor.GetData(EElementType.ConveyorSlot)
     .prefab, transform).GetComponent<ConveyorSlotElement>();
         return conveyorSlot;
+    }
+    private void CalculatorBow()
+    {
+        float startX = startPoint.position.x;
+        float endX = endPoint.position.x;
+        float size = endX - startX;
+        float offset = size / (allConveyorBows.Count);
+        for (int i = 0; i < allConveyorBows.Count; i++)
+        {
+            float posX = startX + offset * 0.5f + offset * i;
+            Vector3 pos = new Vector3(
+    posX,
+    startPoint.position.y,
+    startPoint.position.z
+);
+            allConveyorBows[i].Tf.position = pos;
+
+        }
     }
     private void CalculatorSlot()
     {
@@ -253,10 +277,6 @@ public class Conveyor : BLBMono
     private void OnIncreaseSpeedGame(IncreaseSpeedGameEvent param)
     {
         if (param.amount > maxSlot) return;
-        for (int i = 0; i < maxAllSlots.Count; i++)
-        {
-            maxAllSlots[i].ChangeSpeed(GameData.Instance.GetSpeedConveyor());
-        }
         EventDispatcher.Dispatch(new IncreaseSpeedWaterEvent() { });
     }
     private void WarningConveyor()

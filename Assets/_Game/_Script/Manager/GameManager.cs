@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.RegisterEvent<EndGameEvent>(OnEndGame);
         EventDispatcher.RegisterEvent<ChangeSceneEvent>(OnChangeScene);
         EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
-        EventDispatcher.RegisterEvent<IncreaseSpeedGameEvent>(OnIncreaseSpeedGame);
+        EventDispatcher.RegisterEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedGame);
         
     }
     private void OnDisable()
@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.RemoveEvent<EndGameEvent>(OnEndGame);
         EventDispatcher.RemoveEvent<ChangeSceneEvent>(OnChangeScene);
         EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
-        EventDispatcher.RemoveEvent<IncreaseSpeedGameEvent>(OnIncreaseSpeedGame);
+        EventDispatcher.RemoveEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedGame);
     }
     void Start()
     {
@@ -87,7 +87,7 @@ public class GameManager : Singleton<GameManager>
     {
         ChangeGameState(EGameState.Playing);
     }
-    private void OnIncreaseSpeedGame(IncreaseSpeedGameEvent param)
+    private void OnIncreaseSpeedGame(IncreaseSpeedWaterEvent param)
     {
         isSpeed = true;
     }
