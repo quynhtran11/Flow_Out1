@@ -11,6 +11,9 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private MeshRenderer mesh2;
     [SerializeField] private MeshRenderer waterMesh;
+    [SerializeField] private RectTransform textPosUnclick;
+    [SerializeField] private RectTransform textPosClick;
+    [SerializeField] private RectTransform textPosConveyor;
     private MaterialPropertyBlock matBlock;
     private MaterialPropertyBlock matBlock2;
     private MaterialPropertyBlock matWater;
@@ -88,9 +91,29 @@ public class CupElementVisual : BaseElementVisual<CupData>
         waterMesh.SetPropertyBlock(matWater);
 
     }
-    private void ChangeTextAmount(string text)
+    private void ChangeTextAmount(int text)
     {
-        textAmount.SetText(text);
+        textAmount.SetText(text.ToString());
+        if (text <= 0)
+        {
+            textAmount.transform.DOKill();
+            textAmount.transform.DOScale(Vector3.zero, .3f).SetEase(Ease.InBack);
+        }
+    }
+    private void ChangeTextPosition(RectTransform tf,bool isAnim = false)
+    {
+        if (isAnim)
+        {
+            textAmount.transform.DOKill();
+            textAmount.transform.DOLocalMove(tf.localPosition,.3f);
+            textAmount.transform.DOLocalRotate(tf.localEulerAngles,.3f);
+        }
+        else
+        {
+            textAmount.rectTransform.localPosition = tf.localPosition;
+            textAmount.rectTransform.localEulerAngles = tf.localEulerAngles;
+        }
+
     }
     private void ActiveTextAmount(bool isBusy)
     {
@@ -101,6 +124,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
             {
                 currentPos = Tf.transform.localEulerAngles;
             });
+            ChangeTextPosition(textPosUnclick);
             //skin.transform.localEulerAngles =new Vector3(-240f, 0, 0), .3f) ;
         }
         else
@@ -110,7 +134,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
             {
                 currentPos = Tf.transform.localEulerAngles;
             }); ;
-
+            ChangeTextPosition(textPosClick);
             //skin.transform.localEulerAngles = new Vector3(-50f, 0, 0);
         }
     }
@@ -145,7 +169,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         LoadColor(data.color);
         amount = data.amount;
-        ChangeTextAmount(amount.ToString());
+        ChangeTextAmount(amount);
         Tf.DOKill();
         Tf.position = new Vector3(Tf.position.x, Tf.position.y - 10, Tf.position.z);
         float delay = (float)data.id * .05f;
@@ -178,6 +202,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Tf.localScale = Vector3.one;
 
         float startY = Tf.localPosition.y;
+        ChangeTextPosition(textPosConveyor,true);
 
         Sequence seq = DOTween.Sequence();
 
@@ -231,7 +256,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     public void WaterFill()
     {
         amount--;
-        ChangeTextAmount(amount.ToString());
+        ChangeTextAmount(amount);
 
         ParticleSystem go = VFXManager.Instance.GetObject(EVfxType.VFX_WaterBolling);
         go.transform.SetParent(Tf);

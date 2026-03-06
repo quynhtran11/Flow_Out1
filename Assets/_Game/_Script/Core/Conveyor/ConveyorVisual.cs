@@ -14,4 +14,8 @@ public class ConveyorVisual : BLBMono
     {
         textAmount.text = amount.ToString() + "/" + maxAmount;
     }
+    public void AddSlot(int amount, int maxAmount)
+    {
+        ChangeTextAmount(amount, maxAmount);
+    }
 }

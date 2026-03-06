@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b12194f1010714d953c52d02f28525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConveyorSlotElement
+  visual: {fileID: 7716337360265036485}
 --- !u!114 &7716337360265036485
 MonoBehaviour:
   m_ObjectHideFlags: 0

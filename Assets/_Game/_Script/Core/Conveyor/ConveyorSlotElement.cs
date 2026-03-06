@@ -20,10 +20,11 @@ public class ConveyorSlotElement : BLBMono
     {
         this.speed = speed;
     }
-    public void OnInit(int id)
+    public void OnInit(int id,float delay)
     {
         this.idSlot = id;
         speed = GameData.Instance.SpeedConveyor;
+        visual.OnInit(delay);
     }
     public void RegisterObject(CupElement cup)
     {

@@ -92,3 +92,7 @@ public struct IncreaseSpeedGameEvent : IEvenParam // call when add speed game
 public struct IncreaseSpeedWaterEvent : IEvenParam // call when add speed game
 {
 }
+public struct AddSlotEvent : IEvenParam // call when add slot 
+{
+
+}

@@ -29,7 +29,6 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
     }
     public void WaterFills(WaterElement waterFill)
     {
-        Debug.LogError("water");
         ParticleSystem go = VFXManager.Instance.GetObject(EVfxType.VFX_WaterFill);
         go.transform.position = storageFillStart.transform.position;
         WaterFill water = go.GetComponent<WaterFill>();
