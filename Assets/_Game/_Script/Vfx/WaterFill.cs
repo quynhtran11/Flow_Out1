@@ -45,7 +45,7 @@ public class WaterFill : BaseVFX
     }
     IEnumerator PlayLine(Vector3 startPos, Vector3 endPos)
     {
-        float extendTime = 0.085f;  
+        float extendTime = 0.1f;  
         float retractTime = 0.125f;  
         float activeTime = maxTime;
 

@@ -27,7 +27,7 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     }
     public void WaterFill()
     {
-        Tf.DOMove(targetEnd.position, speed+.1f).OnComplete(() =>
+        Tf.DOMove(targetEnd.position, speed+.05f).OnComplete(() =>
         {
             // test
             mesh.gameObject.SetActive(false);
