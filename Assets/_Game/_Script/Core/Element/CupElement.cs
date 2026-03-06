@@ -45,18 +45,18 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     {
         isCheck = false;
     }
-    public void WaterFill()
+    public void WaterFill(bool isRevive = false)
     {
         currentWater++;
         visual.WaterFill();
-        if (currentWater >= Data.amount)
+        if (currentWater >= Data.amount || isRevive )
         {
             isBusy = true;
             CheckClearCup();
+
         }
         else
         {
-
         EventDispatcher.Dispatch(new CheckLoseEvent() { });
         }
     }

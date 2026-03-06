@@ -90,9 +90,9 @@ public class Conveyor : BLBMono
     }
     private void CaculatorConveyorSlot()
     {
+        maxSlot ++;
         isPause = true;
         ConveyorSlotElement slot = SpawnConveyor();
-        maxSlot += 1;
         maxAllSlots.Add(slot);
         slot.OnInit(maxSlot,0);
 

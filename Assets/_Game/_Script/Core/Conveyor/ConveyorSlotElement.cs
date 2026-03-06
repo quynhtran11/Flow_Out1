@@ -55,10 +55,10 @@ public class ConveyorSlotElement : BLBMono
             color = this.objectOwner.Data.color
         });
     }
-    public void WaterFillCup(WaterElement water, CupElement cup)
+    public void WaterFillCup(WaterElement water, CupElement cup,bool isRevive = false)
     {
         if (water == null) return;
-        cup.WaterFill();
+        cup.WaterFill(isRevive);
         water.WaterFill();
         //cup.StopCheck();
         //Debug.LogError("fill_" + water.Data.color + "ID" + water.Data.waterID);

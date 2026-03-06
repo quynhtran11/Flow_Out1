@@ -88,7 +88,7 @@ public class StorageElementService : BaseElementService<StorageElement>
             {
                 allElements[j].ClearWater(value);
             }
-            param.conveyorSlot.WaterFillCup(value, param.cup);
+            param.conveyorSlot.WaterFillCup(value, param.cup,true);
         }
         for (int i = 0; i < allElements.Count; i++)
         {

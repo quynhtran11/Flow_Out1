@@ -60,6 +60,7 @@ public class GameManager : Singleton<GameManager>
     }
     private void OnEndGame(EndGameEvent param)
     {
+        if (gameState == EGameState.EndGame) return;
         ChangeGameState(EGameState.EndGame);
         if (param.isWin)
         {
