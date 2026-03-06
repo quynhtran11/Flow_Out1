@@ -53,7 +53,6 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
         {
             isBusy = true;
             CheckClearCup();
-
         }
         else
         {

@@ -28,15 +28,9 @@ public partial class GameData
     public bool LoadResouces=>loadResouces;
     public float ClickRadius => clickRadius;
     public float CoinLevelReward => coinLevelReward;
-    public float SpeedConveyor => speedConveyor;
-    public float SpeedWaterFill => speedWaterFill;
-    public float SpeedConveyorEndGame => speedConveyorEndGame;
-    public float SpeedWaterFillEndGame => speedWaterFillEndGame;
     public float DelayCallWinUI => delayCallWinUI;
     public float DelayCallLoseUI => delayCallLoseUI;
     public float DistanceCheckFill => distanceCheckFill;
-    public float TimeActiveFill => timeActiveFill;
-    public float TimeActiveFillEndGame => timeActiveFillEndGame;
     public int InitSlot => initSlot;
     public int MaxLevel => maxLevel;
 
@@ -45,6 +39,39 @@ public partial class GameData
     {
         var levels = Resources.LoadAll("Data/Level");
         maxLevel = levels.Length;
+    }
+    public float GetTimeActiveFill()
+    {
+        if (GameManager.Instance.IsSpeed)
+        {
+            return timeActiveFillEndGame;
+        }
+        else
+        {
+            return timeActiveFill;
+        }
+    }
+    public float GetSpeedConveyor()
+    {
+        if (GameManager.Instance.IsSpeed)
+        {
+            return speedConveyorEndGame;
+        }
+        else
+        {
+            return speedConveyor;
+        }
+    }
+    public float GetSpeedWaterFill()
+    {
+        if (GameManager.Instance.IsSpeed)
+        {
+            return speedWaterFillEndGame;
+        }
+        else
+        {
+            return speedWaterFill;
+        }
     }
 }
 

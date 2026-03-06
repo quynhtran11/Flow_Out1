@@ -30,6 +30,9 @@ public enum ESceneType
 public enum EBoosterType
 {
     None,
+    Shuffle,
+    PickUp,
+    InstantFill
 }
 public enum ERewardType
 {

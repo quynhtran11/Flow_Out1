@@ -8,6 +8,8 @@ public class GameManager : Singleton<GameManager>
 
     public EGameState GameState => gameState;
     public ESceneType SceneType => sceneType;
+    private bool isSpeed;
+    public bool IsSpeed => isSpeed;
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<StartGameplayEvent>(OnStartGame);
@@ -16,6 +18,8 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.RegisterEvent<EndGameEvent>(OnEndGame);
         EventDispatcher.RegisterEvent<ChangeSceneEvent>(OnChangeScene);
         EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
+        EventDispatcher.RegisterEvent<IncreaseSpeedGameEvent>(OnIncreaseSpeedGame);
+        
     }
     private void OnDisable()
     {
@@ -25,6 +29,7 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.RemoveEvent<EndGameEvent>(OnEndGame);
         EventDispatcher.RemoveEvent<ChangeSceneEvent>(OnChangeScene);
         EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
+        EventDispatcher.RemoveEvent<IncreaseSpeedGameEvent>(OnIncreaseSpeedGame);
     }
     void Start()
     {
@@ -44,6 +49,7 @@ public class GameManager : Singleton<GameManager>
     }
     private void OnStartGame(StartGameplayEvent param)
     {
+        isSpeed = false;
         Invoke(nameof(StartGame), 1f);
     }
     private void OnContinueGame(ContinueGameEvent param)
@@ -80,5 +86,9 @@ public class GameManager : Singleton<GameManager>
     private void OnReviveGame(ReviveGameEvent param)
     {
         ChangeGameState(EGameState.Playing);
+    }
+    private void OnIncreaseSpeedGame(IncreaseSpeedGameEvent param)
+    {
+        isSpeed = true;
     }
 }

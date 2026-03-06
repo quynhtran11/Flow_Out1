@@ -32,7 +32,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         if (param.cup != this) return;
         CancelInvoke();
-        Invoke(nameof(DelayClear), GameData.Instance.TimeActiveFill+.15f);
+        Invoke(nameof(DelayClear), GameData.Instance.GetTimeActiveFill ()+ .15f);
     }
     private void DelayClear()
     {

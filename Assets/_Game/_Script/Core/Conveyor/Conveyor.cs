@@ -255,7 +255,7 @@ public class Conveyor : BLBMono
         if (param.amount > maxSlot) return;
         for (int i = 0; i < maxAllSlots.Count; i++)
         {
-            maxAllSlots[i].ChangeSpeed(GameData.Instance.SpeedConveyorEndGame);
+            maxAllSlots[i].ChangeSpeed(GameData.Instance.GetSpeedConveyor());
         }
         EventDispatcher.Dispatch(new IncreaseSpeedWaterEvent() { });
     }

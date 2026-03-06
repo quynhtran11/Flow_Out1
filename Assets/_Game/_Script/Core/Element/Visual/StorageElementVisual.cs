@@ -21,11 +21,11 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
     }
     private void OnIncreaseSpeedWater(IncreaseSpeedWaterEvent param)
     {
-        speed = GameData.Instance.TimeActiveFillEndGame;
+        speed = GameData.Instance.GetTimeActiveFill();
     }
     public override void AfterInit()
     {
-        speed = GameData.Instance.TimeActiveFill;
+        speed = GameData.Instance.GetTimeActiveFill();
     }
     public void WaterFills(WaterElement waterFill)
     {

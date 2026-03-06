@@ -19,7 +19,7 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
         Tf.DOKill();
         float delay = (data.waterID * .1f) + .2f;
         Tf.DOMove(centerPos, .5f).SetDelay(delay).SetEase(Ease.OutBack, .3f);
-        speed = Mathf.Clamp(GameData.Instance.SpeedWaterFill, 0, GameData.Instance.SpeedWaterFill);
+        speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
     public void RegisterTarget(Transform tf)
     {
@@ -35,6 +35,6 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     }
     public void ChangeSpeedWater()
     {
-        speed = Mathf.Clamp(GameData.Instance.SpeedWaterFillEndGame, 0, GameData.Instance.SpeedWaterFillEndGame);
+        speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
 }

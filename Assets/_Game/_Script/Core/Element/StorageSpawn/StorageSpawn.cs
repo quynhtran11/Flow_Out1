@@ -44,7 +44,7 @@ public class StorageSpawn
             allWaters[i].OnInit();
             allWaters[i].RegisterTarget(targetEnd);
         }
-        speed = Mathf.Clamp(GameData.Instance.SpeedWaterFill, 0, GameData.Instance.SpeedWaterFill);
+        speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
     public void CalculatorPosition()
     {
@@ -68,6 +68,6 @@ public class StorageSpawn
         {
             allWaters[i].ChangeSpeedWater();
         }
-        speed = Mathf.Clamp(GameData.Instance.SpeedWaterFillEndGame, 0, GameData.Instance.SpeedWaterFillEndGame);
+        speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
 }

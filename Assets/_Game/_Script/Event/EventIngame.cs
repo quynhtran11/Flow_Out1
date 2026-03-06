@@ -96,3 +96,7 @@ public struct AddSlotEvent : IEvenParam // call when add slot
 {
 
 }
+public struct UseShuffleEvent : IEvenParam // call when use shuffle
+{
+
+}

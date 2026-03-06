@@ -19,7 +19,7 @@ public class WaterFill : BaseVFX
     }
     private void OnIncreaseSpeedWater(IncreaseSpeedWaterEvent param)
     {
-        maxTime = GameData.Instance.TimeActiveFillEndGame;
+        maxTime = GameData.Instance.GetTimeActiveFill();
     }
     private void OnChangeScene(ChangeSceneEvent param)
     {
