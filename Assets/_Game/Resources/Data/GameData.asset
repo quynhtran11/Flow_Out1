@@ -18,9 +18,9 @@ MonoBehaviour:
   clickRadius: 0.37
   coinLevelReward: 30
   speedConveyor: 3
-  speedWaterFill: 0.25
-  timeActiveFill: 0.25
-  distanceCheckFill: 0.35
+  speedWaterFill: 0.6
+  timeActiveFill: 0.6
+  distanceCheckFill: 0.21
   speedConveyorEndGame: 5
   speedWaterFillEndGame: 0.2
   timeActiveFillEndGame: 0.2

@@ -34,6 +34,10 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
         WaterFill water = go.GetComponent<WaterFill>();
         Color c = GameData.Instance.ColorData.GetData(waterFill.Data.color).color;
         water.OnInit(storageFillStart, storageFillEnd,speed,c);
+
+        var buble = VFXManager.Instance.GetObject(EVfxType.VFX_BubleLarge);
+        buble.transform.position = storageFillStart.position;
+
     }
     public void CompleteStorage()
     {

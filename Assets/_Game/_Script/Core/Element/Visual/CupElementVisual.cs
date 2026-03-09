@@ -7,6 +7,7 @@ using UnityEngine;
 public class CupElementVisual : BaseElementVisual<CupData>
 {
     [SerializeField] private Transform parentVfx;
+    [SerializeField] private Transform parentWater;
     [SerializeField] private TextMeshProUGUI textAmount;
     [SerializeField] private MeshRenderer mesh;
     [SerializeField] private MeshRenderer mesh2;
@@ -70,9 +71,9 @@ public class CupElementVisual : BaseElementVisual<CupData>
         matBlock.SetColor("_BaseColor", c);
         mesh.SetPropertyBlock(matBlock, 0);
         matBlock.Clear();
-        var colorR = Mathf.Lerp(Color.white.r,c.r,.4f);
-        var colorG = Mathf.Lerp(Color.white.g,c.g,.4f);
-        var colorB = Mathf.Lerp(Color.white.b,c.b,.4f);
+        var colorR = Mathf.Lerp(Color.white.r, c.r, .4f);
+        var colorG = Mathf.Lerp(Color.white.g, c.g, .4f);
+        var colorB = Mathf.Lerp(Color.white.b, c.b, .4f);
         Color color = c;
         color.a = .4f;
         matBlock.SetColor("_BaseColor", color);
@@ -83,12 +84,17 @@ public class CupElementVisual : BaseElementVisual<CupData>
         mesh2.SetPropertyBlock(matBlock2, 0);
 
         waterMesh.GetPropertyBlock(matWater);
-        matWater.SetColor("Color_E9C3FC1D", c); // top color 
-
-        matWater.SetColor("Color_1B2A4228", c*.8f); // bottom color 
-        matWater.SetColor("Color_12DEDFED", c);// foam color
-        matWater.SetFloat("Vector1_86B367DE", 2f); // fill 
+        matWater.SetColor("_BaseColor", c); 
         waterMesh.SetPropertyBlock(matWater);
+        parentWater.transform.localScale = new Vector3(.8f, 0, .8f);
+        // use shader 
+        //waterMesh.GetPropertyBlock(matWater);
+        //matWater.SetColor("Color_E9C3FC1D", c); // top color 
+
+        //matWater.SetColor("Color_1B2A4228", c*.8f); // bottom color 
+        //matWater.SetColor("Color_12DEDFED", c);// foam color
+        //matWater.SetFloat("Vector1_86B367DE", 2f); // fill 
+        //waterMesh.SetPropertyBlock(matWater);
 
     }
     private void ChangeTextAmount(int text)
@@ -182,6 +188,21 @@ public class CupElementVisual : BaseElementVisual<CupData>
             waterMesh.SetPropertyBlock(matWater);
             yield return null;
         }
+    }
+    private void FillWater()
+    {
+        EventDispatcher.Dispatch(new FillPauseGameEvent() { });
+
+        float v = (float)(   data.amount -amount) / (float)data.amount;
+        Vector3 size = Vector3.one * v;
+        size.x = 1;
+        size.z = 1;
+        parentWater.DOKill();
+        parentWater.DOScale(size, GameData.Instance.GetSpeedWaterFill()).OnComplete(() =>
+        {
+            EventDispatcher.Dispatch(new FillContinueGame() { });
+        });
+
     }
     public override void AfterInit()
     {
@@ -294,9 +315,11 @@ public class CupElementVisual : BaseElementVisual<CupData>
         float t = (float)(data.amount - amount) / data.amount;
 
         float shaderValue = Mathf.Lerp(2f, -1f, t);
-        StopAllCoroutines();
-        StartCoroutine(FillWater(shaderValue));
+        FillWater();
+        //StopAllCoroutines();
+        //StartCoroutine(FillWater(shaderValue));
         CupShake();
     }
+
     
 }

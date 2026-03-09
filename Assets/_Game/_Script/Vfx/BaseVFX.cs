@@ -13,7 +13,7 @@ public abstract class BaseVFX : BLBMono
     {
         Invoke(nameof(DelayDeactive),activeTime);
     }
-    protected void DelayDeactive()
+    protected virtual void DelayDeactive()
     {
         VFXManager.Instance.ReturnObject(type, vfx);
     }

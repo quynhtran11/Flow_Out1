@@ -20,6 +20,7 @@ public enum EVfxType {
     VFX_WaterFill,
     VFX_Explode,
     VFX_WaterBolling,
+    VFX_BubleLarge,
 }
 public enum ESceneType
 {

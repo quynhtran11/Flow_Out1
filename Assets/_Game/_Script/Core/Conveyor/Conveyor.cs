@@ -9,6 +9,7 @@ public class Conveyor : BLBMono
     [SerializeField] private List<ConveyorBowElement> allConveyorBows = new List<ConveyorBowElement>();
     private int maxSlot;
     private int currentSlot;
+    private int currentFill;
     private bool isBusy;
     private bool isPause;
     private List<ConveyorSlotElement> maxAllSlots = new List<ConveyorSlotElement>();
@@ -24,6 +25,8 @@ public class Conveyor : BLBMono
         EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
         EventDispatcher.RegisterEvent<IncreaseSpeedGameEvent>(OnIncreaseSpeedGame);
         EventDispatcher.RegisterEvent<AddSlotEvent>(OnAddSlot);
+        EventDispatcher.RegisterEvent<FillPauseGameEvent>(OnFillPauseGame);
+        EventDispatcher.RegisterEvent<FillContinueGame>(OnFillContinueGame);
     }
     private void OnDisable()
     {
@@ -35,17 +38,19 @@ public class Conveyor : BLBMono
         EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
         EventDispatcher.RemoveEvent<IncreaseSpeedGameEvent>(OnIncreaseSpeedGame);
         EventDispatcher.RemoveEvent<AddSlotEvent>(OnAddSlot);
+        EventDispatcher.RemoveEvent<FillPauseGameEvent>(OnFillPauseGame);
+        EventDispatcher.RemoveEvent<FillContinueGame>(OnFillContinueGame);
     }
     private void Update()
     {
-        if (GameManager.Instance.GameState != EGameState.Playing) return;
+        if (GameManager.Instance.GameState != EGameState.Playing || IsFill()) return;
         if (isBusy || isPause) return;
         for (int i = maxAllSlots.Count - 1; i >= 0; i--)
         {
             if (maxAllSlots[i] == null) continue;
             maxAllSlots[i].OnUpdate(startPoint.position, endPoint.position);
         }
-        for (int i = allConveyorBows.Count-1; i >= 0; i--)
+        for (int i = allConveyorBows.Count - 1; i >= 0; i--)
         {
             if (allConveyorBows[i] == null) return;
             allConveyorBows[i].OnUpdate(startPoint.position, endPoint.position);
@@ -106,7 +111,7 @@ public class Conveyor : BLBMono
                 startPoint.position.y,
                 startPoint.position.z
             );
-            conveyorSlot.OnInit(i,delay*i);
+            conveyorSlot.OnInit(i, delay * i);
             conveyorSlot.transform.position = pos;
             maxAllSlots.Add(conveyorSlot);
         }
@@ -114,11 +119,11 @@ public class Conveyor : BLBMono
     }
     private void CaculatorConveyorSlot()
     {
-        maxSlot ++;
+        maxSlot++;
         isPause = true;
         ConveyorSlotElement slot = SpawnConveyor();
         maxAllSlots.Add(slot);
-        slot.OnInit(maxSlot,0);
+        slot.OnInit(maxSlot, 0);
 
         float startX = startPoint.position.x;
         float endX = endPoint.position.x;
@@ -129,7 +134,7 @@ public class Conveyor : BLBMono
         for (int i = 0; i < maxAllSlots.Count; i++)
         {
             float posX = startX + offset * 0.5f + offset * i;
-            Vector3 pos = new Vector3(posX,startPoint.position.y,startPoint.position.z);
+            Vector3 pos = new Vector3(posX, startPoint.position.y, startPoint.position.z);
             allPos.Add(pos);
             //maxAllSlots[i].Tf.position = pos;
         }
@@ -145,7 +150,7 @@ public class Conveyor : BLBMono
             for (int j = 0; j < count; j++)
             {
                 float t = Mathf.Abs(allPos[i].x - slotTemps[j].Tf.position.x);
-                if ( t< distance)
+                if (t < distance)
                 {
                     c = slotTemps[j];
                     distance = t;
@@ -289,6 +294,18 @@ public class Conveyor : BLBMono
     private void OnAddSlot(AddSlotEvent param)
     {
         CaculatorConveyorSlot();
-        visual.AddSlot(currentSlot,maxSlot);
+        visual.AddSlot(currentSlot, maxSlot);
+    }
+    private void OnFillPauseGame(FillPauseGameEvent param)
+    {
+        currentFill++;
+    }
+    private void OnFillContinueGame(FillContinueGame param)
+    {
+        currentFill--;
+    }
+    private bool IsFill()
+    {
+        return currentFill > 0;
     }
 }

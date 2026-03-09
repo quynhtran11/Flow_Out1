@@ -100,3 +100,11 @@ public struct UseShuffleEvent : IEvenParam // call when use shuffle
 {
 
 }
+public struct FillPauseGameEvent : IEvenParam // call when fill 
+{
+
+}
+public struct FillContinueGame : IEvenParam // call when fill complete
+{
+
+}
