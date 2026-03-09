@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - Vector1_1AEEBAF1: 0
-    - Vector1_86B367DE: 2
+    - Vector1_86B367DE: 0.3
     - _QueueControl: 0
     - _QueueOffset: 0
     - _XRMotionVectorsPass: 1

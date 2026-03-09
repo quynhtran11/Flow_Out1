@@ -22,11 +22,12 @@ public class SpawnManager : BLBMono
     private void SpawnCup(LevelInfor lv)
     {
         cupService = new CupElementService();
+        float offset = 2;
         for (int i = 0; i < lv.AllCups.Length; i++)
         {
             CupElement cup = SpanwObject<CupElement>(GameData.Instance.ElementInfor.GetData(EElementType.Cup).prefab);
             cup.gameObject.name = "Cup_" + i;
-            Vector3 pos = new Vector3(lv.AllCups[i].pos.x, lv.AllCups[i].pos.y, 0);
+            Vector3 pos = new Vector3(lv.AllCups[i].pos.x, lv.AllCups[i].pos.y - offset, 0);
             cup.Tf.position = pos;
             cup.Initilize(lv.AllCups[i]);
             cupService.RegisterObject(cup);
@@ -46,7 +47,7 @@ public class SpawnManager : BLBMono
             StorageElement storage = SpanwObject<StorageElement>(storagePrefab);
             storage.gameObject.name = "Storage_" + i;
             float x = center- totalWidth / 2f+ storageWidth / 2f+ i * (storageWidth + spacing);
-            storage.Tf.position = new Vector3(x,  22f,0);
+            storage.Tf.position = new Vector3(x,  15f,0);
             storage.Initilize(lev.AllStorages[i]);
             storageService.RegisterObject(storage);
         }

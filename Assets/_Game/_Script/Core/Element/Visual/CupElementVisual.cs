@@ -141,14 +141,32 @@ public class CupElementVisual : BaseElementVisual<CupData>
     private void ActiveInteract(bool isBusy)
     {
         ActiveTextAmount(isBusy);
-        if (isBusy) return;
-        float delay = (float)data.id * .05f;
-        //skin.DOKill();
-        Vector3 scaleInit = new Vector3(.98f, .95f, 1f);
-        Vector3 scaleAfter = new Vector3(1.03f, 1.05f, 1f);
-        skin.transform.localScale = scaleInit;
-        skin.DOScaleX(scaleAfter.x, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay);
-        skin.DOScaleY(scaleAfter.y, 1.15f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay + .2f);
+        //if (isBusy) return;
+        //float delay = (float)data.id * .05f;
+        ////skin.DOKill();
+        //Vector3 scaleInit = new Vector3(.98f, .95f, 1f);
+        //Vector3 scaleAfter = new Vector3(1.03f, 1.05f, 1f);
+        //skin.transform.localScale = scaleInit;
+        //skin.DOScaleX(scaleAfter.x, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay);
+        //skin.DOScaleY(scaleAfter.y, 1.15f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay + .2f);
+    }
+    private void CupShake()
+    {
+        Tf.DOKill();
+        Tf.localRotation = Quaternion.Euler(currentPos);
+
+        float t = GameData.Instance.GetSpeedWaterFill();
+        float delay = t * .3f;
+
+        Tf.DOShakeRotation(
+            0.2f,      
+            10f,
+            20,
+            90f,
+            true
+        )
+        .SetDelay(delay)
+        .SetLoops(Mathf.CeilToInt((t - delay) / 0.2f));
     }
     IEnumerator FillWater(float target)
     {
@@ -230,7 +248,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
               .SetEase(Ease.OutCubic)
         );
         seq.Join(
-    Tf.DOLocalRotate(new Vector3(20, 0, 0), .3f));
+    Tf.DOLocalRotate(new Vector3(25, 0, 0), .3f));
 
         seq.Insert(seq.Duration() - 0.12f,
             Tf.DOScale(new Vector3(1.15f, 0.85f, 1.15f), 0.1f)
@@ -244,31 +262,41 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         seq.OnComplete(() =>
         {
+            currentPos = Tf.localEulerAngles;
             callBack?.Invoke();
         });
     }
     public void MoveFailed()
     {
         Tf.DOKill();
-        Tf.localEulerAngles = currentPos;
-        Tf.DOShakeRotation(.25f,39,7);
+        Tf.localRotation = Quaternion.Euler(currentPos);
+
+        Tf.DOShakeRotation(
+            0.25f,   
+            10f,     
+            20,      
+            90f,     
+            true     
+        );
     }
     public void WaterFill()
     {
         amount--;
         ChangeTextAmount(amount);
 
-        ParticleSystem go = VFXManager.Instance.GetObject(EVfxType.VFX_WaterBolling);
+        WaterBolling go = VFXManager.Instance.GetObject(EVfxType.VFX_WaterBolling).GetComponent<WaterBolling>();
+        if (go == null) return;
+        Color c = GameData.Instance.ColorData.GetData(data.color).color;
+        go.OnInit(c);
         go.transform.SetParent(Tf);
         go.transform.position = parentVfx.position;
-
-        var v = go.emission;
-        v.enabled = false;
 
         float t = (float)(data.amount - amount) / data.amount;
 
         float shaderValue = Mathf.Lerp(2f, -1f, t);
         StopAllCoroutines();
         StartCoroutine(FillWater(shaderValue));
+        CupShake();
     }
+    
 }

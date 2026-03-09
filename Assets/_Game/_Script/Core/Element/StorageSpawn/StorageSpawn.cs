@@ -22,7 +22,8 @@ public class StorageSpawn
     }
     public void SpawnWater(StorageData data)
     {
-        float spacing = 4;
+        float spacing = 2.75f;
+        float offset = .4f;
         for (int i = 0; i < data.waterDatas.Length; i++)
         {
             WaterElement water = GameObject
@@ -31,7 +32,7 @@ public class StorageSpawn
             water.Initilize(data.waterDatas[i]);
             //water.Tf.position = // TODO
             float size = spacing * (i);
-            Vector3 pos = new Vector3(tf.position.x, tf.position.y+ size, tf.position.z);
+            Vector3 pos = new Vector3(tf.position.x, (tf.position.y+ size)+(-offset), tf.position.z);
             water.Tf.position = pos;
             allWaters.Add(water);
             allPos.Add(pos);

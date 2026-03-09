@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2661247815925468864}
   - component: {fileID: 7973905525775321717}
   - component: {fileID: 1371140790676776173}
-  - component: {fileID: 7584909793125183266}
-  - component: {fileID: 828482936989527427}
+  - component: {fileID: 1907144297463048258}
+  - component: {fileID: 8397013927811823791}
   m_Layer: 0
   m_Name: VFX_WaterFill
   m_TagString: Untagged
@@ -95,7 +95,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.825
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -159,11 +159,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaterFill
   activeTime: 0
   type: 1
-  vfx: {fileID: 7584909793125183266}
+  vfx: {fileID: 1907144297463048258}
   speedOffset: 2.5
   line: {fileID: 7973905525775321717}
   icon: {fileID: 0}
---- !u!198 &7584909793125183266
+--- !u!198 &1907144297463048258
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4886,7 +4886,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &828482936989527427
+--- !u!199 &8397013927811823791
 ParticleSystemRenderer:
   serializedVersion: 7
   m_ObjectHideFlags: 0
