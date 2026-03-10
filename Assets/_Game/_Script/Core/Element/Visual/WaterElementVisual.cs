@@ -18,8 +18,9 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
         LoadColor(data.color);
         Tf.position = new Vector3(Tf.position.x, Tf.position.y + 10f, Tf.position.z );
         Tf.DOKill();
-        float delay = (data.waterID * .1f) + .2f;
-        Tf.DOMove(centerPos, .5f).SetDelay(delay).SetEase(Ease.OutBack, .3f);
+        //float delay = (data.waterID * .1f) + .2f;
+        float delay = (data.waterGroupID * .1f) + .2f;
+        Tf.DOMove(centerPos, .5f).SetDelay(delay).SetEase(Ease.OutBack, .4f);
         speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
     public void RegisterTarget(Transform tf)
