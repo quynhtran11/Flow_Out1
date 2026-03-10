@@ -248,7 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1686483157028145641}
-  - component: {fileID: 7487683940040231001}
+  - component: {fileID: 2927599237892461146}
   m_Layer: 0
   m_Name: HiddenPropertiesVisual
   m_TagString: Untagged
@@ -272,7 +272,7 @@ Transform:
   - {fileID: 8565823481980770704}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7487683940040231001
+--- !u!114 &2927599237892461146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6857223958866675947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 645a9e838b655c94993a01ac15dab959, type: 3}
+  m_Script: {fileID: 11500000, guid: 3833df9afe1c8224991c15abc57b30a7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HiddenPropertiesVisual
+  m_EditorClassIdentifier: Assembly-CSharp::WaterHiddenPropertiesVisual
   text: {fileID: 7001388079644016997}

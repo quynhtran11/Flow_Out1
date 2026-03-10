@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class BasePropertiesVisual : BLBMono
+public class BasePropertiesVisual<T> : BLBMono
 {
+    protected T data;
     protected virtual void OnEnable()
     {
         OnRegister();
@@ -11,8 +12,9 @@ public class BasePropertiesVisual : BLBMono
     {
         OnUnregister();
     }
-    public virtual void OnInit()
+    public virtual void OnInit(T data) 
     {
+        this.data = data;
     }
     public virtual void OnExit() { }
     protected virtual void OnFacePolygonConnectSuccess()

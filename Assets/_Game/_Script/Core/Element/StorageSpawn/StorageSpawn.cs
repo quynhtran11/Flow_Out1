@@ -56,11 +56,15 @@ public class StorageSpawn
             int index = i;
             allWaters[index].DOKill();
             allWaters[index].Tf.DOMove(allPos[index], speed).SetDelay(delay)/*.SetEase(Ease.OutBack)*/;
-            if (isFill && i == 0 && allWaters[index].Data.hiddenData.isHidden)
-            {
-                Debug.LogError("log_");
-            }
         }
+        if (allWaters.Count <= 0) return;
+        var value = allWaters[0];
+        if (!isFill) return;
+        Debug.LogError("ClearSuccessWaterEvent");
+        EventDispatcher.Dispatch(new ClearSuccessWaterEvent()
+        {
+            water = value
+        });
     }
     public void ClearWater(WaterElement water)
     {

@@ -42,4 +42,13 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     {
         mesh.color = GameData.Instance.ColorData.GetHiddenColor();
     }
+    public void ShowColor()
+    {
+        mesh.DOKill();
+        mesh.DOColor(color,.3f);
+    }
+    public void ShowText()
+    {
+
+    }
 }

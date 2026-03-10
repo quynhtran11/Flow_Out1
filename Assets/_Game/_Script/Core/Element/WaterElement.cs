@@ -23,4 +23,9 @@ public class WaterElement : BaseElement<WaterElementVisual, WaterData>
     {
         visual.StartHidden();
     }
+    public void StopHidden()
+    {
+        visual.ShowColor();
+        visual.ShowText();
+    }
 }

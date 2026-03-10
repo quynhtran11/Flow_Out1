@@ -108,7 +108,7 @@ public struct FillContinueGame : IEvenParam // call when fill complete
 {
 
 }
-public struct CompleteHiddenPropertiesEvent : IEvenParam // call when hidden complete
+public struct ClearSuccessWaterEvent : IEvenParam // call when water fill success
 {
     public WaterElement water;
 }
