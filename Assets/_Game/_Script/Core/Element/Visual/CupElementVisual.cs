@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class CupElementVisual : BaseElementVisual<CupData>
 {
+    [SerializeField] private Transform startPoint;
+    [SerializeField] private Transform endPoint;
+
     [SerializeField] private Transform parentVfx;
     [SerializeField] private Transform parentWater;
     [SerializeField] private TextMeshProUGUI textAmount;
@@ -33,12 +36,12 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         if (param.cup != this) return;
         CancelInvoke();
-        Invoke(nameof(DelayClear), GameData.Instance.GetTimeActiveFill ()+ .15f);
+        Invoke(nameof(DelayClear), GameData.Instance.GetTimeActiveFill() + .15f);
     }
     private void DelayClear()
     {
         Tf.DOKill();
-            Tf.parent = parent;
+        Tf.parent = parent;
         Tf.transform.DOJump(new Vector3(Tf.position.x, Tf.position.y + 3, Tf.position.z), 1, 1, .3f).OnComplete(() =>
         {
             Tf.DOScale(Vector3.zero, .4f).SetEase(Ease.InBack).OnComplete(() =>
@@ -84,7 +87,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         mesh2.SetPropertyBlock(matBlock2, 0);
 
         waterMesh.GetPropertyBlock(matWater);
-        matWater.SetColor("_BaseColor", c); 
+        matWater.SetColor("_BaseColor", c);
         waterMesh.SetPropertyBlock(matWater);
         parentWater.transform.localScale = new Vector3(.8f, 0, .8f);
         // use shader 
@@ -106,13 +109,13 @@ public class CupElementVisual : BaseElementVisual<CupData>
             textAmount.transform.DOScale(Vector3.zero, .3f).SetEase(Ease.InBack);
         }
     }
-    private void ChangeTextPosition(RectTransform tf,bool isAnim = false)
+    private void ChangeTextPosition(RectTransform tf, bool isAnim = false)
     {
         if (isAnim)
         {
             textAmount.transform.DOKill();
-            textAmount.transform.DOLocalMove(tf.localPosition,.3f);
-            textAmount.transform.DOLocalRotate(tf.localEulerAngles,.3f);
+            textAmount.transform.DOLocalMove(tf.localPosition, .3f);
+            textAmount.transform.DOLocalRotate(tf.localEulerAngles, .3f);
         }
         else
         {
@@ -165,7 +168,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         float delay = t * .3f;
 
         Tf.DOShakeRotation(
-            0.2f,      
+            0.2f,
             10f,
             20,
             90f,
@@ -193,7 +196,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         EventDispatcher.Dispatch(new FillPauseGameEvent() { });
 
-        float v = (float)(   data.amount -amount) / (float)data.amount;
+        float v = (float)(data.amount - amount) / (float)data.amount;
         Vector3 size = Vector3.one * v;
         size.x = 1;
         size.z = 1;
@@ -239,9 +242,11 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         Tf.DOKill();
         Tf.localScale = Vector3.one;
-
+        float timeMove = 1.5f;
+        var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpark).GetComponent<BubleSparkVfx>();
+        vfx.OnInit(timeMove, Tf, GameData.Instance.ColorData.GetData(data.color).color);
         float startY = Tf.localPosition.y;
-        ChangeTextPosition(textPosConveyor,true);
+        ChangeTextPosition(textPosConveyor, true);
 
         Sequence seq = DOTween.Sequence();
 
@@ -265,7 +270,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
               .SetEase(Ease.OutQuad)
         );
         seq.Append(
-            Tf.DOLocalJump(new Vector3(0,1.5f,-.5f), 2.5f, 1, 0.45f)
+            Tf.DOLocalJump(new Vector3(0, timeMove, -.5f), 2.5f, 1, 0.45f)
               .SetEase(Ease.OutCubic)
         );
         seq.Join(
@@ -293,11 +298,11 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Tf.localRotation = Quaternion.Euler(currentPos);
 
         Tf.DOShakeRotation(
-            0.25f,   
-            10f,     
-            20,      
-            90f,     
-            true     
+            0.25f,
+            14f,
+            20,
+            90f,
+            true
         );
     }
     public void WaterFill()
@@ -319,7 +324,16 @@ public class CupElementVisual : BaseElementVisual<CupData>
         //StopAllCoroutines();
         //StartCoroutine(FillWater(shaderValue));
         CupShake();
+
+        float lerpY = Mathf.Lerp(startPoint.localPosition.y, endPoint.localPosition.y, t);
+        float t2 = (float)(data.amount - (amount+1)) / data.amount;
+
+        float lerpY2 = Mathf.Lerp(startPoint.localPosition.y, endPoint.localPosition.y, t2);
+
+
+        var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpin).GetComponent<BubleSpin>();
+        vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0,lerpY2,0), Tf, c,amount);
     }
 
-    
+
 }

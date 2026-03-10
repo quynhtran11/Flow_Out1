@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 479084}
   - component: {fileID: 19887470}
   - component: {fileID: 19991458}
+  - component: {fileID: 2877532897214309747}
   m_Layer: 0
-  m_Name: WaterSpark
+  m_Name: BubleSpark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +119,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.6
-      minScalar: 0.3
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -835,7 +836,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 2.5
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4871,6 +4872,20 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &2877532897214309747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1f8062fa966b947888a0c1b81ad7f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BubleSparkVfx
+  type: 5
+  vfx: {fileID: 19898892}
 --- !u!1 &177496
 GameObject:
   m_ObjectHideFlags: 0
@@ -4988,7 +5003,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.6
-      minScalar: 0.3
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5687,7 +5702,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 10.5
       minScalar: 10
       maxCurve:
         serializedVersion: 2

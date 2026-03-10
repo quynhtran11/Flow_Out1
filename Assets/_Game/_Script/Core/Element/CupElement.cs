@@ -7,6 +7,11 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     public bool IsCheck => isCheck;
     private int currentWater = 0;
     public int CurrentWater => currentWater;
+    protected override void SetUpProperties()
+    {
+        base.SetUpProperties();
+        allPros = PropertisFactory.GetCupProperties(data);
+    }
     public void SetMatrix(Vector2Int matrix)
     {
         this.matrix = matrix;

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ColorInfor : AHardData<ColorData, EColorType>
 {
+    [SerializeField] private ColorData hiddenColor;
     public override ColorData GetData(EColorType type)
     {
         for (int i = 0; i < datas.Length; i++)
@@ -11,6 +12,10 @@ public class ColorInfor : AHardData<ColorData, EColorType>
             return datas[i];
         }
         return null;
+    }
+    public Color GetHiddenColor()
+    {
+        return hiddenColor.color;
     }
 }
 [System.Serializable]

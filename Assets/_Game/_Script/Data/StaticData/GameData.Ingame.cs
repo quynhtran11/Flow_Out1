@@ -20,11 +20,13 @@ public partial class GameData
     [SerializeField] private ColorInfor colorData;
     [SerializeField] private ElementInfor elementInfor;
     [SerializeField] private VFXInfor vfxInfor;
+    [SerializeField] private PropetiesInfor propetiesInfor;
     #region Properties
     public SoundInfor SoundData => soundData;
     public ColorInfor ColorData => colorData;
     public ElementInfor ElementInfor => elementInfor;
     public VFXInfor VfxInfor => vfxInfor;
+    public PropetiesInfor PropetiesInfor => propetiesInfor;
     public bool LoadResouces=>loadResouces;
     public float ClickRadius => clickRadius;
     public float CoinLevelReward => coinLevelReward;

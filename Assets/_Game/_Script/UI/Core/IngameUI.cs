@@ -21,7 +21,7 @@ public class IngameUI : UIBase
     }
     private void OnStartGame(StartGameplayEvent param)
     {
-        textLevel.text = "Level_" + param.level.LevelID.ToString();
+        textLevel.text = "Level " + param.level.LevelID.ToString();
         btnSetting.interactable = true;
     }
     private void OnReviveGame(ReviveGameEvent param)

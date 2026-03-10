@@ -29,6 +29,7 @@ public struct WaterData
     public int waterID;
     public int waterGroupID;
     public EColorType color;
+    public HiddenData hiddenData;
 }
 
 [System.Serializable]

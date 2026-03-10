@@ -47,14 +47,19 @@ public class StorageSpawn
         }
         speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
-    public void CalculatorPosition()
+    public void CalculatorPosition(bool isFill = false)
     {
         float delay = 0;
         for (int i = 0; i < allWaters.Count; i++)
         {
             //delay += ((float)i * .05f);
-            allWaters[i].DOKill();
-            allWaters[i].Tf.DOMove(allPos[i], speed).SetDelay(delay)/*.SetEase(Ease.OutBack)*/;
+            int index = i;
+            allWaters[index].DOKill();
+            allWaters[index].Tf.DOMove(allPos[index], speed).SetDelay(delay)/*.SetEase(Ease.OutBack)*/;
+            if (isFill && i == 0 && allWaters[index].Data.hiddenData.isHidden)
+            {
+                Debug.LogError("log_");
+            }
         }
     }
     public void ClearWater(WaterElement water)

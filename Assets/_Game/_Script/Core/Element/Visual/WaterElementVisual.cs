@@ -6,11 +6,12 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     [SerializeField] private SpriteRenderer mesh;
     private Transform targetEnd;
     private float speed;
+    private Color color;
+    public SpriteRenderer Mesh => mesh;
     private void LoadColor(EColorType type)
     {
-        Color c = GameData.Instance.ColorData.GetData(type).color;
-
-        mesh.color = c;
+        color = GameData.Instance.ColorData.GetData(type).color;
+        mesh.color = color;
     }
     public override void AfterInit()
     {
@@ -36,5 +37,9 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     public void ChangeSpeedWater()
     {
         speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
+    }
+    public void StartHidden()
+    {
+        mesh.color = GameData.Instance.ColorData.GetHiddenColor();
     }
 }

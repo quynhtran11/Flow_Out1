@@ -169,11 +169,13 @@
         {
           "waterID": 2,
           "waterGroupID": 0,
+          "hiddenData": { "isHidden": false },
           "color": 3
         },
         {
           "waterID": 2,
           "waterGroupID": 0,
+          "hiddenData": { "isHidden": false },
           "color": 7
         },
 

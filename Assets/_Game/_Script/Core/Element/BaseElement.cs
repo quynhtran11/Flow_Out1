@@ -9,9 +9,12 @@ public abstract class BaseElement<T, R> : BLBMono where T : BaseElementVisual<R>
 
     protected R data;
     public R Data => data;
-    protected List<IProperties> allPros;
+    protected List<IProperties> allPros = new List<IProperties>();
     public bool IsBusy => isBusy;
+    protected virtual void SetUpProperties()
+    {
 
+    }
     public void Initilize(R data) // call first, set up data
     {
         this.data = data;
@@ -20,10 +23,11 @@ public abstract class BaseElement<T, R> : BLBMono where T : BaseElementVisual<R>
     public virtual void OnInit() {
         visual.OnInit(data);
         visual.SetCenterPos(Tf.position);
-        //for (int i = 0; i < allPros.Count; i++)
-        //{
-        //    allPros[i].Initilize(this);
-        //}
+        SetUpProperties();
+        for (int i = 0; i < allPros.Count; i++)
+        {
+            allPros[i].Initilize(this);
+        }
     } // call after Initilize
 
     public virtual void SetBusy(bool isBusy)

@@ -108,3 +108,7 @@ public struct FillContinueGame : IEvenParam // call when fill complete
 {
 
 }
+public struct CompleteHiddenPropertiesEvent : IEvenParam // call when hidden complete
+{
+    public WaterElement water;
+}

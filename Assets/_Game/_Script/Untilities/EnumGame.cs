@@ -21,6 +21,8 @@ public enum EVfxType {
     VFX_Explode,
     VFX_WaterBolling,
     VFX_BubleLarge,
+    VFX_BubleSpark,
+    VFX_BubleSpin,
 }
 public enum ESceneType
 {
@@ -96,4 +98,9 @@ public enum EElementType
     Storage,
     Water,
     ConveyorSlot
+}
+public enum EPropertiesType
+{
+    None,
+    Hidden
 }
