@@ -19,6 +19,10 @@ public static class PropertisFactory
         {
             allPros.Add(new HiddenProperties() { });
         }
+        if (data.freezeData.amount>0)
+        {
+            allPros.Add(new FreezeProperties() { });
+        }
         return allPros;
     }
 }

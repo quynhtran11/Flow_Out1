@@ -60,7 +60,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 18
+  m_SortingOrder: 12
   m_TargetDisplay: 0
 --- !u!114 &7599751468872113237
 MonoBehaviour:
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 1686483157028145641}
   - component: {fileID: 2927599237892461146}
   m_Layer: 0
-  m_Name: HiddenPropertiesVisual
+  m_Name: WaterHiddenPropertiesVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -102,5 +102,6 @@ public enum EElementType
 public enum EPropertiesType
 {
     None,
-    Hidden
+    Hidden,
+    Freeze
 }

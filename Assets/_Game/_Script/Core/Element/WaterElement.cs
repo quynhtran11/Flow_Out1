@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class WaterElement : BaseElement<WaterElementVisual, WaterData>
 {
+    private bool pauseFill = false;
     protected override void SetUpProperties()
     {
         base.SetUpProperties();
@@ -27,5 +28,16 @@ public class WaterElement : BaseElement<WaterElementVisual, WaterData>
     {
         visual.ShowColor();
         visual.ShowText();
+    }
+    public void StartFreeze()
+    {
+        pauseFill = true;
+    }
+    public void StopFreeze()
+    {
+        pauseFill = false;
+    }
+    public bool IsPaused() {
+        return pauseFill;
     }
 }

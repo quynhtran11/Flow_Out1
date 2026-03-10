@@ -1,10 +1,13 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HiddenPropertiesVisual<T> : BasePropertiesVisual<T>
+public class FreezePropertiesVisual<T> : BasePropertiesVisual<T>
 {
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private SpriteRenderer freezeIcon;
+    protected int amount;
     protected override void OnRegister()
     {
         base.OnRegister();
@@ -18,9 +21,30 @@ public class HiddenPropertiesVisual<T> : BasePropertiesVisual<T>
     protected virtual void OnClearSuccessWater(ClearSuccessWaterEvent param)
     {
     }
+    public override void OnInit(T data)
+    {
+        base.OnInit(data);
+    }
+    protected bool IsBreak()
+    {
+        return amount <= 0;
+    }
+    protected void DeCreaseAmount()
+    {
+        amount--;
+        ChangeTextAmount();
+    }
+    protected void ChangeTextAmount()
+    {
+        text.text = amount.ToString();
+    }
     public override void OnExit()
     {
+        base.OnExit();
         text.transform.DOKill();
         text.transform.DOScale(Vector3.zero, .3f).SetEase(Ease.InBack);
+        freezeIcon.DOFade(0, .3f);
+        // call fx break freeze
+
     }
 }

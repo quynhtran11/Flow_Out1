@@ -158,6 +158,7 @@
         {
           "waterID": 1,
           "waterGroupID": 0,
+          "hiddenData": { "isHidden": false },
           "color": 2
         },
         {

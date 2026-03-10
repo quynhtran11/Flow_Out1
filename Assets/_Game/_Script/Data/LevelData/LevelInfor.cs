@@ -17,6 +17,7 @@ public struct CupData
     public Vector2Int pos;
     public HiddenData hiddenData;
     public ConnectData connectData;
+    public FreezeData freezeData;
 }
 [System.Serializable]
 public struct StorageData
@@ -30,6 +31,7 @@ public struct WaterData
     public int waterGroupID;
     public EColorType color;
     public HiddenData hiddenData;
+    public FreezeData freezeData;
 }
 
 [System.Serializable]
@@ -41,4 +43,14 @@ public struct HiddenData
 public struct ConnectData
 {
     public int idConnect;
+}
+[System.Serializable]
+public struct FreezeData
+{
+    public int amount;
+}
+[System.Serializable]
+public struct KeyLockData
+{
+    public int idGroup;
 }

@@ -18,7 +18,8 @@ public class StorageElement : BaseElement<StorageElementVisual, StorageData>
             return currentWater;
         }
         currentWater = storageSpawn.AllWaters[0];
-        if (currentWater == null || currentWater.IsBusy || currentWater.Data.color != type) return null;
+        if (currentWater == null || currentWater.IsBusy || currentWater.Data.color != type||
+            currentWater.IsPaused()) return null;
         storageSpawn.AllWaters.Remove(currentWater);
         storageSpawn.CalculatorPosition(true);
         if (storageSpawn.AllWaters.Count <= 0)

@@ -100,6 +100,7 @@
         {
           "waterID": 4,
           "waterGroupID": 0,
+          "freezeData": { "amount": 3 },
           "color": 3
         },
         {
@@ -124,6 +125,7 @@
         {
           "waterID": 2,
           "waterGroupID": 1,
+          "freezeData": { "amount": 2 },
           "color": 2
         },
         {

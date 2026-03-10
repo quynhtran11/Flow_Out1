@@ -4,8 +4,7 @@ public class WaterHiddenPropertiesVisual : HiddenPropertiesVisual<WaterElement>
 {
     protected override void OnClearSuccessWater(ClearSuccessWaterEvent param)
     {
-        base.OnClearSuccessWater(param);
-        if (!data.Data.hiddenData.isHidden || 
+        if (isBusy|| !data.Data.hiddenData.isHidden || 
             !param.water.Data.hiddenData.isHidden ||
             param.water != data ) return;
         OnExit();
