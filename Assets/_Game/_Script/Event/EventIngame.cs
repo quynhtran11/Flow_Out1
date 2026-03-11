@@ -55,7 +55,11 @@ public struct ClearCupEvent : IEvenParam // call when clear 1 cup
 }
 public struct CupToConveyorEvent : IEvenParam // call when cup to conveyor
 {
-    public CupElement cup;  
+    public CupElement cup;
+}
+public struct CupToConveyorSuccessEvent : IEvenParam // call when cup to conveyor success
+{
+    public CupElement cup;
 }
 public struct CheckFullSlotConveyorEvent : IEvenParam // call check full slot
 {
@@ -111,4 +115,8 @@ public struct FillContinueGame : IEvenParam // call when fill complete
 public struct ClearSuccessWaterEvent : IEvenParam // call when water fill success
 {
     public WaterElement water;
+}
+public struct CupQualifiedInteractEvent : IEvenParam // call khi cup co the bam dc 
+{
+    public CupElement cup;
 }

@@ -1,12 +1,21 @@
 using UnityEngine;
-
 public class WaterHiddenPropertiesVisual : HiddenPropertiesVisual<WaterElement>
 {
-    protected override void OnClearSuccessWater(ClearSuccessWaterEvent param)
+    protected override void OnRegister()
     {
-        if (isBusy|| !data.Data.hiddenData.isHidden || 
-            !param.water.Data.hiddenData.isHidden ||
-            param.water != data ) return;
+        base.OnRegister();
+        EventDispatcher.RegisterEvent<ClearSuccessWaterEvent>(OnClearSuccessWater);
+    }
+    protected override void OnUnregister()
+    {
+        base.OnUnregister();
+        EventDispatcher.RemoveEvent<ClearSuccessWaterEvent>(OnClearSuccessWater);
+    }
+    protected virtual void OnClearSuccessWater(ClearSuccessWaterEvent param)
+    {
+        if (isBusy || !data.Data.hiddenData.isHidden ||
+    !param.water.Data.hiddenData.isHidden ||
+    param.water != data) return;
         OnExit();
         data.StopHidden();
         Debug.LogError("break");

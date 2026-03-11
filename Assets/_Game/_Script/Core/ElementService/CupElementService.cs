@@ -72,7 +72,10 @@ public class CupElementService : BaseElementService<CupElement>
         var valueFinal = maxtrix[row, 0];
         if (valueFinal == null) return;
         valueFinal.SetBusy(false);
-
+        EventDispatcher.Dispatch(new CupQualifiedInteractEvent()
+        {
+            cup = valueFinal
+        });
     }
     public override void InitElement(LevelInfor level)
     {

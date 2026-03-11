@@ -9,6 +9,7 @@ public abstract class BaseElementVisual<R> : BLBMono
     [SerializeField] protected Collider elementCollider;
     public Vector3 CenterPos => centerPos;
     public Collider ElementCollider => elementCollider;
+    public Transform Skin => skin;
     public virtual void OnInit(R data)
     {
         this.data = data;

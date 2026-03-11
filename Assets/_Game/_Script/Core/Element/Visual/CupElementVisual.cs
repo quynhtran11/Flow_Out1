@@ -23,7 +23,9 @@ public class CupElementVisual : BaseElementVisual<CupData>
     private MaterialPropertyBlock matWater;
     private Transform parent;
     private int amount;
+    private int maxAmount;
     private Vector3 currentPos;
+    protected EColorType color;
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<ClearCupEvent>(OnClearCup);
@@ -98,7 +100,6 @@ public class CupElementVisual : BaseElementVisual<CupData>
         //matWater.SetColor("Color_12DEDFED", c);// foam color
         //matWater.SetFloat("Vector1_86B367DE", 2f); // fill 
         //waterMesh.SetPropertyBlock(matWater);
-
     }
     private void ChangeTextAmount(int text)
     {
@@ -122,7 +123,18 @@ public class CupElementVisual : BaseElementVisual<CupData>
             textAmount.rectTransform.localPosition = tf.localPosition;
             textAmount.rectTransform.localEulerAngles = tf.localEulerAngles;
         }
-
+    }
+    private void ScaleText(bool isScale)
+    {
+        textAmount.DOKill();
+        if (isScale)
+        {
+            textAmount.transform.DOScale(Vector3.one, .4f);
+        }
+        else
+        {
+            textAmount.transform.DOScale(Vector3.zero, .4f);
+        }
     }
     private void ActiveTextAmount(bool isBusy)
     {
@@ -196,7 +208,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         EventDispatcher.Dispatch(new FillPauseGameEvent() { });
 
-        float v = (float)(data.amount - amount) / (float)data.amount;
+        float v = (float)(maxAmount - amount) / (float)maxAmount;
         Vector3 size = Vector3.one * v;
         size.x = 1;
         size.z = 1;
@@ -211,6 +223,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         LoadColor(data.color);
         amount = data.amount;
+        maxAmount = data.amount;
         ChangeTextAmount(amount);
         Tf.DOKill();
         Tf.position = new Vector3(Tf.position.x, Tf.position.y - 10, Tf.position.z);
@@ -219,6 +232,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         parent = Tf.parent;
         elementCollider.enabled = true;
         currentPos = Tf.transform.localEulerAngles;
+        color = data.color;
     }
     public override void SetBusy(bool isBusy)
     {
@@ -244,7 +258,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Tf.localScale = Vector3.one;
         float timeMove = 1.5f;
         var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpark).GetComponent<BubleSparkVfx>();
-        vfx.OnInit(timeMove, Tf, GameData.Instance.ColorData.GetData(data.color).color);
+        vfx.OnInit(timeMove, Tf, GameData.Instance.ColorData.GetData(color).color);
         float startY = Tf.localPosition.y;
         ChangeTextPosition(textPosConveyor, true);
 
@@ -312,12 +326,12 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         WaterBolling go = VFXManager.Instance.GetObject(EVfxType.VFX_WaterBolling).GetComponent<WaterBolling>();
         if (go == null) return;
-        Color c = GameData.Instance.ColorData.GetData(data.color).color;
+        Color c = GameData.Instance.ColorData.GetData(color).color;
         go.OnInit(c);
         go.transform.SetParent(Tf);
         go.transform.position = parentVfx.position;
 
-        float t = (float)(data.amount - amount) / data.amount;
+        float t = (float)(maxAmount - amount) / maxAmount;
 
         float shaderValue = Mathf.Lerp(2f, -1f, t);
         FillWater();
@@ -326,14 +340,31 @@ public class CupElementVisual : BaseElementVisual<CupData>
         CupShake();
 
         float lerpY = Mathf.Lerp(startPoint.localPosition.y, endPoint.localPosition.y, t);
-        float t2 = (float)(data.amount - (amount+1)) / data.amount;
+        float t2 = (float)(maxAmount - (amount + 1)) / maxAmount;
 
         float lerpY2 = Mathf.Lerp(startPoint.localPosition.y, endPoint.localPosition.y, t2);
 
 
         var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpin).GetComponent<BubleSpin>();
-        vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0,lerpY2,0), Tf, c,amount);
+        vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0, lerpY2, 0), Tf, c, amount);
     }
-
-
+    public void Toggle(EColorType type, int amount)
+    {
+        maxAmount = amount;
+        this.amount = maxAmount;
+        LoadColor(type);
+        this.color = type;
+        ChangeTextAmount(maxAmount);
+    }
+    public void StartHidden()
+    {
+        LoadColor(EColorType.Black);
+        ScaleText(false);
+    }
+    public void StopHidden()
+    {
+        LoadColor(color);
+        ScaleText(true);
+        Debug.LogError("aff2");
+    }
 }

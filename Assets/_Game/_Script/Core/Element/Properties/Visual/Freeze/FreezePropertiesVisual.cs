@@ -44,6 +44,9 @@ public class FreezePropertiesVisual<T> : BasePropertiesVisual<T>
         text.transform.DOKill();
         text.transform.DOScale(Vector3.zero, .3f).SetEase(Ease.InBack);
         freezeIcon.DOFade(0, .3f);
+        var vfx= VFXManager.Instance.GetObject(EVfxType.VFX_Freeze);
+        vfx.transform.SetParent(Tf);
+        vfx.transform.localPosition = Vector3.zero;
         // call fx break freeze
 
     }

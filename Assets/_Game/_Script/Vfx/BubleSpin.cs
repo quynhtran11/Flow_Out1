@@ -16,13 +16,18 @@ public class BubleSpin : BLBMono
         float b = Mathf.Lerp(c.b, Color.white.b, .5f);
         Color color = new Color(r, g, b, 1);
         vfx.startColor = color;
-        float t = amount > 0 ? .5f : 0.1f;
-        Invoke(nameof(ReturnObject),GameData.Instance.GetTimeActiveFill()+ t);
+        //float t = amount > 0 ? .5f : 0.1f;
+        Invoke(nameof(ReturnObject),GameData.Instance.GetTimeActiveFill()/2f);
     }
     private void ReturnObject()
     {
         var em = fx.emission;
         em.enabled = false;
-        //VFXManager.Instance.ReturnObject(type, fx);
+        Invoke(nameof(Return), 1f);
+    }
+
+    private void Return()
+    {
+        VFXManager.Instance.ReturnObject(type, fx);
     }
 }

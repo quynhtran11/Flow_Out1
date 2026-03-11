@@ -1,16 +1,25 @@
 using UnityEngine;
 public class CupElement : BaseElement<CupElementVisual, CupData>
 {
+    protected EColorType color;
     protected Vector2Int matrix;
     public Vector2Int Matrix => matrix;
     private bool isCheck = false;
     public bool IsCheck => isCheck;
     private int currentWater = 0;
+    private int maxWater = 0;
     public int CurrentWater => currentWater;
+    public EColorType Color => color;
+    public override void OnInit()
+    {
+        base.OnInit();
+        color = data.color;
+        maxWater = data.amount;
+    }
     protected override void SetUpProperties()
     {
         base.SetUpProperties();
-        allPros = PropertisFactory.GetCupProperties(data);
+        allPros = PropertisFactory.GetCupProperties(data,this);
     }
     public void SetMatrix(Vector2Int matrix)
     {
@@ -54,7 +63,7 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     {
         currentWater++;
         visual.WaterFill();
-        if (currentWater >= Data.amount || isRevive )
+        if (currentWater >= maxWater || isRevive )
         {
             isBusy = true;
             CheckClearCup();
@@ -66,15 +75,29 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     }
     public int RemainingWater()
     {
-        int remain = data.amount - currentWater;
+        int remain = maxWater - currentWater;
         return remain;
     }
     private void CheckClearCup()
     {
-        if (currentWater < Data.amount) return;
+        if (currentWater < maxWater) return;
         EventDispatcher.Dispatch(new ClearCupEvent()
         {
             cup = visual
         });
+    }
+    public void ToggleCup(EColorType type,int max)
+    {
+        this.color = type;
+        this.maxWater = max;
+        visual.Toggle(color, maxWater);
+    }
+    public void StartHidden()
+    {
+        visual.StartHidden();
+    }
+    public void StopHidden()
+    {
+        visual.StopHidden();
     }
 }

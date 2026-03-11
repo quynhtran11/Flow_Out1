@@ -15,6 +15,11 @@
         "y": 0
       },
       "hiddenData": { "isHidden": false },
+      "toggleColorData": {
+        "isToggle": true,
+        "idGroup": 0,
+        "colorType": 2
+      },
       "connectData": { "idConnect": -1 }
     },
     {
@@ -26,6 +31,11 @@
         "y": 0
       },
       "hiddenData": { "isHidden": false },
+      "toggleColorData": {
+        "isToggle": true,
+        "idGroup": 0,
+        "colorType": 1
+      },
       "connectData": { "idConnect": -1 }
     },
     {

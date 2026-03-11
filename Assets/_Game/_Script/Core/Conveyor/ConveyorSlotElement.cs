@@ -46,7 +46,7 @@ public class ConveyorSlotElement : BLBMono
                 WaterFillCup(x, objectOwner);
             },
             pos = Tf.position,
-            color = this.objectOwner.Data.color
+            color = this.objectOwner.Color
         });       
     }
     public void WaterFillCup(WaterElement water, CupElement cup,bool isRevive = false)

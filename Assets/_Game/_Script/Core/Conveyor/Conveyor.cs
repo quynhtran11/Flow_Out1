@@ -45,6 +45,8 @@ public class Conveyor : BLBMono
     {
         if (GameManager.Instance.GameState != EGameState.Playing /*|| IsFill()*/) return;
         if (isBusy || isPause) return;
+        if (maxAllSlots == null || maxAllSlots.Count <= 0|| allConveyorBows == null||
+            allConveyorBows.Count<=0) return;
         for (int i = maxAllSlots.Count - 1; i >= 0; i--)
         {
             if (maxAllSlots[i] == null) continue;
@@ -219,6 +221,10 @@ public class Conveyor : BLBMono
             // warning
             WarningConveyor();
         }
+        EventDispatcher.Dispatch(new CupToConveyorSuccessEvent()
+        {
+            cup = param.cup,
+        });
     }
     private void OnCheckFullSlotConveyor(CheckFullSlotConveyorEvent param)
     {

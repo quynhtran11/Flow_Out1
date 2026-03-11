@@ -18,6 +18,8 @@ public struct CupData
     public HiddenData hiddenData;
     public ConnectData connectData;
     public FreezeData freezeData;
+    public ToggleColorData toggleColorData;
+    
 }
 [System.Serializable]
 public struct StorageData
@@ -53,4 +55,11 @@ public struct FreezeData
 public struct KeyLockData
 {
     public int idGroup;
+}
+[System.Serializable]
+public struct ToggleColorData
+{
+    public bool isToggle;
+    public int idGroup;
+    public EColorType colorType;
 }

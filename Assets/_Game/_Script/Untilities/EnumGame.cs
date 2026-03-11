@@ -23,6 +23,7 @@ public enum EVfxType {
     VFX_BubleLarge,
     VFX_BubleSpark,
     VFX_BubleSpin,
+    VFX_Freeze
 }
 public enum ESceneType
 {
@@ -102,6 +103,8 @@ public enum EElementType
 public enum EPropertiesType
 {
     None,
-    Hidden,
-    Freeze
+    HiddenWater,
+    Freeze,
+    ToggleColor,
+    HiddenCup
 }

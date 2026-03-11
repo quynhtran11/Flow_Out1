@@ -39,7 +39,7 @@ public class StorageElementService : BaseElementService<StorageElement>
         {
             for (int j = 0; j < colors.Count; j++)
             {
-                if (param.cups[i].Data.color == colors[j]) {
+                if (param.cups[i].Color == colors[j]) {
                     isLose = false; break;
                 }
             }
@@ -73,7 +73,7 @@ public class StorageElementService : BaseElementService<StorageElement>
                 var value = allElements[i].AllWater()[j];
                 if(value == null ) continue;
                 if (allElements[i].AllWater()[j].IsBusy) continue;
-                if(value.Data.color == param.cup.Data.color)
+                if(value.Data.color == param.cup.Color)
                 {
                     allWaters.Add(value);
                 }

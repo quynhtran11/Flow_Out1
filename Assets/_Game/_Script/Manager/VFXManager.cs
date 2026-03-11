@@ -5,34 +5,34 @@ public class VFXManager : Singleton<VFXManager>
 {
     private Dictionary<EVfxType, Queue<ParticleSystem>> allVfx = new Dictionary<EVfxType, Queue<ParticleSystem>>();
 
-    protected override bool dondestroy => true;
-    private void OnEnable()
-    {
-        EventDispatcher.RegisterEvent<ChangeSceneEvent>(OnChangeScene);
-    }
-    private void OnDisable()
-    {
-        EventDispatcher.RemoveEvent<ChangeSceneEvent>(OnChangeScene);
-    }
+    protected override bool dondestroy => false;
+    //private void OnEnable()
+    //{
+    //    //EventDispatcher.RegisterEvent<ChangeSceneEvent>(OnChangeScene);
+    //}
+    //private void OnDisable()
+    //{
+    //    //EventDispatcher.RemoveEvent<ChangeSceneEvent>(OnChangeScene);
+    //}
     private void Start()
     {
         OnInit();
     }
-    private void OnChangeScene(ChangeSceneEvent param)
-    {
-        foreach(var ob in allVfx)
-        {
-            int count = ob.Value.Count;
-            for (int i = 0; i < count; i++)
-            {
-                var v = ob.Value.Dequeue();
-                if (v.gameObject.activeSelf)
-                {
-                    ReturnObject(ob.Key, v);
-                }
-            }
-        }
-    }
+    //private void OnChangeScene(ChangeSceneEvent param)
+    //{
+    //    foreach(var ob in allVfx)
+    //    {
+    //        int count = ob.Value.Count;
+    //        for (int i = 0; i < count; i++)
+    //        {
+    //            var v = ob.Value.Dequeue();
+    //            if (v.gameObject.activeSelf)
+    //            {
+    //                ReturnObject(ob.Key, v);
+    //            }
+    //        }
+    //    }
+    //}
     public ParticleSystem GetObject(EVfxType vfxType)
     {
         if (!allVfx.ContainsKey(vfxType)) return null;
