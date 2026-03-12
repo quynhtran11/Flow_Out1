@@ -98,7 +98,8 @@ public enum EElementType
     Cup,
     Storage,
     Water,
-    ConveyorSlot
+    ConveyorSlot,
+    CupSlot
 }
 public enum EPropertiesType
 {

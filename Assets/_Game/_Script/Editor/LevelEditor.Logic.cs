@@ -67,6 +67,22 @@ public partial class LevelEditor
             EditorGUILayout.EndHorizontal();
         }
     }
+    private bool CreateProperties(string name,string name2,bool isEdit)
+    {
+        bool isEditing = isEdit;
+        string edit = (isEditing ? name : name2);
+        Color c = isEditing ? Color.green : Color.white;
+        if (CreateButton(edit, 40, Color.white, c))
+        {
+            return !isEditing;
+        }
+        return isEditing;
+    }
+    private void CupProperties()
+    {
+        levelTool.isHiddenCup = CreateProperties("HIDDING", "HIDDEN", levelTool.isHiddenCup);
+        levelTool.isToggleCup = CreateProperties("TOGGING", "TOGGLE", levelTool.isToggleCup);
+    }
     private bool CreateButtonHeighWith(string name, float sizeX, float sizeY, Color c)
     {
         EditorGUILayout.Space(10);

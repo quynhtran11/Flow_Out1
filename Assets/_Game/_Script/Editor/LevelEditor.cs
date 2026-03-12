@@ -38,9 +38,6 @@ public partial class LevelEditor : EditorWindow
         levelID = EditorGUILayout.IntField("LevelID", levelID);
         mode = (EModeType)EditorGUILayout.EnumPopup("Mode", mode);
 
-
-
-
         if (CreateButton("LOAD " +levelID, 40, Color.white, Color.white))
         {
             Load();
@@ -56,15 +53,13 @@ public partial class LevelEditor : EditorWindow
     }
     private void CupGUI(SerializedObject serializedObj)
     {
-        bool isEditing = levelTool.isEditCup;
-        string edit = "CUP " + (isEditing ? "EDITTING" : "EDIT");
-
-        Color c = isEditing ? Color.green : Color.white;
-        if (CreateButton(edit, 40, Color.white, c))
-        {
-            levelTool.isEditCup = !levelTool.isEditCup;
-        }
+        levelTool.isEditCup = CreateProperties("EDITTING", "EDIT", levelTool.isEditCup);
         ViewStat(serializedObj);
+        CupProperties();
+    }
+    private void StorageGUI()
+    {
+
     }
     private bool CreateButton(string name, float size, Color co, Color backColor)
     {

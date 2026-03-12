@@ -1,8 +1,8 @@
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class SpawnManager : BLBMono
 {
-    [SerializeField] private GameObject waterPrefab;
 
     private CupElementService cupService;
     private StorageElementService storageService;
@@ -33,11 +33,29 @@ public class SpawnManager : BLBMono
             cupService.RegisterObject(cup);
         }
     }
+    private void SpawnSlotCup(LevelInfor lv)
+    {
+        float offset = 2f;
+        float spacing = 3f; 
+        int column = lv.Map.x;
+        int row = lv.Map.y +5;
+        for (int y = 0; y < row; y++)
+        {
+            for (int x = 0; x < column; x++)
+            {
+                Vector3 pos = new Vector3(x * spacing,-y * spacing - offset,3f);
+                SlotCupElement slot = SpanwObject<SlotCupElement>(GameData.Instance.ElementInfor.GetData(EElementType.CupSlot).prefab);
+                slot.gameObject.name = "SlotCup " + x+"_"+y;
+                slot.Tf.position = pos;
+                slot.OnInit();
+            }
+        }
+    }
     private void SpawnStorage(LevelInfor lev)
     {
         storageService = new StorageElementService();
         int count = lev.AllStorages.Length;
-        float spacing = 1f;
+        float spacing = 2f;
         GameObject storagePrefab = GameData.Instance.ElementInfor.GetData(EElementType.Storage).prefab;
         float storageWidth = storagePrefab.GetComponentInChildren<Renderer>().bounds.size.x;
         float totalWidth = count * storageWidth + (count - 1) * spacing;
@@ -46,8 +64,8 @@ public class SpawnManager : BLBMono
         {
             StorageElement storage = SpanwObject<StorageElement>(storagePrefab);
             storage.gameObject.name = "Storage_" + i;
-            float x = center- totalWidth / 2f+ storageWidth / 2f+ i * (storageWidth + spacing);
-            storage.Tf.position = new Vector3(x,  15f,3f);
+            float x = center - totalWidth / 2f + storageWidth / 2f + i * (storageWidth + spacing);
+            storage.Tf.position = new Vector3(x, 15f, 3f);
             storage.Initilize(lev.AllStorages[i]);
             storageService.RegisterObject(storage);
         }
@@ -56,6 +74,7 @@ public class SpawnManager : BLBMono
     {
         SpawnCup(lev);
         SpawnStorage(lev);
+        SpawnSlotCup(lev);
     }
     private void InitAllObject(LevelInfor level)
     {
