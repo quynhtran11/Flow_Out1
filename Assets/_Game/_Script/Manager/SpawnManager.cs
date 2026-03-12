@@ -1,6 +1,4 @@
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-
 public class SpawnManager : BLBMono
 {
 
@@ -22,12 +20,11 @@ public class SpawnManager : BLBMono
     private void SpawnCup(LevelInfor lv)
     {
         cupService = new CupElementService();
-        float offset = 2;
         for (int i = 0; i < lv.AllCups.Length; i++)
         {
             CupElement cup = SpanwObject<CupElement>(GameData.Instance.ElementInfor.GetData(EElementType.Cup).prefab);
             cup.gameObject.name = "Cup_" + i;
-            Vector3 pos = new Vector3(lv.AllCups[i].pos.x, lv.AllCups[i].pos.y - offset, 0);
+            Vector3 pos = new Vector3(lv.AllCups[i].pos.x, lv.AllCups[i].pos.y , 0);
             cup.Tf.position = pos;
             cup.Initilize(lv.AllCups[i]);
             cupService.RegisterObject(cup);
@@ -35,7 +32,6 @@ public class SpawnManager : BLBMono
     }
     private void SpawnSlotCup(LevelInfor lv)
     {
-        float offset = 2f;
         float spacing = 3f; 
         int column = lv.Map.x;
         int row = lv.Map.y +5;
@@ -43,7 +39,7 @@ public class SpawnManager : BLBMono
         {
             for (int x = 0; x < column; x++)
             {
-                Vector3 pos = new Vector3(x * spacing,-y * spacing - offset,3f);
+                Vector3 pos = new Vector3(x * spacing,-y * spacing ,3f);
                 SlotCupElement slot = SpanwObject<SlotCupElement>(GameData.Instance.ElementInfor.GetData(EElementType.CupSlot).prefab);
                 slot.gameObject.name = "SlotCup " + x+"_"+y;
                 slot.Tf.position = pos;
@@ -65,7 +61,7 @@ public class SpawnManager : BLBMono
             StorageElement storage = SpanwObject<StorageElement>(storagePrefab);
             storage.gameObject.name = "Storage_" + i;
             float x = center - totalWidth / 2f + storageWidth / 2f + i * (storageWidth + spacing);
-            storage.Tf.position = new Vector3(x, 15f, 3f);
+            storage.Tf.position = new Vector3(x, 17.25f, 3f);
             storage.Initilize(lev.AllStorages[i]);
             storageService.RegisterObject(storage);
         }
