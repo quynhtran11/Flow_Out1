@@ -12,15 +12,16 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private Transform parentVfx;
     [SerializeField] private Transform parentWater;
     [SerializeField] private TextMeshProUGUI textAmount;
-    [SerializeField] private MeshRenderer mesh;
-    [SerializeField] private MeshRenderer mesh2;
-    [SerializeField] private MeshRenderer waterMesh;
+    //[SerializeField] private MeshRenderer mesh;
+    //[SerializeField] private MeshRenderer mesh2;
+    //[SerializeField] private MeshRenderer waterMesh;
+    [SerializeField] private SpriteRenderer skinBoder;
     [SerializeField] private RectTransform textPosUnclick;
     [SerializeField] private RectTransform textPosClick;
     [SerializeField] private RectTransform textPosConveyor;
-    private MaterialPropertyBlock matBlock;
-    private MaterialPropertyBlock matBlock2;
-    private MaterialPropertyBlock matWater;
+    //private MaterialPropertyBlock matBlock;
+    //private MaterialPropertyBlock matBlock2;
+    //private MaterialPropertyBlock matWater;
     private Transform parent;
     private int amount;
     private int maxAmount;
@@ -59,39 +60,42 @@ public class CupElementVisual : BaseElementVisual<CupData>
     }
     private void LoadColor(EColorType type)
     {
-        if (matBlock == null)
-        {
-            matBlock = new MaterialPropertyBlock();
-        }
-        if (matBlock2 == null)
-        {
-            matBlock2 = new MaterialPropertyBlock();
-        }
-        if (matWater == null)
-        {
-            matWater = new MaterialPropertyBlock();
-        }
+
+        //if (matBlock == null)
+        //{
+        //    matBlock = new MaterialPropertyBlock();
+        //}
+        //if (matBlock2 == null)
+        //{
+        //    matBlock2 = new MaterialPropertyBlock();
+        //}
+        //if (matWater == null)
+        //{
+        //    matWater = new MaterialPropertyBlock();
+        //}
+        //matBlock.Clear();
+        //matBlock.SetColor("_BaseColor", c);
+        //mesh.SetPropertyBlock(matBlock, 0);
+        //matBlock.Clear();
+        //var colorR = Mathf.Lerp(Color.white.r, c.r, .4f);
+        //var colorG = Mathf.Lerp(Color.white.g, c.g, .4f);
+        //var colorB = Mathf.Lerp(Color.white.b, c.b, .4f);
+        //Color color = c;
+        //color.a = .4f;
+        //matBlock.SetColor("_BaseColor", color);
+        //mesh.SetPropertyBlock(matBlock, 1);
+
+        //mesh2.GetPropertyBlock(matBlock2, 0);
+        //matBlock2.SetColor("_BaseColor", c);
+        //mesh2.SetPropertyBlock(matBlock2, 0);
+
+        //waterMesh.GetPropertyBlock(matWater);
+        //matWater.SetColor("_BaseColor", c);
+        //waterMesh.SetPropertyBlock(matWater);
         Color c = GameData.Instance.ColorData.GetData(type).color;
-        matBlock.Clear();
-        matBlock.SetColor("_BaseColor", c);
-        mesh.SetPropertyBlock(matBlock, 0);
-        matBlock.Clear();
-        var colorR = Mathf.Lerp(Color.white.r, c.r, .4f);
-        var colorG = Mathf.Lerp(Color.white.g, c.g, .4f);
-        var colorB = Mathf.Lerp(Color.white.b, c.b, .4f);
-        Color color = c;
-        color.a = .4f;
-        matBlock.SetColor("_BaseColor", color);
-        mesh.SetPropertyBlock(matBlock, 1);
-
-        mesh2.GetPropertyBlock(matBlock2, 0);
-        matBlock2.SetColor("_BaseColor", c);
-        mesh2.SetPropertyBlock(matBlock2, 0);
-
-        waterMesh.GetPropertyBlock(matWater);
-        matWater.SetColor("_BaseColor", c);
-        waterMesh.SetPropertyBlock(matWater);
+        skinBoder.color = c;
         parentWater.transform.localScale = new Vector3(.8f, 0, .8f);
+
         // use shader 
         //waterMesh.GetPropertyBlock(matWater);
         //matWater.SetColor("Color_E9C3FC1D", c); // top color 
@@ -151,7 +155,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         else
         {
             textAmount.color = new Color(1, 1, 1, 1f);
-            Tf.DORotate(new Vector3(-50f, 0, 0), .3f).OnComplete(() =>
+            Tf.DORotate(new Vector3(0, 0, 0), .3f).OnComplete(() =>
             {
                 currentPos = Tf.transform.localEulerAngles;
             }); ;
@@ -189,21 +193,21 @@ public class CupElementVisual : BaseElementVisual<CupData>
         .SetDelay(delay)
         .SetLoops(Mathf.CeilToInt((t - delay) / 0.2f));
     }
-    IEnumerator FillWater(float target)
-    {
-        waterMesh.GetPropertyBlock(matWater);
-        float current = matWater.GetFloat("Vector1_86B367DE");
+    //IEnumerator FillWater(float target)
+    //{
+    //    waterMesh.GetPropertyBlock(matWater);
+    //    float current = matWater.GetFloat("Vector1_86B367DE");
 
-        float t = 0;
-        while (t < 1)
-        {
-            t += Time.deltaTime * 3f;
-            float value = Mathf.Lerp(current, target, t);
-            matWater.SetFloat("Vector1_86B367DE", value);
-            waterMesh.SetPropertyBlock(matWater);
-            yield return null;
-        }
-    }
+    //    float t = 0;
+    //    while (t < 1)
+    //    {
+    //        t += Time.deltaTime * 3f;
+    //        float value = Mathf.Lerp(current, target, t);
+    //        matWater.SetFloat("Vector1_86B367DE", value);
+    //        waterMesh.SetPropertyBlock(matWater);
+    //        yield return null;
+    //    }
+    //}
     private void FillWater()
     {
         EventDispatcher.Dispatch(new FillPauseGameEvent() { });
@@ -288,7 +292,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
               .SetEase(Ease.OutCubic)
         );
         seq.Join(
-    Tf.DOLocalRotate(new Vector3(25, 0, 0), .3f));
+    Tf.DOLocalRotate(new Vector3(60, 0, 0), .3f));
 
         seq.Insert(seq.Duration() - 0.12f,
             Tf.DOScale(new Vector3(1.15f, 0.85f, 1.15f), 0.1f)
