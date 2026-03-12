@@ -59,7 +59,7 @@ public static class JsonManager
         string name = level.LevelID.ToString("000");
         string json = JsonUtility.ToJson(level, true);
 
-        string filePath = Application.dataPath + $"/_Game/Data/Level/Level_{name}.json";
+        string filePath = Application.dataPath + $"/_Game/Resources/Data/Level/Level_{name}.json";
 
         string directory = Path.GetDirectoryName(filePath);
         if (!Directory.Exists(directory))
@@ -76,7 +76,7 @@ public static class JsonManager
     public static LevelInfor LoadLevelInfor(int levelID)
     {
         string name = levelID.ToString("000");
-        string filePath = Application.dataPath + $"/_Game/Data/Level/Level_{name}.json";
+        string filePath = Application.dataPath + $"/_Game/Resources/Data/Level/Level_{name}.json";
         string text = File.ReadAllText(filePath);
         LevelInfor lv = JsonUtility.FromJson<LevelInfor>(text);
         return lv;
