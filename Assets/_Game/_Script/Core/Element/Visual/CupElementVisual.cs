@@ -209,12 +209,12 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Tf.localRotation = Quaternion.Euler(currentPos);
 
         float t = GameData.Instance.GetSpeedWaterFill();
-        t += t * .5f;
-        float delay = t * .6f;
+        t += t * .3f;
+        float delay = t * .3f;
 
         Tf.DOShakeRotation(
             0.2f,
-            13f,
+            10f,
             20,
             90f,
             true
