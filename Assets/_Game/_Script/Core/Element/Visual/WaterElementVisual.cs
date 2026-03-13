@@ -13,7 +13,11 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     {
         color = GameData.Instance.ColorData.GetData(type).color;
         mesh.color = color;
-        meshBorder.color = color;
+        float r = Mathf.Lerp(color.r, Color.white.r, .5f);
+        float g = Mathf.Lerp(color.g, Color.white.g, .5f);
+        float b = Mathf.Lerp(color.b, Color.white.b, .5f);
+        Color col = new Color(r, g, b, 1);
+        meshBorder.color = col;
     }
     public override void AfterInit()
     {
@@ -25,9 +29,10 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
         Tf.DOMove(centerPos, .5f).SetDelay(delay).SetEase(Ease.OutBack, .4f);
         speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
-    public void RegisterTarget(Transform tf)
+    public void RegisterTarget(Transform tf,bool isLast)
     {
-        targetEnd = tf; 
+        targetEnd = tf;
+        meshBorder.sortingOrder = isLast ? 11 : 9;
     }
     public void WaterFill()
     {

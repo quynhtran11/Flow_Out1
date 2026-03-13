@@ -11,12 +11,16 @@ public class WaterSinVfx : MonoBehaviour
     {
         isLoop = true;
         skin.color = c * .8f;
+        skin.enabled = false;
         StopAllCoroutines();
         StartCoroutine(WaterLoop());
     }
     IEnumerator WaterLoop()
     {
+        float timeDelay = GameData.Instance.GetSpeedWaterFill() * .4f;
         yield return null;
+        yield return new WaitForSeconds(timeDelay);
+        skin.enabled = true;
         float t = 0;
         float maxTime = 0.1f;
         int index = 0;

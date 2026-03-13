@@ -8,9 +8,9 @@ public class WaterElement : BaseElement<WaterElementVisual, WaterData>
         base.SetUpProperties();
         allPros = PropertisFactory.GetWaterProperties(data);
     }
-    public void RegisterTarget(Transform tf)
+    public void RegisterTarget(Transform tf,bool isLast)
     {
-        visual.RegisterTarget(tf);
+        visual.RegisterTarget(tf,isLast);
     }
     public void WaterFill()
     {

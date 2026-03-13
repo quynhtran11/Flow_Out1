@@ -205,9 +205,10 @@ public class Conveyor : BLBMono
     }
     private void OnCupToConveyor(CupToConveyorEvent param)
     {
-        if (IsFullSlot()) return;
+        if (IsFullSlot() || param.cup == null) return;
         param.cup.DOKill();
         ConveyorSlotElement c = GetConveyorSlotQualified();
+        if (c == null) return;
         c.RegisterObject(param.cup);
         Vector3 pos = new Vector3(c.Tf.position.x, c.Tf.position.y + .5f,
             c.Tf.position.z);

@@ -43,7 +43,7 @@ public class StorageSpawn
         for (int i = 0; i < allWaters.Count; i++)
         {
             allWaters[i].OnInit();
-            allWaters[i].RegisterTarget(targetEnd);
+            allWaters[i].RegisterTarget(targetEnd,i>=allWaters.Count-1);
         }
         speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }

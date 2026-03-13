@@ -36,6 +36,8 @@ public class WinGameUI : UIBase
     }
     private void ClaimReward(int coin)
     {
+        btnAds.interactable = false;
+        btnContinue.interactable = false;
         UserData.InCreaseCoin(coin, callBack: () =>
         {
             var service = ServiceLocator.Get<SceneService>();
