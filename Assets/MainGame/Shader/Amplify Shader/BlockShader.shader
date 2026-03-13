@@ -5,7 +5,7 @@ Shader "BlockShader"
 	Properties
 	{
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-		_Color ("Tint", Color) = (1,1,1,1)
+		[HDR] _Color ("Tint", Color) = (1,1,1,1) 
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
 		[PerRendererData] _AlphaTex ("External Alpha", 2D) = "white" {}
 		[Toggle] _ActiveGradient( "ActiveGradient", Float ) = 0

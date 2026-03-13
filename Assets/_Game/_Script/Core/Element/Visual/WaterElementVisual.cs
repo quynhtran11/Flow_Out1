@@ -4,6 +4,7 @@ using UnityEngine;
 public class WaterElementVisual : BaseElementVisual<WaterData>
 {
     [SerializeField] private SpriteRenderer mesh;
+    [SerializeField] private SpriteRenderer meshBorder;
     private Transform targetEnd;
     private float speed;
     private Color color;
@@ -12,6 +13,7 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     {
         color = GameData.Instance.ColorData.GetData(type).color;
         mesh.color = color;
+        meshBorder.color = color;
     }
     public override void AfterInit()
     {
@@ -33,6 +35,7 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
         {
             // test
             mesh.gameObject.SetActive(false);
+            meshBorder.gameObject.SetActive(false);
         });
     }
     public void ChangeSpeedWater()
@@ -42,11 +45,14 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     public void StartHidden()
     {
         mesh.color = GameData.Instance.ColorData.GetHiddenColor();
+        meshBorder.color = GameData.Instance.ColorData.GetHiddenColor();
     }
     public void ShowColor()
     {
         mesh.DOKill();
         mesh.DOColor(color,.3f);
+        meshBorder.DOKill();
+        meshBorder.DOColor(color, .3f);
     }
     public void ShowText()
     {

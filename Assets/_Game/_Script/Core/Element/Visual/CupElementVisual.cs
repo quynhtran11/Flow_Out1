@@ -8,6 +8,8 @@ public class CupElementVisual : BaseElementVisual<CupData>
 {
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform endPoint;
+    [SerializeField] private Transform open;
+    [SerializeField] private Transform close;
 
     [SerializeField] private Transform parentVfx;
     [SerializeField] private Transform parentWater;
@@ -15,7 +17,12 @@ public class CupElementVisual : BaseElementVisual<CupData>
     //[SerializeField] private MeshRenderer mesh;
     //[SerializeField] private MeshRenderer mesh2;
     //[SerializeField] private MeshRenderer waterMesh;
+    
+    [SerializeField] private WaterSinVfx waterSin;
     [SerializeField] private SpriteRenderer skinBoder;
+    [SerializeField] private SpriteRenderer water;
+    [SerializeField] private SpriteRenderer skinBoderClose;
+    [SerializeField] private Transform mask;
     [SerializeField] private RectTransform textPosUnclick;
     [SerializeField] private RectTransform textPosClick;
     [SerializeField] private RectTransform textPosConveyor;
@@ -95,7 +102,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Color c = GameData.Instance.ColorData.GetData(type).color;
         skinBoder.color = c;
         parentWater.transform.localScale = new Vector3(.8f, 0, .8f);
-
+        water.color = c;
         // use shader 
         //waterMesh.GetPropertyBlock(matWater);
         //matWater.SetColor("Color_E9C3FC1D", c); // top color 
@@ -145,11 +152,14 @@ public class CupElementVisual : BaseElementVisual<CupData>
         if (isBusy)
         {
             textAmount.color = new Color(1, 1, 1, .3f);
-            Tf.DORotate(new Vector3(-240f, 0, 0), .3f).OnComplete(() =>
+            Tf.DORotate(new Vector3(0, 0, 0), .3f).OnComplete(() =>
             {
                 currentPos = Tf.transform.localEulerAngles;
             });
             ChangeTextPosition(textPosUnclick);
+            open.gameObject.SetActive(false);
+            close.gameObject.SetActive(true);
+            skinBoderClose.color = GameData.Instance.ColorData.GetData(color).color;
             //skin.transform.localEulerAngles =new Vector3(-240f, 0, 0), .3f) ;
         }
         else
@@ -160,6 +170,8 @@ public class CupElementVisual : BaseElementVisual<CupData>
                 currentPos = Tf.transform.localEulerAngles;
             }); ;
             ChangeTextPosition(textPosClick);
+            open.gameObject.SetActive(true);
+            close.gameObject.SetActive(false);
             //skin.transform.localEulerAngles = new Vector3(-50f, 0, 0);
         }
     }
@@ -193,21 +205,26 @@ public class CupElementVisual : BaseElementVisual<CupData>
         .SetDelay(delay)
         .SetLoops(Mathf.CeilToInt((t - delay) / 0.2f));
     }
-    //IEnumerator FillWater(float target)
-    //{
-    //    waterMesh.GetPropertyBlock(matWater);
-    //    float current = matWater.GetFloat("Vector1_86B367DE");
+    IEnumerator FillWater(float target)
+    {
+        //waterMesh.GetPropertyBlock(matWater);
+        //float current = matWater.GetFloat("Vector1_86B367DE");
 
-    //    float t = 0;
-    //    while (t < 1)
-    //    {
-    //        t += Time.deltaTime * 3f;
-    //        float value = Mathf.Lerp(current, target, t);
-    //        matWater.SetFloat("Vector1_86B367DE", value);
-    //        waterMesh.SetPropertyBlock(matWater);
-    //        yield return null;
-    //    }
-    //}
+        //float t = 0;
+        //while (t < 1)
+        //{
+        //    t += Time.deltaTime * 3f;
+        //    float value = Mathf.Lerp(current, target, t);
+        //    matWater.SetFloat("Vector1_86B367DE", value);
+        //    waterMesh.SetPropertyBlock(matWater);
+        //    yield return null;
+        //}
+        yield return null;
+        mask.transform.DOKill();
+        float t = GameData.Instance.GetSpeedWaterFill();
+        Vector3 pos = new Vector3(0, target, 0);
+        mask.transform.DOLocalMove(pos, t+.1f);
+    }
     private void FillWater()
     {
         EventDispatcher.Dispatch(new FillPauseGameEvent() { });
@@ -237,6 +254,10 @@ public class CupElementVisual : BaseElementVisual<CupData>
         elementCollider.enabled = true;
         currentPos = Tf.transform.localEulerAngles;
         color = data.color;
+        waterSin.gameObject.SetActive(false);
+        mask.transform.position = startPoint.transform.position;
+        mask.gameObject.SetActive(false);
+
     }
     public override void SetBusy(bool isBusy)
     {
@@ -306,6 +327,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         seq.OnComplete(() =>
         {
+            mask.gameObject.SetActive(true);
             currentPos = Tf.localEulerAngles;
             callBack?.Invoke();
         });
@@ -337,20 +359,21 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         float t = (float)(maxAmount - amount) / maxAmount;
 
-        float shaderValue = Mathf.Lerp(2f, -1f, t);
+        float shaderValue = Mathf.Lerp(startPoint.transform.localPosition.y, endPoint.transform.localPosition.y, t);
         FillWater();
-        //StopAllCoroutines();
-        //StartCoroutine(FillWater(shaderValue));
+        StopAllCoroutines();
+        StartCoroutine(FillWater(shaderValue));
         CupShake();
 
         float lerpY = Mathf.Lerp(startPoint.localPosition.y, endPoint.localPosition.y, t);
         float t2 = (float)(maxAmount - (amount + 1)) / maxAmount;
 
         float lerpY2 = Mathf.Lerp(startPoint.localPosition.y, endPoint.localPosition.y, t2);
+        waterSin.gameObject.SetActive(true);
 
-
-        var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpin).GetComponent<BubleSpin>();
-        vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0, lerpY2, 0), Tf, c, amount);
+        waterSin.OnInit(c);
+        //var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpin).GetComponent<BubleSpin>();
+        //vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0, lerpY2, 0), Tf, c, amount);
     }
     public void Toggle(EColorType type, int amount)
     {
