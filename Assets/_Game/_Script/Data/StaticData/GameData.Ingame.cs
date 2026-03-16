@@ -16,6 +16,7 @@ public partial class GameData
     [SerializeField] private float timeActiveFillEndGame;
     [SerializeField] private float delayCallWinUI;
     [SerializeField] private float delayCallLoseUI;
+    [SerializeField] private float sizePaddingCam;
     [SerializeField] private SoundInfor soundData;
     [SerializeField] private ColorInfor colorData;
     [SerializeField] private ElementInfor elementInfor;
@@ -33,6 +34,7 @@ public partial class GameData
     public float DelayCallWinUI => delayCallWinUI;
     public float DelayCallLoseUI => delayCallLoseUI;
     public float DistanceCheckFill => distanceCheckFill;
+    public float SizePaddingCam => sizePaddingCam;
     public int InitSlot => initSlot;
     public int MaxLevel => maxLevel;
 

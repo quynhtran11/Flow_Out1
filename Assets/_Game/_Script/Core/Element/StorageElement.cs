@@ -48,8 +48,4 @@ public class StorageElement : BaseElement<StorageElementVisual, StorageData>
     {
         storageSpawn.CalculatorPosition();
     }
-    public void ChangeSpeedWater()
-    {
-        storageSpawn.ChangeSpeedWater();
-    }
 }

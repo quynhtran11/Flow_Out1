@@ -8,24 +8,8 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
     [SerializeField] private Transform storageFillEnd;
     public Transform TargetEnd => targetEnd;
     public Transform SpawnParent => spawnParent;
-    private float speed;
-    private void OnEnable()
-    {
-        EventDispatcher.RegisterEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedWater);
-
-    }
-    private void OnDisable()
-    {
-        EventDispatcher.RemoveEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedWater);
-
-    }
-    private void OnIncreaseSpeedWater(IncreaseSpeedWaterEvent param)
-    {
-        speed = GameData.Instance.GetTimeActiveFill();
-    }
     public override void AfterInit()
     {
-        speed = GameData.Instance.GetTimeActiveFill();
     }
     public void WaterFills(WaterElement waterFill)
     {
@@ -33,7 +17,7 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
         go.transform.position = storageFillStart.transform.position;
         WaterFill water = go.GetComponent<WaterFill>();
         Color c = GameData.Instance.ColorData.GetData(waterFill.Data.color).color;
-        water.OnInit(storageFillStart, storageFillEnd,speed,c);
+        water.OnInit(storageFillStart, storageFillEnd, GameData.Instance.GetTimeActiveFill(), c);
 
         var buble = VFXManager.Instance.GetObject(EVfxType.VFX_BubleLarge);
         buble.transform.position = storageFillStart.position;

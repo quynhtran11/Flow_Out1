@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.RegisterEvent<ChangeSceneEvent>(OnChangeScene);
         EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
         EventDispatcher.RegisterEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedGame);
-        
+        EventDispatcher.RegisterEvent<IncreaseSpeedGameForTapEvent>(OnIncreaseSpeedGameForTap);
     }
     private void OnDisable()
     {
@@ -30,6 +30,8 @@ public class GameManager : Singleton<GameManager>
         EventDispatcher.RemoveEvent<ChangeSceneEvent>(OnChangeScene);
         EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
         EventDispatcher.RemoveEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedGame);
+        EventDispatcher.RemoveEvent<IncreaseSpeedGameForTapEvent>(OnIncreaseSpeedGameForTap);
+
     }
     void Start()
     {
@@ -90,5 +92,14 @@ public class GameManager : Singleton<GameManager>
     private void OnIncreaseSpeedGame(IncreaseSpeedWaterEvent param)
     {
         isSpeed = true;
+       
+    }
+    private void OnIncreaseSpeedGameForTap(IncreaseSpeedGameForTapEvent param)
+    {
+        isSpeed = param.isAddSpeed;
+        //if (isSpeed)
+        //{
+        //    EventDispatcher.Dispatch(new IncreaseSpeedWaterEvent() { });
+        //}
     }
 }

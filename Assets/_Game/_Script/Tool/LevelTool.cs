@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public partial class LevelTool : MonoBehaviour
@@ -44,10 +46,12 @@ public partial class LevelTool : MonoBehaviour
     }
     private void Spawn(GameObject prefab,Vector2 pos,EColorType color)
     {
+#if UNITY_EDITOR
         GameObject obj = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         obj.gameObject.SetActive(true);
         SpriteRenderer icon  = obj.GetComponent<SpriteRenderer>();
         icon.color = GameData.Instance.ColorData.GetData(color).color;
         obj.transform.position = pos;
+#endif
     }
 }

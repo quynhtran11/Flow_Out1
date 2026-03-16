@@ -89,13 +89,13 @@ LineRenderer:
   - {x: 0, y: 0, z: 8.54}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 1.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6555555
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -163,6 +163,10 @@ MonoBehaviour:
   speedOffset: 2.5
   line: {fileID: 7973905525775321717}
   icon: {fileID: 0}
+  iconWaterFill:
+  - {fileID: 2800000, guid: 992009950557ed6449347bf5db2493e0, type: 3}
+  - {fileID: 2800000, guid: 67d40457fc5d11a49b59635a9caa1a18, type: 3}
+  - {fileID: 2800000, guid: facaed32f475325439e94e8d7f201ba3, type: 3}
 --- !u!198 &1907144297463048258
 ParticleSystem:
   m_ObjectHideFlags: 0

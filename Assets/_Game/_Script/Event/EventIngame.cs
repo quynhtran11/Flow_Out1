@@ -120,3 +120,7 @@ public struct CupQualifiedInteractEvent : IEvenParam // call khi cup co the bam 
 {
     public CupElement cup;
 }
+public struct IncreaseSpeedGameForTapEvent : IEvenParam // call khi user tap vao man hinh
+{
+    public bool isAddSpeed;
+}

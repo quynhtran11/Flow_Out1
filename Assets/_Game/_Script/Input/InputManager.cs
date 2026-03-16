@@ -5,14 +5,66 @@ public class InputManager : BLBMono
     private bool showClickGizmo = false;
     private bool isTouch;
     private Vector3 lastClickPos;
-
+    private float timePress;
+    private float maxTimePress;
+    private bool isPress;
+    private bool endGame;
+    private void OnEnable()
+    {
+        timePress = 0;
+        maxTimePress = 1;
+        endGame = false;
+        EventDispatcher.RegisterEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedGame);
+    }
+    private void OnDisable()
+    {
+        EventDispatcher.RemoveEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedGame);
+    }
     private void Update()
     {
         if (Input.GetMouseButtonUp(0))
         {
             ClickObject();
+            UnPressScreen();
+        }
+        if (Input.GetMouseButton(0))
+        {
+            PressScreen();
         }
     }
+    private void OnIncreaseSpeedGame(IncreaseSpeedWaterEvent param)
+    {
+        endGame = true;
+    }
+    private void PressScreen()
+    {
+        if (endGame) return;
+        timePress += Time.deltaTime;
+        Debug.LogError("press");
+        if (timePress >= maxTimePress && !isPress)
+        {
+            Debug.LogError("pressTrue");
+            EventDispatcher.Dispatch(new IncreaseSpeedGameForTapEvent()
+            {
+                isAddSpeed = true
+            });
+            isPress = true;
+        }
+    }
+    private void UnPressScreen()
+    {
+        Debug.LogError("1pressFalse");
+        if (endGame) return;
+        if (!isPress) return;
+        EventDispatcher.Dispatch(new IncreaseSpeedGameForTapEvent()
+        {
+            isAddSpeed = false
+        });
+        timePress = 0;
+        isPress = false;
+        Debug.LogError("2pressFalse");
+    }
+
     private void ClickObject()
     {
         showClickGizmo = true;

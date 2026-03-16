@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StorageSpawn
 {
-    private float speed;
     private Transform tf;
     private Transform targetEnd;
     private List<WaterElement> allWaters = new List<WaterElement>();
@@ -45,11 +44,11 @@ public class StorageSpawn
             allWaters[i].OnInit();
             allWaters[i].RegisterTarget(targetEnd,i>=allWaters.Count-1);
         }
-        speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
     public void CalculatorPosition(bool isFill = false)
     {
         float delay = 0;
+        float speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
         for (int i = 0; i < allWaters.Count; i++)
         {
             //delay += ((float)i * .05f);
@@ -78,6 +77,5 @@ public class StorageSpawn
         {
             allWaters[i].ChangeSpeedWater();
         }
-        speed = Mathf.Clamp(GameData.Instance.GetSpeedWaterFill(), 0, GameData.Instance.GetSpeedWaterFill());
     }
 }

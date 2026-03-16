@@ -7,11 +7,9 @@ public class StorageElementService : BaseElementService<StorageElement>
         EventDispatcher.RemoveEvent<CheckFillWaterEvent>(OnCheckFillWater);
         EventDispatcher.RemoveEvent<CheckAllQualifiedFillEvent>(OnCheckAllQualifiedFill);
         EventDispatcher.RemoveEvent<ReviveStorageEvent>(OnReviveStorage);
-        EventDispatcher.RemoveEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedWater);
         EventDispatcher.RegisterEvent<CheckFillWaterEvent>(OnCheckFillWater);
         EventDispatcher.RegisterEvent<CheckAllQualifiedFillEvent>(OnCheckAllQualifiedFill);
         EventDispatcher.RegisterEvent<ReviveStorageEvent>(OnReviveStorage);
-        EventDispatcher.RegisterEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedWater);
     }
     private void OnCheckFillWater(CheckFillWaterEvent param)
     {
@@ -96,12 +94,5 @@ public class StorageElementService : BaseElementService<StorageElement>
         }
         param.conveyorSlot.UnRegisterObject();
 
-    }
-    private void OnIncreaseSpeedWater(IncreaseSpeedWaterEvent param)
-    {
-        for (int a = 0; a < allElements.Count; a++)
-        {
-            allElements[a].ChangeSpeedWater();
-        }
     }
 }

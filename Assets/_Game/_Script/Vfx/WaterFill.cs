@@ -6,11 +6,15 @@ public class WaterFill : BaseVFX
     [SerializeField] protected float speedOffset = 2.5f;
     [SerializeField] protected LineRenderer line;
     [SerializeField] protected SpriteRenderer icon;
+    [SerializeField] protected Texture[] iconWaterFill;
+    private MaterialPropertyBlock mpb;
+
     private float maxTime;
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<ChangeSceneEvent>(OnChangeScene);
         EventDispatcher.RegisterEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedWater);
+        mpb = new MaterialPropertyBlock();
     }
     private void OnDisable()
     {
@@ -25,8 +29,18 @@ public class WaterFill : BaseVFX
     {
         VFXManager.Instance.ReturnObject(EVfxType.VFX_WaterFill, vfx);
     }
+    void SetTexture(Texture tex)
+    {
+        Renderer rd = GetComponent<Renderer>();
+
+        rd.GetPropertyBlock(mpb);
+        mpb.SetTexture("_MainTex", tex);
+        rd.SetPropertyBlock(mpb);
+    }
     public void OnInit(Transform tf, Transform tf2, float t, Color c)
     {
+        Texture text = iconWaterFill[Random.Range(0, iconWaterFill.Length)];
+        SetTexture(text);
         line.positionCount = 2;
 
         Vector3 start = tf.position;
