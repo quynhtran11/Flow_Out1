@@ -9,16 +9,22 @@ public partial class LevelTool : MonoBehaviour
 {
     public void Load(int index)
     {
+        Clear();
         LevelInfor lv = JsonManager.LoadLevelInfor(index);
         allCups = lv.AllCups.ToList();
         Debug.LogError(lv.Map);
         for (int i = 0; i < lv.AllCups.Length; i++)
         {
-            Spawn(toolVisual.CupPrefab(), lv.AllCups[i].pos,lv.AllCups[i].color);
+            Spawn(toolVisual.CupPrefab(), lv.AllCups[i].pos, lv.AllCups[i].color, "Cup_" + lv.AllCups[i].id);
         }
     }
-    public void Save()
+    public void Save(int index,EModeType type)
     {
+        LevelInfor lv = new LevelInfor();
+        lv.LevelID = index;
+        lv.Mode = type;
+        lv.AllCups = allCups.ToArray();
+        JsonManager.SaveLevelInfor(lv);
     }
     public void Clear()
     {
@@ -27,6 +33,7 @@ public partial class LevelTool : MonoBehaviour
         {
             DestroyImmediate(allCup[i]);
         }
+        allCups = new List<CupData>();
     }
     public Dictionary<EColorType, int> GetCupAmount()
     {
@@ -44,7 +51,11 @@ public partial class LevelTool : MonoBehaviour
         }
         return dic;
     }
-    private void Spawn(GameObject prefab,Vector2 pos,EColorType color)
+    public bool IsEditCup()
+    {
+        return isEditCup;
+    }
+    private void Spawn(GameObject prefab,Vector2 pos,EColorType color,string name)
     {
 #if UNITY_EDITOR
         GameObject obj = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
@@ -52,6 +63,7 @@ public partial class LevelTool : MonoBehaviour
         SpriteRenderer icon  = obj.GetComponent<SpriteRenderer>();
         icon.color = GameData.Instance.ColorData.GetData(color).color;
         obj.transform.position = pos;
+        obj.gameObject.name = name;
 #endif
     }
 }

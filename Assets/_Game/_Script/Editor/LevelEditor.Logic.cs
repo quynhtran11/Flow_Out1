@@ -6,6 +6,7 @@ public partial class LevelEditor
 {
     int levelID;
     EModeType mode;
+
     LevelTool levelTool;
     public void Clear()
     {
@@ -17,7 +18,10 @@ public partial class LevelEditor
     {
         levelTool.Load(levelID);
     }
-
+    public void Save()
+    {
+        levelTool.Save(levelID, mode);
+    }
     public void ViewStat(SerializedObject serializedObj)
     {
         if (levelTool == null) return;
@@ -80,8 +84,17 @@ public partial class LevelEditor
     }
     private void CupProperties()
     {
+        if (!levelTool.isEditCup) return;
         levelTool.isHiddenCup = CreateProperties("HIDDING", "HIDDEN", levelTool.isHiddenCup);
+        if (levelTool.isHiddenCup)
+        {
+            //hiddenAmount = EditorGUILayout.IntField("HiddenAmount", hiddenAmount);
+        }
         levelTool.isToggleCup = CreateProperties("TOGGING", "TOGGLE", levelTool.isToggleCup);
+        if (levelTool.isToggleCup)
+        {
+
+        }
     }
     private bool CreateButtonHeighWith(string name, float sizeX, float sizeY, Color c)
     {

@@ -395,7 +395,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         float lerpY2 = Mathf.Lerp(startPoint.localPosition.y, endPoint.localPosition.y, t2);
         waterSin.gameObject.SetActive(true);
 
-        waterSin.OnInit(c);
+        waterSin.OnInit(c,t);
         //var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpin).GetComponent<BubleSpin>();
         //vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0, lerpY2, 0), Tf, c, amount);
     }

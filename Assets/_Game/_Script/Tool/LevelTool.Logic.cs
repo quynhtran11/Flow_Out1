@@ -10,6 +10,7 @@ public partial class LevelTool
 
     [SerializeField] private LevelToolVisual toolVisual;
     [SerializeField] List<CupData> allCups = new List<CupData>();
+    public LevelToolVisual ToolVisual => toolVisual;
 
 
     public List<CupData> AllCups => allCups;

@@ -31,7 +31,8 @@ public partial class LevelEditor : EditorWindow
         );
 
         EditorGUILayout.LabelField("Editing: " + levelTool.name);
-        EditorGUILayout.Space(10);
+        EditorGUILayout.Space(20);
+
     }
     private void LevelGUI()
     {
@@ -44,7 +45,7 @@ public partial class LevelEditor : EditorWindow
         }
         if (CreateButton("SAVE " + levelID, 40, Color.white, Color.white))
         {
-
+            Save();
         }
         if (CreateButton("CLEAR ", 40, Color.white, Color.white))
         {
@@ -53,8 +54,8 @@ public partial class LevelEditor : EditorWindow
     }
     private void CupGUI(SerializedObject serializedObj)
     {
-        levelTool.isEditCup = CreateProperties("EDITTING", "EDIT", levelTool.isEditCup);
         ViewStat(serializedObj);
+        levelTool.isEditCup = CreateProperties("EDITTING_CUP", "EDIT_CUP", levelTool.isEditCup);
         CupProperties();
     }
     private void StorageGUI()
