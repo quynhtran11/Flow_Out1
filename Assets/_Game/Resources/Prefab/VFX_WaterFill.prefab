@@ -164,7 +164,11 @@ MonoBehaviour:
   line: {fileID: 7973905525775321717}
   icon: {fileID: 0}
   iconWaterFill:
-  - {fileID: 2800000, guid: facaed32f475325439e94e8d7f201ba3, type: 3}
+  - {fileID: 2800000, guid: 992009950557ed6449347bf5db2493e0, type: 3}
+  sizeLines:
+  - 1
+  - 1
+  - 1
 --- !u!198 &1907144297463048258
 ParticleSystem:
   m_ObjectHideFlags: 0

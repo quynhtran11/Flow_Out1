@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class LevelToolVisual : MonoBehaviour
@@ -15,7 +16,8 @@ public class LevelToolVisual : MonoBehaviour
     }
     public GameObject HiddenWaterPrefab()
     {
-        return hiddenWaterPrefab;
+        GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(hiddenWaterPrefab, transform);
+        return go;
     }
 
 }

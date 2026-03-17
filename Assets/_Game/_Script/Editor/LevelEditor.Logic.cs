@@ -71,7 +71,14 @@ public partial class LevelEditor
             EditorGUILayout.EndHorizontal();
         }
     }
-    private bool CreateProperties(string name,string name2,bool isEdit)
+    private void CreateSquare(string name, Color c, EColorType type)
+    {
+        if (CreateButton(name, 40, Color.white, c))
+        {
+            levelTool.cupColor = type;
+        }
+    }
+    private bool CreateProperties(string name, string name2, bool isEdit)
     {
         bool isEditing = isEdit;
         string edit = (isEditing ? name : name2);
@@ -85,6 +92,35 @@ public partial class LevelEditor
     private void CupProperties()
     {
         if (!levelTool.isEditCup) return;
+        if (CreateButton("AUTOSPAWN_CUP", 40, Color.white, Color.white))
+        {
+            levelTool.SpawnCup(levelTool.GetAutoPosCup(), levelTool.AllCups.Count);
+        }
+        levelTool.isSpawnCup = CreateProperties("SPAWNING_CUP", "SPAWN_CUP", levelTool.isSpawnCup);
+        if (levelTool.isSpawnCup)
+        {
+
+        }
+        levelTool.isRemoveCup = CreateProperties("REMOVING_CUP", "REMOVE_CUP", levelTool.isRemoveCup);
+        if (levelTool.isRemoveCup)
+        {
+        }
+        levelTool.isColorCup = CreateProperties("COLORING", "COLOR", levelTool.isColorCup);
+        if (levelTool.isColorCup)
+        {
+            EditorGUILayout.LabelField("--------------");
+            for (int i = 1; i < (int)EColorType.Black; i++)
+            {
+                EColorType name = (EColorType)i;
+                string desc = name.ToString();
+                if (name == levelTool.cupColor)
+                {
+                    desc += "_Use";
+                }
+                CreateSquare(desc, GameData.Instance.ColorData.GetData(name).color, name);
+            }
+            EditorGUILayout.LabelField("--------------");
+        }
         levelTool.isHiddenCup = CreateProperties("HIDDING", "HIDDEN", levelTool.isHiddenCup);
         if (levelTool.isHiddenCup)
         {

@@ -318,6 +318,7 @@ MonoBehaviour:
   targetEnd: {fileID: 2097048608908598037}
   storageFillStart: {fileID: 6102890762083100831}
   storageFillEnd: {fileID: 7461641619742606463}
+  vfxLoop: {fileID: 2960590152249126043}
 --- !u!1 &5291557316790630317
 GameObject:
   m_ObjectHideFlags: 0

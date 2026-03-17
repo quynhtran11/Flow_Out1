@@ -7,6 +7,7 @@ public class WaterFill : BaseVFX
     [SerializeField] protected LineRenderer line;
     [SerializeField] protected SpriteRenderer icon;
     [SerializeField] protected Texture[] iconWaterFill;
+    [SerializeField] protected float[] sizeLines;
     private MaterialPropertyBlock mpb;
 
     private float maxTime;
@@ -39,7 +40,9 @@ public class WaterFill : BaseVFX
     }
     public void OnInit(Transform tf, Transform tf2, float t, Color c)
     {
-        Texture text = iconWaterFill[Random.Range(0, iconWaterFill.Length)];
+        int rand = Random.Range(0, iconWaterFill.Length);
+        line.startWidth = sizeLines[rand];
+        Texture text = iconWaterFill[rand];
         SetTexture(text);
         line.positionCount = 2;
 

@@ -90,7 +90,7 @@ public enum EColorType
     Gray,
     Orange,
     White,
-    Black
+    Black // dang check tong so luong bang black
 }
 public enum EElementType
 {

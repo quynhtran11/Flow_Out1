@@ -20,19 +20,45 @@ public class LevelSceneGUI : Editor
                 float distance = (z - ray.origin.z) / ray.direction.z;
                 Vector3 worldPos = ray.origin + ray.direction * distance;
 
-                Collider2D hitCollider = Physics2D.OverlapPoint(worldPos);
-                if (hitCollider == null || !hitCollider.CompareTag("Cup")) return;
-                ChangePropertiesVisualTool(hitCollider.gameObject);
-                ChangePropertiesTool(hitCollider.gameObject);
+                if (!tool.isSpawnCup)
+                {
+                    Collider2D hitCollider = Physics2D.OverlapPoint(worldPos);
+                    if (hitCollider == null || !hitCollider.CompareTag("Cup")) return;
+                    if (tool.isRemoveCup)
+                    {
+                        Debug.LogError("remove");
+                        tool.RemoveCup(hitCollider.gameObject);
+                    }
+                    else
+                    {
+                        Debug.LogError("spawn");
+
+                        ChangePropertiesVisualTool(hitCollider.gameObject);
+                        ChangePropertiesTool(hitCollider.gameObject);
+                    }
+                }
+                else
+                {
+                    Collider2D hitCollider = Physics2D.OverlapPoint(worldPos);
+                    if (hitCollider != null && hitCollider.CompareTag("Cup"))
+                    {
+                        worldPos = hitCollider.transform.position;
+                        tool.SpawnPerCup(worldPos, true);
+                    }
+                    else
+                    {
+                        tool.SpawnPerCup(worldPos, false);
+                    }
+                }
+
                 e.Use();
             }
         }
     }
     private void ChangePropertiesTool(GameObject go)
     {
-        if (go == null || tool == null ) return;
+        if (go == null || tool == null) return;
         CupData data = new CupData();
-        List<CupData> allDatas = new List<CupData>(tool.AllCups);
         for (int i = 0; i < tool.AllCups.Count; i++)
         {
             if (Vector2.Distance(tool.AllCups[i].pos, go.transform.position) <= .1f)
@@ -42,10 +68,13 @@ public class LevelSceneGUI : Editor
                 break;
             }
         }
+        if (tool.isColorCup)
+        {
+            data.color = tool.cupColor;
+        }
         if (tool.isHiddenCup)
         {
             data.hiddenData.isHidden = true;
-            allDatas.Add(data);
             Debug.LogError("hidden");
         }
         if (tool.isToggleCup)
@@ -61,17 +90,25 @@ public class LevelSceneGUI : Editor
         if (gos == null || gos.Length <= 0 || go == null) return;
         for (int i = 0; i < gos.Length; i++)
         {
-            if(Vector3.Distance(go.transform.position, gos[i].transform.position) <= .1f)
+            if (Vector3.Distance(go.transform.position, gos[i].transform.position) <= .1f)
             {
                 final = gos[i];
                 break;
             }
         }
         if (final == null) return;
+        if (tool.isColorCup)
+        {
+            SpriteRenderer s = final.GetComponent<SpriteRenderer>();
+            s.color = GameData.Instance.ColorData.GetData(tool.cupColor).color;
+        }
+
         if (tool.isHiddenCup)
         {
-            Debug.LogError("hidden");
-            
+            GameObject hid = tool.ToolVisual.HiddenWaterPrefab();
+            Debug.LogError(hid.gameObject.name);
+            Debug.LogError(final.gameObject.name);
+            hid.transform.position = final.transform.position;
         }
         if (tool.isToggleCup)
         {

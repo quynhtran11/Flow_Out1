@@ -6,6 +6,7 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
     [SerializeField] private Transform targetEnd;
     [SerializeField] private Transform storageFillStart;
     [SerializeField] private Transform storageFillEnd;
+    [SerializeField] private ParticleSystem vfxLoop;
     public Transform TargetEnd => targetEnd;
     public Transform SpawnParent => spawnParent;
     public override void AfterInit()
@@ -25,6 +26,8 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
     }
     public void CompleteStorage()
     {
+        var emi = vfxLoop.emission;
+        emi.enabled = false;
         Debug.LogError("CompleteStorage");
     }
 }

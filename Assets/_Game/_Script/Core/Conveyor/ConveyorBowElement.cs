@@ -4,7 +4,7 @@ public class ConveyorBowElement : BLBMono
 {
     public void OnUpdate(Vector2 start, Vector2 end)
     {
-        Vector2 calculatorSpeed = Vector2.left * GameData.Instance.GetSpeedConveyor() * Time.deltaTime;
+        Vector2 calculatorSpeed = Vector2.left * (GameData.Instance.GetSpeedConveyor()) * Time.deltaTime;
         Tf.Translate(calculatorSpeed);
         if (Tf.position.x >= end.x)
         {

@@ -1,0 +1,7 @@
+water.png
+size:196,196
+filter:Linear,Linear
+pma:true
+scale:0.75
+watersurface
+bounds:1,136,191,56

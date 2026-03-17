@@ -1,0 +1,586 @@
+{
+    "levelID": 4,
+    "map": {
+        "x": 0,
+        "y": 0
+    },
+    "mode": 0,
+    "allCups": [
+        {
+            "id": 0,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 0,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 1,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 3,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 2,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 3,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -3
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 4,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -6
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 7,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -15
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 8,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -18
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 9,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 3,
+                "y": -3
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 10,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 3,
+                "y": -6
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 11,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 3,
+                "y": -9
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 12,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 3,
+                "y": -12
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 13,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 3,
+                "y": -15
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 14,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 0,
+                "y": -3
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 15,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 0,
+                "y": -6
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 16,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 0,
+                "y": -9
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 17,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -21
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 18,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -24
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 19,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -27
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 20,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -30
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 21,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -33
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 22,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -36
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 23,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 9,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 24,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 12,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 23,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -9
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 24,
+            "amount": 0,
+            "color": 5,
+            "pos": {
+                "x": 6,
+                "y": -12
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        }
+    ],
+    "allStorages": []
+}
