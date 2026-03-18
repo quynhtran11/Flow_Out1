@@ -8,7 +8,7 @@
   "allCups": [
     {
       "id": 0,
-      "amount": 2,
+      "amount": 3,
       "color": 3,
       "pos": {
         "x": 0,
@@ -41,7 +41,7 @@
     },
     {
       "id": 3,
-      "amount": 4,
+      "amount": 3,
       "color": 8,
       "pos": {
         "x": 0,
@@ -135,7 +135,7 @@
         {
           "waterID": 4,
           "waterGroupID": 1,
-          "color": 8
+          "color": 3
         },
         {
           "waterID": 5,

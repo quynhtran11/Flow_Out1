@@ -1,4 +1,6 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public class LevelToolVisual : MonoBehaviour
@@ -16,8 +18,11 @@ public class LevelToolVisual : MonoBehaviour
     }
     public GameObject HiddenWaterPrefab()
     {
+#if UNITY_EDITOR
         GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(hiddenWaterPrefab, transform);
         return go;
+#endif
+        return null;
     }
 
 }

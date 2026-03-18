@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: water_SkeletonData
+  m_Name: water_cup_SkeletonData
   m_EditorClassIdentifier: spine-unity::Spine.Unity.SkeletonDataAsset
   atlasAssets:
-  - {fileID: 11400000, guid: 1db1851edc25bb7459ef855bacd0d3b4, type: 2}
+  - {fileID: 11400000, guid: 55258efb2e1a32e459103c9d9569f7fb, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: a70ea981e99018246b0041538c7118cf, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: e0826cbcbe58d364f8da5d46fd53e181, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0

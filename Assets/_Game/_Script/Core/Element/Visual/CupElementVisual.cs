@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Spine.Unity;
 using System;
 using System.Collections;
 using TMPro;
@@ -14,10 +15,6 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private Transform parentVfx;
     [SerializeField] private Transform parentWater;
     [SerializeField] private TextMeshProUGUI textAmount;
-    //[SerializeField] private MeshRenderer mesh;
-    //[SerializeField] private MeshRenderer mesh2;
-    //[SerializeField] private MeshRenderer waterMesh;
-    
     [SerializeField] private WaterSinVfx waterSin;
     [SerializeField] private SpriteRenderer skinBoder;
     [SerializeField] private SpriteRenderer water;
@@ -28,9 +25,6 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private RectTransform textPosUnclick;
     [SerializeField] private RectTransform textPosClick;
     [SerializeField] private RectTransform textPosConveyor;
-    //private MaterialPropertyBlock matBlock;
-    //private MaterialPropertyBlock matBlock2;
-    //private MaterialPropertyBlock matWater;
     private Transform parent;
     private int amount;
     private int maxAmount;
@@ -116,7 +110,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         {
             subSkins[i].color = col;
         }
-
+ 
         // use shader 
         //waterMesh.GetPropertyBlock(matWater);
         //matWater.SetColor("Color_E9C3FC1D", c); // top color 
@@ -274,11 +268,6 @@ public class CupElementVisual : BaseElementVisual<CupData>
         waterSin.gameObject.SetActive(false);
         mask.transform.position = startPoint.transform.position;
         mask.gameObject.SetActive(false);
-
-
-
-
-
     }
     public override void SetBusy(bool isBusy)
     {
@@ -394,8 +383,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         float lerpY2 = Mathf.Lerp(startPoint.localPosition.y, endPoint.localPosition.y, t2);
         waterSin.gameObject.SetActive(true);
-
-        waterSin.OnInit(c,t);
+        waterSin.OnInit(c,t, (maxAmount - amount));
         //var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpin).GetComponent<BubleSpin>();
         //vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0, lerpY2, 0), Tf, c, amount);
     }

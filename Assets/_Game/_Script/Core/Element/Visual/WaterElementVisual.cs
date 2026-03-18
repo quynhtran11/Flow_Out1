@@ -13,11 +13,9 @@ public class WaterElementVisual : BaseElementVisual<WaterData>
     {
         color = GameData.Instance.ColorData.GetData(type).color;
         mesh.color = color;
-        float r = Mathf.Lerp(color.r, Color.white.r, .5f);
-        float g = Mathf.Lerp(color.g, Color.white.g, .5f);
-        float b = Mathf.Lerp(color.b, Color.white.b, .5f);
-        Color col = new Color(r, g, b, 1);
-        meshBorder.color = col;
+        Color colorNew = Color.Lerp(color, Color.white, .5f);
+        colorNew.a = 1;
+        meshBorder.color = colorNew;
     }
     public override void AfterInit()
     {

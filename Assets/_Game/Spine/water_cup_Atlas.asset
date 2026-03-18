@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: water_Atlas
+  m_Name: water_cup_Atlas
   m_EditorClassIdentifier: spine-unity::Spine.Unity.SpineAtlasAsset
   textureLoadingMode: 0
   onDemandTextureLoader: {fileID: 0}
-  atlasFile: {fileID: 4900000, guid: 821fe28d9b4e60a42975cf8b091c2451, type: 3}
+  atlasFile: {fileID: 4900000, guid: 61c4f6aba082687499c707136d11dd13, type: 3}
   materials:
-  - {fileID: 2100000, guid: ba980b98c8a48e545b70f56aeab822e8, type: 2}
+  - {fileID: 2100000, guid: 76a1eabe0b01b9d478643136d4d88d85, type: 2}
