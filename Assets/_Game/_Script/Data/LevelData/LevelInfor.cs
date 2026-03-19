@@ -24,6 +24,7 @@ public struct CupData
 [System.Serializable]
 public struct StorageData
 {
+    public int id;
     public WaterData[] waterDatas;
 }
 [System.Serializable]

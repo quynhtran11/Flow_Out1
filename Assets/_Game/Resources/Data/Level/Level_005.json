@@ -1,0 +1,126 @@
+{
+    "levelID": 5,
+    "map": {
+        "x": 3,
+        "y": 3
+    },
+    "mode": 0,
+    "allCups": [
+        {
+            "id": 0,
+            "amount": 0,
+            "color": 1,
+            "pos": {
+                "x": 0,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 1,
+            "amount": 0,
+            "color": 1,
+            "pos": {
+                "x": 3,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 2,
+            "amount": 0,
+            "color": 1,
+            "pos": {
+                "x": 6,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 3,
+            "amount": 0,
+            "color": 1,
+            "pos": {
+                "x": 3,
+                "y": -3
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        },
+        {
+            "id": 4,
+            "amount": 0,
+            "color": 1,
+            "pos": {
+                "x": 3,
+                "y": -6
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": 0
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
+        }
+    ],
+    "allStorages": []
+}

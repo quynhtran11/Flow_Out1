@@ -7,6 +7,7 @@ public class FreezePropertiesVisual<T> : BasePropertiesVisual<T>
 {
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private SpriteRenderer freezeIcon;
+    public TextMeshProUGUI Text => text;
     protected int amount;
     protected override void OnRegister()
     {

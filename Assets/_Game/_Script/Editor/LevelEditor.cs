@@ -18,6 +18,8 @@ public partial class LevelEditor : EditorWindow
         SerializedObject serializedObj = new SerializedObject(levelTool);
         LevelGUI();
         CupGUI(serializedObj);
+        StorageGUI(serializedObj);
+        WaterGUI(serializedObj);
         serializedObj.ApplyModifiedProperties();
         EditorGUILayout.EndScrollView();
     }
@@ -29,6 +31,7 @@ public partial class LevelEditor : EditorWindow
             typeof(LevelTool),
             true
         );
+        levelTool.forDev = EditorGUILayout.Toggle("forDev", levelTool.forDev);
 
         EditorGUILayout.LabelField("Editing: " + levelTool.name);
         EditorGUILayout.Space(20);
@@ -58,9 +61,16 @@ public partial class LevelEditor : EditorWindow
         levelTool.isEditCup = CreateProperties("EDITTING_CUP", "EDIT_CUP", levelTool.isEditCup);
         CupProperties();
     }
-    private void StorageGUI()
+    private void StorageGUI(SerializedObject serializedObj)
     {
-
+        ViewStatStorage(serializedObj);
+        levelTool.isEditStorage = CreateProperties("EDITTING_STORAGE", "EDIT_STORAGE", levelTool.isEditStorage);
+        StorageProperties();
+    }
+    private void WaterGUI(SerializedObject serializedObj)
+    {
+        levelTool.isEditWater = CreateProperties("EDITTING_WATER", "EDIT_WATER", levelTool.isEditWater);
+        WaterProperties(serializedObj);
     }
     private bool CreateButton(string name, float size, Color co, Color backColor)
     {

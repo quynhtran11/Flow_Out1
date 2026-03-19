@@ -10,16 +10,15 @@ public class LevelSceneGUI : Editor
         Event e = Event.current;
         tool = (LevelTool)target;
 
-        if (tool.IsEditCup())
+        HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
+        if (e.type == EventType.MouseUp)
         {
-            HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
-            if (e.type == EventType.MouseUp)
+            Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+            float z = 0f;
+            float distance = (z - ray.origin.z) / ray.direction.z;
+            Vector3 worldPos = ray.origin + ray.direction * distance;
+            if (tool.IsEditCup())
             {
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                float z = 0f;
-                float distance = (z - ray.origin.z) / ray.direction.z;
-                Vector3 worldPos = ray.origin + ray.direction * distance;
-
                 if (!tool.isSpawnCup)
                 {
                     Collider2D hitCollider = Physics2D.OverlapPoint(worldPos);
@@ -33,8 +32,8 @@ public class LevelSceneGUI : Editor
                     {
                         Debug.LogError("spawn");
 
-                        ChangePropertiesVisualTool(hitCollider.gameObject);
-                        ChangePropertiesTool(hitCollider.gameObject);
+                        ChangeCupPropertiesVisualTool(hitCollider.gameObject);
+                        ChangeCupPropertiesTool(hitCollider.gameObject);
                     }
                 }
                 else
@@ -50,12 +49,66 @@ public class LevelSceneGUI : Editor
                         tool.SpawnPerCup(worldPos, false);
                     }
                 }
-
-                e.Use();
             }
+            if (tool.IsEditStorage())
+            {
+                Collider2D[] hitCollider = Physics2D.OverlapPointAll(worldPos);
+                for (int i = 0; i < hitCollider.Length; i++)
+                {
+                    if (hitCollider[i] == null || !hitCollider[i].CompareTag("Storage")) continue;
+                    if (tool.isRemoveStorage)
+                    {
+                        Debug.LogError("remove");
+                        tool.RemoveStorage(hitCollider[i].gameObject);
+                    }
+                }
+            }
+            if (tool.IsEditWater())
+            {
+                Collider2D[] hitCollider = Physics2D.OverlapPointAll(worldPos);
+                for (int i = 0; i < hitCollider.Length; i++)
+                {
+                    if (hitCollider != null && hitCollider[i].CompareTag("Storage"))
+                    {
+                        if (tool.isSpawnWater)
+                        {
+                            tool.SpawnPerWater(tool.AllStorages.Count, hitCollider[i].transform.position);
+                        }
+                    }
+                    if (hitCollider == null || !hitCollider[i].CompareTag("Water")) continue;
+                    if (tool.isRemoveWater)
+                    {
+                        tool.RemoveWater(hitCollider[i].gameObject);
+                    }
+                    else
+                    {
+                        ChangeWaterPropertiesTool(hitCollider[i].gameObject);
+                        ChangeWaterPropertiesVisualTool(hitCollider[i].gameObject);
+                    }
+                }
+            }
+            e.Use();
         }
     }
-    private void ChangePropertiesTool(GameObject go)
+    private void ChangeWaterPropertiesTool(GameObject go)
+    {
+        if (go == null || tool == null) return;
+        int idGroup = (int)go.transform.position.x / (int)tool.offsetStorage;
+        if (tool.AllStorages.Count <= 0 || idGroup >= tool.AllStorages.Count) return;
+        int id = ((int)go.transform.position.y / 4) - 1;
+        WaterData water = tool.AllStorages[idGroup].waterDatas[id];
+        if (tool.isColorWater)
+        {
+            water.color = tool.waterColor;
+        }
+        if (tool.isHiddenWater)
+        {
+            Debug.LogError("hide");
+            water.hiddenData.isHidden = true;
+        }
+        tool.AllStorages[idGroup].waterDatas[id] = water;
+    }
+    private void ChangeCupPropertiesTool(GameObject go)
     {
         if (go == null || tool == null) return;
         CupData data = new CupData();
@@ -83,7 +136,7 @@ public class LevelSceneGUI : Editor
         }
         tool.AllCups.Add(data);
     }
-    private void ChangePropertiesVisualTool(GameObject go)
+    private void ChangeCupPropertiesVisualTool(GameObject go)
     {
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Cup");
         GameObject final = null;
@@ -115,4 +168,37 @@ public class LevelSceneGUI : Editor
             Debug.LogError("game_" + final.gameObject.name);
         }
     }
+
+    private void ChangeWaterPropertiesVisualTool(GameObject go)
+    {
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Water");
+        GameObject final = null;
+        if (gos == null || gos.Length <= 0 || go == null) return;
+        for (int i = 0; i < gos.Length; i++)
+        {
+            if (Vector3.Distance(go.transform.position, gos[i].transform.position) <= .1f)
+            {
+                final = gos[i];
+                break;
+            }
+        }
+        if (final == null) return;
+        if (tool.isColorWater)
+        {
+            SpriteRenderer s = final.GetComponent<SpriteRenderer>();
+            Debug.LogError(s == null);
+            s.color = GameData.Instance.ColorData.GetData(tool.waterColor).color;
+        }
+        if (tool.isHiddenWater)
+        {
+            Debug.LogError("sfffsaf3");
+            GameObject hid = tool.ToolVisual.HiddenWaterPrefab();
+            hid.transform.position = final.transform.position;
+        }
+        if (tool.isFreezeWater)
+        {
+
+        }
+    }
+
 }

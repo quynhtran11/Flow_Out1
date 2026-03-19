@@ -1,194 +1,270 @@
 {
-  "levelID": 1,
-  "mode": 0,
-  "map": {
-    "x": 3,
-    "y": 2
-  },
-  "allCups": [
-    {
-      "id": 0,
-      "amount": 3,
-      "color": 1,
-      "pos": {
-        "x": 0,
-        "y": 0
-      },
-      "hiddenData": { "isHidden": false },
-      "toggleColorData": {
-        "isToggle": true,
-        "idGroup": 0,
-        "colorType": 2
-      },
-      "connectData": { "idConnect": -1 }
-    },
-    {
-      "id": 1,
-      "amount": 3,
-      "color": 2,
-      "pos": {
+    "levelID": 1,
+    "map": {
         "x": 3,
-        "y": 0
-      },
-      "hiddenData": { "isHidden": false },
-      "toggleColorData": {
-        "isToggle": true,
-        "idGroup": 0,
-        "colorType": 1
-      },
-      "connectData": { "idConnect": -1 }
+        "y": 2
     },
-    {
-      "id": 2,
-      "amount": 3,
-      "color": 3,
-      "pos": {
-        "x": 6,
-        "y": 0
-      },
-      "hiddenData": { "isHidden": false },
-      "connectData": { "idConnect": -1 }
-    },
-    {
-      "id": 3,
-      "amount": 3,
-      "color": 1,
-      "pos": {
-        "x": 0,
-        "y": -3
-      },
-      "hiddenData": { "isHidden": false },
-      "connectData": { "idConnect": -1 }
-    },
-    {
-      "id": 4,
-      "amount": 3,
-      "color": 5,
-      "pos": {
-        "x": 3,
-        "y": -3
-      },
-      "hiddenData": { "isHidden": true  },
-      "connectData": { "idConnect": -1 }
-    },
-    {
-      "id": 5,
-      "amount": 3,
-      "color": 1,
-      "pos": {
-        "x": 6,
-        "y": -3
-      },
-      "hiddenData": { "isHidden": true },
-      "connectData": { "idConnect": -1 }
-    }
-  ],
-  "allStorages": [
-    {
-      "waterDatas": [
+    "mode": 0,
+    "allCups": [
         {
-          "waterID": 0,
-          "waterGroupID": 0,
-          "color": 1
+            "id": 0,
+            "amount": 3,
+            "color": 1,
+            "pos": {
+                "x": 0,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": -1
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": true,
+                "idGroup": 0,
+                "colorType": 2
+            }
         },
         {
-          "waterID": 1,
-          "waterGroupID": 0,
-          "color": 1
+            "id": 1,
+            "amount": 3,
+            "color": 2,
+            "pos": {
+                "x": 3,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": -1
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": true,
+                "idGroup": 0,
+                "colorType": 1
+            }
         },
         {
-          "waterID": 2,
-          "waterGroupID": 0,
-          "color": 1
+            "id": 2,
+            "amount": 3,
+            "color": 3,
+            "pos": {
+                "x": 6,
+                "y": 0
+            },
+            "hiddenData": {
+                "isHidden": false
+            },
+            "connectData": {
+                "idConnect": -1
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
         },
         {
-          "waterID": 3,
-          "waterGroupID": 0,
-          "hiddenData": { "isHidden": true },
-          "color": 3
+            "id": 3,
+            "amount": 3,
+            "color": 5,
+            "pos": {
+                "x": 3,
+                "y": -3
+            },
+            "hiddenData": {
+                "isHidden": true
+            },
+            "connectData": {
+                "idConnect": -1
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
         },
         {
-          "waterID": 4,
-          "waterGroupID": 0,
-          "freezeData": { "amount": 3 },
-          "color": 3
+            "id": 4,
+            "amount": 3,
+            "color": 1,
+            "pos": {
+                "x": 6,
+                "y": -3
+            },
+            "hiddenData": {
+                "isHidden": true
+            },
+            "connectData": {
+                "idConnect": -1
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
         },
         {
-          "waterID": 5,
-          "waterGroupID": 0,
-          "color": 5
+            "id": 5,
+            "amount": 3,
+            "color": 1,
+            "pos": {
+                "x": 0,
+                "y": -3
+            },
+            "hiddenData": {
+                "isHidden": true
+            },
+            "connectData": {
+                "idConnect": -1
+            },
+            "freezeData": {
+                "amount": 0
+            },
+            "toggleColorData": {
+                "isToggle": false,
+                "idGroup": 0,
+                "colorType": 0
+            }
         }
-      ]
-    },
-    {
-      "waterDatas": [
+    ],
+    "allStorages": [
         {
-          "waterID": 0,
-          "waterGroupID": 1,
-          "color": 2
+            "id": 0,
+            "waterDatas": [
+                {
+                    "waterID": 0,
+                    "waterGroupID": 0,
+                    "color": 1,
+                    "hiddenData": {
+                        "isHidden": false
+                    },
+                    "freezeData": {
+                        "amount": 0
+                    }
+                },
+                {
+                    "waterID": 1,
+                    "waterGroupID": 0,
+                    "color": 1,
+                    "hiddenData": {
+                        "isHidden": true
+                    },
+                    "freezeData": {
+                        "amount": 0
+                    }
+                },
+                {
+                    "waterID": 2,
+                    "waterGroupID": 0,
+                    "color": 1,
+                    "hiddenData": {
+                        "isHidden": false
+                    },
+                    "freezeData": {
+                        "amount": 0
+                    }
+                },
+                {
+                    "waterID": 3,
+                    "waterGroupID": 0,
+                    "color": 3,
+                    "hiddenData": {
+                        "isHidden": true
+                    },
+                    "freezeData": {
+                        "amount": 0
+                    }
+                },
+                {
+                    "waterID": 4,
+                    "waterGroupID": 0,
+                    "color": 3,
+                    "hiddenData": {
+                        "isHidden": false
+                    },
+                    "freezeData": {
+                        "amount": 3
+                    }
+                },
+                {
+                    "waterID": 5,
+                    "waterGroupID": 0,
+                    "color": 5,
+                    "hiddenData": {
+                        "isHidden": false
+                    },
+                    "freezeData": {
+                        "amount": 0
+                    }
+                }
+            ]
         },
         {
-          "waterID": 1,
-          "waterGroupID": 1,
-          "color": 1
-        },
-        {
-          "waterID": 2,
-          "waterGroupID": 1,
-          "freezeData": { "amount": 2 },
-          "color": 2
-        },
-        {
-          "waterID": 3,
-          "waterGroupID": 1,
-          "hiddenData": { "isHidden": true },
-          "color": 1
-        },
-        {
-          "waterID": 4,
-          "waterGroupID": 1,
-          "color": 1
-        },
-        {
-          "waterID": 5,
-          "waterGroupID": 1,
-          "color": 5
+            "id": 1,
+            "waterDatas": [
+                {
+                    "waterID": 0,
+                    "waterGroupID": 2,
+                    "color": 5,
+                    "hiddenData": {
+                        "isHidden": false
+                    },
+                    "freezeData": {
+                        "amount": 0
+                    }
+                },
+                {
+                    "waterID": 1,
+                    "waterGroupID": 2,
+                    "color": 5,
+                    "hiddenData": {
+                        "isHidden": false
+                    },
+                    "freezeData": {
+                        "amount": 2
+                    }
+                },
+                {
+                    "waterID": 2,
+                    "waterGroupID": 2,
+                    "color": 5,
+                    "hiddenData": {
+                        "isHidden": false
+                    },
+                    "freezeData": {
+                        "amount": 0
+                    }
+                },
+                {
+                    "waterID": 3,
+                    "waterGroupID": 2,
+                    "color": 1,
+                    "hiddenData": {
+                        "isHidden": false
+                    },
+                    "freezeData": {
+                        "amount": 0
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "waterDatas": [
-        {
-          "waterID": 0,
-          "waterGroupID": 2,
-          "color": 3
-        },
-        {
-          "waterID": 1,
-          "waterGroupID": 2,
-          "color": 2
-        },
-        {
-          "waterID": 2,
-          "waterGroupID": 2,
-          "color": 5
-        },
-        {
-          "waterID": 3,
-          "waterGroupID": 2,
-          "color": 1
-        },
-        {
-          "waterID": 4,
-          "waterGroupID": 2,
-          "color": 1
-        },
-        {
-          "waterID": 5,
-          "waterGroupID": 2,
-          "color": 1
-        }
-      ]
-    }
-  ]
+    ]
 }
