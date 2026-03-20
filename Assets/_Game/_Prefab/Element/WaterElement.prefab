@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7443667230238712502}
   - component: {fileID: 1705001526557351107}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4314521537497380963}
   - component: {fileID: 528842985872011202}
   - component: {fileID: 8291645270309005264}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: WaterElement
   m_TagString: Storage
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3516174086910557482}
   - component: {fileID: 8986594155552355140}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5462877963803603007}
   - component: {fileID: 1934039680008134715}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Skin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,8 +274,8 @@ Transform:
   m_GameObject: {fileID: 6253787637323737511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.1854, z: 0.1}
-  m_LocalScale: {x: 2.54, y: 3.1074781, z: 2.54}
+  m_LocalPosition: {x: -0.01, y: 2.602, z: 0.1}
+  m_LocalScale: {x: 3.597815, y: 1.9853678, z: 2.54}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4314521537497380963}
@@ -349,7 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 731141816930245692}
   - component: {fileID: 5048148533008749817}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Skin (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,8 +365,8 @@ Transform:
   m_GameObject: {fileID: 6749109145813574162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0061, y: 4.789, z: 0.1}
-  m_LocalScale: {x: 2.60035, y: 2.8699174, z: 2.54}
+  m_LocalPosition: {x: -0.0096, y: 3.7, z: 0.1}
+  m_LocalScale: {x: 3.6729515, y: 2.8699174, z: 2.54}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4314521537497380963}

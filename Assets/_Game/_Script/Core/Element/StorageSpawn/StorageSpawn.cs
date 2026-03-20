@@ -21,7 +21,7 @@ public class StorageSpawn
     }
     public void SpawnWater(StorageData data)
     {
-        float spacing = 2.75f;
+        float spacing = 1.9f;
         float offset = .4f;
         for (int i = 0; i < data.waterDatas.Length; i++)
         {

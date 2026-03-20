@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 [CustomEditor(typeof(LevelTool))]
@@ -58,7 +57,6 @@ public class LevelSceneGUI : Editor
                     if (hitCollider[i] == null || !hitCollider[i].CompareTag("Storage")) continue;
                     if (tool.isRemoveStorage)
                     {
-                        Debug.LogError("remove");
                         tool.RemoveStorage(hitCollider[i].gameObject);
                     }
                 }
@@ -104,6 +102,10 @@ public class LevelSceneGUI : Editor
         if (tool.isHiddenWater)
         {
             water.hiddenData.isHidden = true;
+        }
+        if (tool.isFreezeWater)
+        {
+            water.freezeData.amount = tool.FreezeWater.amount;
         }
         tool.AllStorages[idGroup].waterDatas[id] = water;
     }
@@ -194,7 +196,10 @@ public class LevelSceneGUI : Editor
         }
         if (tool.isFreezeWater)
         {
-
+            GameObject fre = tool. ToolVisual.FreezeWaterPrefab();
+            fre.transform.position = final.transform.position;
+            WaterFreezePropertiesVisual v = fre.GetComponent<WaterFreezePropertiesVisual>();
+            v.Text.text = tool.FreezeWater.amount.ToString();
         }
     }
 

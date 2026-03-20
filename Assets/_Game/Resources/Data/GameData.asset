@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   loadResouces: 1
-  maxLevel: 3
+  maxLevel: 5
   initSlot: 5
   clickRadius: 0.37
   coinLevelReward: 30
@@ -22,8 +22,8 @@ MonoBehaviour:
   timeActiveFill: 0.3
   distanceCheckFill: 0.5
   speedConveyorEndGame: 5.5
-  speedWaterFillEndGame: 0.2
-  timeActiveFillEndGame: 0.2
+  speedWaterFillEndGame: 0.18
+  timeActiveFillEndGame: 0.18
   delayCallWinUI: 1.5
   delayCallLoseUI: 1.5
   sizePaddingCam: 16

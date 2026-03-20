@@ -43,7 +43,7 @@ public partial class LevelEditor
         Dictionary<EColorType, int> dicCups = levelTool.GetCupAmount();
         Dictionary<EColorType, int> dicWater = levelTool.GetWaterAmount();
         Dictionary<EColorType, int> dicNew = new Dictionary<EColorType, int>();
-
+        if (dicWater == null) return; 
         foreach (var item in dicWater)
         {
             float waterAmount = item.Value;
@@ -105,7 +105,7 @@ public partial class LevelEditor
         column = Mathf.Max(column, 1);
         Dictionary<EColorType, int> dicCups = levelTool.GetWaterAmount();
         int index = 0;
-
+        if (dicCups == null) return;
         foreach (var item in dicCups)
         {
             if (index % column == 0)

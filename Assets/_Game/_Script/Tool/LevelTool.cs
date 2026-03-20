@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
@@ -153,9 +154,11 @@ public partial class LevelTool : MonoBehaviour
     }
     public Dictionary<EColorType, int> GetWaterAmount()
     {
+        if (allStorages == null || allStorages.Count <= 0) return null;
         Dictionary<EColorType, int> dic = new Dictionary<EColorType, int>();
         for (int i = 0; i < allStorages.Count; i++)
         {
+            if (allStorages[i].waterDatas == null || allStorages[i].waterDatas.Length <= 0) continue;
             for (int j = 0; j < allStorages[i].waterDatas.Length; j++)
             {
                 if (dic.ContainsKey(allStorages[i].waterDatas[j].color))
@@ -240,7 +243,14 @@ public partial class LevelTool : MonoBehaviour
         {
             if (allStorages[i].id != idGroup) continue;
             storage = allStorages[i];
-            allWaters = storage.waterDatas.ToList();
+            if (storage.waterDatas == null || storage.waterDatas.Length <= 0)
+            {
+
+            }
+            else
+            {
+                allWaters = storage.waterDatas.ToList();
+            }
             allWaters.Add(water);
             storage.waterDatas = allWaters.ToArray();
             allStorages[i] = storage;
@@ -258,6 +268,27 @@ public partial class LevelTool : MonoBehaviour
             }
         }
         if (index < 0) return;
+        List<CupData> allCupsNew = new List<CupData>();
+        for (int i = 0; i < allCups.Count; i++)
+        {
+            if (i == index) continue;
+            if (Mathf.Abs(allCups[i].pos.x - allCups[index].pos.x) <= .1f&& allCups[i].pos.y < allCups[index].pos.y)
+            {
+                allCupsNew.Add(allCups[i]);
+            }
+        }
+        for (int i = 0; i < allCups.Count; i++)
+        {
+            for (int j = 0; j < allCupsNew.Count; j++)
+            {
+                if (allCups[i].id == allCupsNew[j].id)
+                {
+                    CupData cup = allCupsNew[j];
+                    cup.pos = new Vector2Int(allCupsNew[j].pos.x, allCupsNew[j].pos.y + 3);
+                    allCups[i] = cup;
+                }
+            }
+        }
         allCups.RemoveAt(index);
         DestroyImmediate(pos);
     }
@@ -339,7 +370,7 @@ public partial class LevelTool : MonoBehaviour
             StorageData storage = allStorages[i];
             storage.id = i;
             allStorages[i] = storage;
-
+            if (allStorages[i].waterDatas == null || allStorages[i].waterDatas.Length <= 0) continue;
             for (int j = 0; j < allStorages[i].waterDatas.Length; j++)
             {
                 WaterData water = allStorages[i].waterDatas[j];
