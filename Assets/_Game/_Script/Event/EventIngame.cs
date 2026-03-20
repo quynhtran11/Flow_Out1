@@ -124,3 +124,9 @@ public struct IncreaseSpeedGameForTapEvent : IEvenParam // call khi user tap vao
 {
     public bool isAddSpeed;
 }
+public struct CupPlaceSlotEvent : IEvenParam  // call khi cup di chyen den o moi 
+{
+    public Vector2Int map;
+    public EColorType colorType;
+    public float timeDelay;
+}

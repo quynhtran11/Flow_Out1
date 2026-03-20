@@ -9589,6 +9589,10 @@ MonoBehaviour:
   type: 3
   vfx: {fileID: 19887470}
   jumpingFx: {fileID: 19898892}
+  allPos:
+  - -0.4
+  - 0.2
+  - 1.2
 --- !u!1 &177496
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class LevelManager : BLBMono
     private void Start()
     {
         PropertisFactory.OnInit();
+        VFXManager.Instance.OnInit();
+
         LevelInfor level = new LevelInfor();
         int levelIndex = UserData.CurrentLevel();
         LevelDataLoader.GetLevelInfor(levelIndex, (levelData) =>

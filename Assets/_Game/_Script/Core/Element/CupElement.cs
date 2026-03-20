@@ -30,10 +30,10 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
         base.SetBusy(isBusy);
         visual.SetBusy(isBusy);
     }
-    public void NextMatrix(Vector2Int matrix, Vector3 pos)
+    public void NextMatrix(Vector2Int matrix, Vector3 pos,float t)
     {
         SetMatrix(matrix);
-        visual.MoveNextMatrix(pos);
+        visual.MoveNextMatrix(pos,matrix,t);
     }
     public void OutMatrix()
     {
@@ -41,6 +41,11 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
         EventDispatcher.Dispatch(new CupToConveyorEvent()
         {
             cup = this
+        });
+        EventDispatcher.Dispatch(new CupPlaceSlotEvent()
+        {
+            colorType = color,
+            map = matrix
         });
     }
     public void MoveToConveyor(Vector3 pos)

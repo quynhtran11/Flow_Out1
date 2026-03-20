@@ -76,6 +76,7 @@ public partial class LevelTool : MonoBehaviour
         {
             CupData cup = allCups[i];
             cup.id = i;
+            cup.amount = 3;
             allCupsNew.Add(cup);
         }
         int x = 0;

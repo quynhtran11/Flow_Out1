@@ -19,12 +19,13 @@ public class SpawnManager : BLBMono
     }
     private void SpawnCup(LevelInfor lv)
     {
+        float offset = 1;
         cupService = new CupElementService();
         for (int i = 0; i < lv.AllCups.Length; i++)
         {
             CupElement cup = SpanwObject<CupElement>(GameData.Instance.ElementInfor.GetData(EElementType.Cup).prefab);
             cup.gameObject.name = "Cup_" + i;
-            Vector3 pos = new Vector3(lv.AllCups[i].pos.x, lv.AllCups[i].pos.y , 0);
+            Vector3 pos = new Vector3(lv.AllCups[i].pos.x, lv.AllCups[i].pos.y + offset , 0);
             cup.Tf.position = pos;
             cup.Initilize(lv.AllCups[i]);
             cupService.RegisterObject(cup);
@@ -32,6 +33,8 @@ public class SpawnManager : BLBMono
     }
     private void SpawnSlotCup(LevelInfor lv)
     {
+        float offset = 1;
+
         float spacing = 3f; 
         int column = lv.Map.x;
         int row = lv.Map.y +5;
@@ -39,11 +42,11 @@ public class SpawnManager : BLBMono
         {
             for (int x = 0; x < column; x++)
             {
-                Vector3 pos = new Vector3(x * spacing,-y * spacing ,3f);
+                Vector3 pos = new Vector3(x * spacing,(-y * spacing)+offset ,3f);
                 SlotCupElement slot = SpanwObject<SlotCupElement>(GameData.Instance.ElementInfor.GetData(EElementType.CupSlot).prefab);
                 slot.gameObject.name = "SlotCup " + x+"_"+y;
                 slot.Tf.position = pos;
-                slot.OnInit();
+                slot.OnInit(new Vector2Int(x,y));
             }
         }
     }
@@ -51,7 +54,7 @@ public class SpawnManager : BLBMono
     {
         storageService = new StorageElementService();
         int count = lev.AllStorages.Length;
-        float spacing = 2f;
+        float spacing = 1f;
         GameObject storagePrefab = GameData.Instance.ElementInfor.GetData(EElementType.Storage).prefab;
         float storageWidth = storagePrefab.GetComponentInChildren<Renderer>().bounds.size.x;
         float totalWidth = count * storageWidth + (count - 1) * spacing;

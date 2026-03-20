@@ -9,8 +9,8 @@ public class BubleSparkVfx :BLBMono
     {
         Tf.SetParent(parent);
         Tf.localPosition = Vector3.zero;
-        var main = vfx.main;
-        main.startColor = c;
+        //var main = vfx.main;
+        //main.startColor = c;
         Invoke(nameof(DeActive), time);
     }
     protected void DeActive()

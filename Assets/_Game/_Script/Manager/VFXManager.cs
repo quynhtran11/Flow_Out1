@@ -14,10 +14,6 @@ public class VFXManager : Singleton<VFXManager>
     //{
     //    //EventDispatcher.RemoveEvent<ChangeSceneEvent>(OnChangeScene);
     //}
-    private void Start()
-    {
-        OnInit();
-    }
     //private void OnChangeScene(ChangeSceneEvent param)
     //{
     //    foreach(var ob in allVfx)
@@ -55,7 +51,7 @@ public class VFXManager : Singleton<VFXManager>
         allVfx[vfxType].Enqueue(go);
         go.gameObject.SetActive(false);
     }
-    private void OnInit()
+    public void OnInit()
     {
         var value = GameData.Instance.VfxInfor;
         for (int i = 0; i < value.Data.Length; i++)

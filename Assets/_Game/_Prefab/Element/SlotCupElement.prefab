@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 35
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 2dd5ecc67360c2a40ac1105e03bac6c7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 9bee98baa75d79d46a443d0cf846ef8b, type: 3}
+  m_Color: {r: 0.19607845, g: 0.1764706, b: 0.26666668, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -151,3 +151,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlotCupElementVisual
   skin: {fileID: 1303194451929443343}
+  baseColor: {r: 0.19607843, g: 0.1764706, b: 0.26666668, a: 1}

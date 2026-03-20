@@ -25,6 +25,7 @@ public enum EVfxType {
     VFX_BubleSpin,
     VFX_Freeze,
     VFX_BubleFill,
+    VFX_Star
 }
 public enum ESceneType
 {

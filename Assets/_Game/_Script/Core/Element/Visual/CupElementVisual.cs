@@ -26,6 +26,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private RectTransform textPosClick;
     [SerializeField] private RectTransform textPosConveyor;
     private Transform parent;
+    private ParticleSystem starVFX;
     private int amount;
     private int maxAmount;
     private Vector3 currentPos;
@@ -181,6 +182,10 @@ public class CupElementVisual : BaseElementVisual<CupData>
             ChangeTextPosition(textPosClick);
             open.gameObject.SetActive(true);
             close.gameObject.SetActive(false);
+            starVFX = VFXManager.Instance.GetObject(EVfxType.VFX_Star);
+            starVFX.gameObject.transform.SetParent(Tf);
+            starVFX.gameObject.transform.localPosition = new Vector2(0f, 1f);
+            Debug.LogError("fasf");
             //skin.transform.localEulerAngles = new Vector3(-50f, 0, 0);
         }
         textAmount.transform.localScale = Vector3.one;
@@ -274,13 +279,24 @@ public class CupElementVisual : BaseElementVisual<CupData>
         base.SetBusy(isBusy);
         ActiveInteract(isBusy);
     }
-    public void MoveNextMatrix(Vector3 pos)
+    public void MoveNextMatrix(Vector3 pos,Vector2Int map,float t)
     {
         Tf.DOKill();
-        Tf.DOMove(pos, .5f).SetEase(Ease.InOutBack);
+        Tf.DOMove(pos, .5f).SetEase(Ease.InOutBack).SetDelay(t).OnComplete(() =>
+        {
+            EventDispatcher.Dispatch(new CupPlaceSlotEvent()
+            {
+                colorType = color,
+                map = map,
+                timeDelay = t
+            });
+        });
     }
     public void OutMatrix() // test
     {
+        StarVFX star = starVFX.GetComponent<StarVFX>();
+        if (star == null) return;
+        star.DisableVFX();
         //Tf.DOKill();
         //Vector3 pos = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z + 5f);
         //Tf.DOMove(pos, 1f);
@@ -365,12 +381,12 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         WaterBolling go = VFXManager.Instance.GetObject(EVfxType.VFX_WaterBolling).GetComponent<WaterBolling>();
         if (go == null) return;
+        float t = (float)(maxAmount - amount) / maxAmount;
         Color c = GameData.Instance.ColorData.GetData(color).color;
         go.OnInit(c);
         go.transform.SetParent(Tf);
         go.transform.position = parentVfx.position;
-
-        float t = (float)(maxAmount - amount) / maxAmount;
+        go.SetPos(parentVfx.position, (maxAmount - amount));
 
         float shaderValue = Mathf.Lerp(startPoint.transform.localPosition.y, endPoint.transform.localPosition.y, t);
         FillWater();

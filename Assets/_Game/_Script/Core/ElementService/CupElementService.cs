@@ -54,6 +54,7 @@ public class CupElementService : BaseElementService<CupElement>
             if (value == null) continue;
             queueBlocks.Enqueue(value);
         }
+        float t =0;
         for (int i = 0; i < lenghtMatrix.y; i++)
         {
             if (queueBlocks == null || queueBlocks.Count <= 0)
@@ -62,10 +63,11 @@ public class CupElementService : BaseElementService<CupElement>
             }
             else
             {
+                t += .05f;
                 var value = queueBlocks.Dequeue();
                 Vector2Int newMatrix = new Vector2Int(value.Matrix.x, value.Matrix.y - 1);
                 value.NextMatrix(newMatrix,
-                    centerPos[newMatrix.x, newMatrix.y]);
+                    centerPos[newMatrix.x, newMatrix.y],t);
                 maxtrix[row, i] = value;
             }
         }
@@ -83,6 +85,13 @@ public class CupElementService : BaseElementService<CupElement>
         lenghtMatrix = new Vector2Int(level.Map.x, level.Map.y);
         centerPos = new Vector3[level.Map.x, level.Map.y];
         Queue<CupElement> stack = new Queue<CupElement>();
+        allElements.Sort((a, b) =>
+        {
+            int compareY = b.Data.pos.y.CompareTo(a.Data.pos.y); 
+            if (compareY != 0) return compareY;
+
+            return a.Data.pos.x.CompareTo(b.Data.pos.x); 
+        });
         for (int i = 0; i < allElements.Count; i++)
         {
             stack.Enqueue(allElements[i]);

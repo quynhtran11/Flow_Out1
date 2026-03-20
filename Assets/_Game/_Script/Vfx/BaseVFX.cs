@@ -15,6 +15,7 @@ public abstract class BaseVFX : BLBMono
     }
     protected virtual void DelayDeactive()
     {
+        if (activeTime <= 0) return;
         VFXManager.Instance.ReturnObject(type, vfx);
     }
 }
