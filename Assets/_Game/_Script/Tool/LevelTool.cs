@@ -107,12 +107,6 @@ public partial class LevelTool : MonoBehaviour
             DestroyImmediate(allCup[i]);
         }
         allCups = new List<CupData>();
-        int index = toolVisual.transform.childCount;
-        for (int i = 0; i < index; i++)
-        {
-            Transform value = toolVisual.transform.GetChild(i).GetComponent<Transform>();
-            DestroyImmediate(value.gameObject);
-        }
 
         GameObject[] allStorage = GameObject.FindGameObjectsWithTag("Storage");
         for (int i = 0; i < allStorage.Length; i++)
@@ -126,6 +120,19 @@ public partial class LevelTool : MonoBehaviour
         for (int i = 0; i < allWaters.Length; i++)
         {
             DestroyImmediate(allWaters[i]);
+        }
+        int index = toolVisual.transform.childCount;
+        Debug.LogError("index_" + index);
+        List<Transform> allTf = new List<Transform>();
+        for (int i = 0; i < index; i++)
+        {
+            int indexOf = i;
+            Transform value = toolVisual.transform.GetChild(indexOf).GetComponent<Transform>();
+            allTf.Add(value);
+        }
+        foreach (var item in allTf)
+        {
+            DestroyImmediate(item.gameObject);
         }
     }
     public Dictionary<EColorType, int> GetCupAmount()

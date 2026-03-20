@@ -59,17 +59,50 @@ public partial class LevelEditor : EditorWindow
     {
         ViewStat(serializedObj);
         levelTool.isEditCup = CreateProperties("EDITTING_CUP", "EDIT_CUP", levelTool.isEditCup);
+        if (!levelTool.isEditCup)
+        {
+            levelTool.isSpawnCup = false;
+            levelTool.isRemoveCup = false;
+            levelTool.isColorCup = false;
+        }
+        else
+        {
+            levelTool.isEditStorage = false;
+            levelTool.isEditWater = false;
+        }
         CupProperties();
     }
     private void StorageGUI(SerializedObject serializedObj)
     {
         ViewStatStorage(serializedObj);
         levelTool.isEditStorage = CreateProperties("EDITTING_STORAGE", "EDIT_STORAGE", levelTool.isEditStorage);
+        if (!levelTool.isEditStorage)
+        {
+            levelTool.isRemoveStorage = false;
+        }
+        else
+        {
+            levelTool.isEditCup = false;
+            levelTool.isEditWater = false;
+        }
         StorageProperties();
     }
     private void WaterGUI(SerializedObject serializedObj)
     {
         levelTool.isEditWater = CreateProperties("EDITTING_WATER", "EDIT_WATER", levelTool.isEditWater);
+        if (!levelTool.isEditWater)
+        {
+            levelTool.isSpawnWater = false;
+            levelTool.isRemoveWater = false;
+            levelTool.isColorWater = false;
+            levelTool.isHiddenWater = false;
+            levelTool.isFreezeWater = false;
+        }
+        else
+        {
+             levelTool.isEditCup = false;
+             levelTool.isEditStorage = false;
+        }
         WaterProperties(serializedObj);
     }
     private bool CreateButton(string name, float size, Color co, Color backColor)

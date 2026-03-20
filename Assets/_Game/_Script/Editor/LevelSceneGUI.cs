@@ -103,7 +103,6 @@ public class LevelSceneGUI : Editor
         }
         if (tool.isHiddenWater)
         {
-            Debug.LogError("hide");
             water.hiddenData.isHidden = true;
         }
         tool.AllStorages[idGroup].waterDatas[id] = water;
@@ -128,7 +127,6 @@ public class LevelSceneGUI : Editor
         if (tool.isHiddenCup)
         {
             data.hiddenData.isHidden = true;
-            Debug.LogError("hidden");
         }
         if (tool.isToggleCup)
         {
@@ -191,7 +189,6 @@ public class LevelSceneGUI : Editor
         }
         if (tool.isHiddenWater)
         {
-            Debug.LogError("sfffsaf3");
             GameObject hid = tool.ToolVisual.HiddenWaterPrefab();
             hid.transform.position = final.transform.position;
         }

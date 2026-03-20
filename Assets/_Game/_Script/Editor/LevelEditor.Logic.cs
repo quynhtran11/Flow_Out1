@@ -43,11 +43,18 @@ public partial class LevelEditor
         Dictionary<EColorType, int> dicCups = levelTool.GetCupAmount();
         Dictionary<EColorType, int> dicWater = levelTool.GetWaterAmount();
         Dictionary<EColorType, int> dicNew = new Dictionary<EColorType, int>();
+
         foreach (var item in dicWater)
         {
-            int remain = item.Value / 3;
-            remain -= dicCups[item.Key];
-            dicNew.Add(item.Key, remain);   
+            float waterAmount = item.Value;
+
+            int neededCups = (int)Mathf.CeilToInt(waterAmount / 3.0f);
+
+            int currentCups = dicCups.ContainsKey(item.Key) ? dicCups[item.Key] : 0;
+
+            int remain = neededCups - currentCups;
+
+            dicNew.Add(item.Key, remain);
         }
         int index = 0;
 
