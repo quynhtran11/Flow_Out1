@@ -1,9 +1,19 @@
 using UnityEngine;
 
-public abstract class BaseBoosterButton : BLBMono
+public class BaseBoosterButton : BLBMono
 {
     [SerializeField] private ButtonEffect btn;
-    [SerializeField] private EBoosterType type;
+    [SerializeField] private EBoosterType boosterType;
+    protected BoosterData data;
+    public EBoosterType BoosterType => boosterType;
+
+    public string KeyBooster
+    {
+        get
+        {
+            return GameUntilities.GetKeyBooster(boosterType);
+        }
+    }
     private void OnEnable()
     {
         btn.onClick.AddListener(ClickBooster);
@@ -16,5 +26,17 @@ public abstract class BaseBoosterButton : BLBMono
     {
         UseBooser();
     }
-    protected abstract void UseBooser();
+    protected void UseBooser()
+    {
+        int amount = UserData.GetBooster(KeyBooster);
+        EventDispatcher.Dispatch(new ClickBoosterGuidEvent()
+        {
+            data = data
+        });
+    }
+    public void OnInit(BoosterData booterData)
+    {
+        this.data = booterData;
+
+    }
 }

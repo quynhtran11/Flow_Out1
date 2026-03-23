@@ -18,6 +18,7 @@ public class WaterHiddenPropertiesVisual : HiddenPropertiesVisual<WaterElement>
     param.water != data) return;
         OnExit();
         data.StopHidden();
-        Debug.LogError("break");
+        data.RemoveProperties(pro);
+
     }
 }

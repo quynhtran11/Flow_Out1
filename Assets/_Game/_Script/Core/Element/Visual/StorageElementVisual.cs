@@ -24,8 +24,8 @@ public class StorageElementVisual : BaseElementVisual<StorageData>
         var buble = VFXManager.Instance.GetObject(EVfxType.VFX_BubleLarge);
         buble.transform.position = storageFillStart.position;
 
-        var bubleFill = VFXManager.Instance.GetObject(EVfxType.VFX_BubleFill);
-        bubleFill.transform.position = parentFill.position;
+        //var bubleFill = VFXManager.Instance.GetObject(EVfxType.VFX_BubleFill);
+        //bubleFill.transform.position = parentFill.position;
 
 
     }

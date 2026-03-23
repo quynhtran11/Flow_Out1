@@ -2,7 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class HiddenPropertiesVisual<T> : BasePropertiesVisual<T>
+public class HiddenPropertiesVisual<T> : BasePropertiesVisual<T,HiddenProperties>
 {
     [SerializeField] private TextMeshProUGUI text;
 

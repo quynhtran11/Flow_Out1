@@ -32,9 +32,7 @@ public class StorageElement : BaseElement<StorageElementVisual, StorageData>
     }
     public WaterElement FirstWater()
     {
-        if (storageSpawn.AllWaters == null || storageSpawn.AllWaters.Count <= 0) return null;
-        if (isBusy) return null;
-        return storageSpawn.AllWaters[0];
+        return storageSpawn.GetFirstWater();
     }
     public void ClearWater(WaterElement water)
     {

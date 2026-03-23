@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class CupToggleColorPropertiesVisual : ToggleColorPropertiesVisual<CupElement>
 {
-    public override void OnInit(CupElement data)
+    public override void OnInit(CupElement data, ToggleColorProperties pro)
     {
-        base.OnInit(data);
+        base.OnInit(data,pro);
         color1 = this.data.Data.color;
         color2 = this.data.Data.toggleColorData.colorType;
         count1 = this.data.Data.amount;
@@ -30,5 +30,10 @@ public class CupToggleColorPropertiesVisual : ToggleColorPropertiesVisual<CupEle
     {
         if (this.data == null) return;
         this.data.ToggleCup(type,count);
+    }
+    protected override void BreakToggle()
+    {
+        base.BreakToggle();
+        data.RemoveProperties(pro);
     }
 }

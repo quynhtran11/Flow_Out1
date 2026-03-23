@@ -32,7 +32,6 @@ public class WaterSinVfx : MonoBehaviour
         skeleton.enabled = false;
         skeletonMesh.enabled = false;
             index = (amount-1);
-        Debug.LogError("index_" + index);
         skeletonMesh.transform.DOLocalMove(allPos[index], GameData.Instance.GetSpeedWaterFill());
         skeletonMesh.transform.DOScale(allSize[index], GameData.Instance.GetSpeedWaterFill());
         StopAllCoroutines();

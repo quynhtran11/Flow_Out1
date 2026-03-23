@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,5 +34,14 @@ public abstract class BaseElement<T, R> : BLBMono where T : BaseElementVisual<R>
     public virtual void SetBusy(bool isBusy)
     {
         this.isBusy = isBusy;
+    }
+    public void RemoveProperties(IProperties pro)
+    {
+        if (!allPros.Contains(pro)) return;
+        allPros.Remove(pro);
+    }
+    public bool HasProperties()
+    {
+        return allPros.Count > 0;
     }
 }

@@ -2,14 +2,21 @@ using System.Collections.Generic;
 using UnityEngine;
 public class StorageElementService : BaseElementService<StorageElement>
 {
+    public StorageElementService()
+    {
+        allElements.Clear();
+        RegisterEvent();
+    }
     protected override void RegisterEvent()
     {
         EventDispatcher.RemoveEvent<CheckFillWaterEvent>(OnCheckFillWater);
         EventDispatcher.RemoveEvent<CheckAllQualifiedFillEvent>(OnCheckAllQualifiedFill);
         EventDispatcher.RemoveEvent<ReviveStorageEvent>(OnReviveStorage);
+        EventDispatcher.RemoveEvent<GetShuffleObjectEvent>(OnGetShuffleObject);
         EventDispatcher.RegisterEvent<CheckFillWaterEvent>(OnCheckFillWater);
         EventDispatcher.RegisterEvent<CheckAllQualifiedFillEvent>(OnCheckAllQualifiedFill);
         EventDispatcher.RegisterEvent<ReviveStorageEvent>(OnReviveStorage);
+        EventDispatcher.RegisterEvent<GetShuffleObjectEvent>(OnGetShuffleObject);
     }
     private void OnCheckFillWater(CheckFillWaterEvent param)
     {
@@ -69,15 +76,15 @@ public class StorageElementService : BaseElementService<StorageElement>
             for (int j = 0; j < allElements[i].AllWater().Count; j++)
             {
                 var value = allElements[i].AllWater()[j];
-                if(value == null ) continue;
+                if (value == null) continue;
                 if (allElements[i].AllWater()[j].IsBusy) continue;
-                if(value.Data.color == param.cup.Color)
+                if (value.Data.color == param.cup.Color)
                 {
                     allWaters.Add(value);
                 }
             }
         }
-        allWaters.Sort((a, b) =>a.transform.position.y.CompareTo(b.transform.position.y));
+        allWaters.Sort((a, b) => a.transform.position.y.CompareTo(b.transform.position.y));
         if (allWaters.Count < remainWater) return;
         for (int i = 0; i < remainWater; i++)
         {
@@ -86,7 +93,7 @@ public class StorageElementService : BaseElementService<StorageElement>
             {
                 allElements[j].ClearWater(value);
             }
-            param.conveyorSlot.WaterFillCup(value, param.cup,true);
+            param.conveyorSlot.WaterFillCup(value, param.cup, true);
         }
         for (int i = 0; i < allElements.Count; i++)
         {
@@ -94,5 +101,15 @@ public class StorageElementService : BaseElementService<StorageElement>
         }
         param.conveyorSlot.UnRegisterObject();
 
+    }
+    private void OnGetShuffleObject(GetShuffleObjectEvent param)
+    {
+        List<WaterElement> allWaters = new List<WaterElement>();
+        for (int i = 0; i < allElements.Count; i++)
+        {
+            allWaters.Add(allElements[i].FirstWater());
+        }
+
+        param.callBack?.Invoke(allWaters);
     }
 }

@@ -5,6 +5,7 @@ public class IngameUI : UIBase
 {
     [SerializeField] private TextMeshProUGUI textLevel;
     [SerializeField] private ButtonEffect btnSetting;
+    [SerializeField] private BaseBoosterButton[] allBossters;
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<StartGameplayEvent>(OnStartGame);
@@ -23,6 +24,7 @@ public class IngameUI : UIBase
     {
         textLevel.text = "Level " + param.level.LevelID.ToString();
         btnSetting.interactable = true;
+        OnInit();
     }
     private void OnReviveGame(ReviveGameEvent param)
     {
@@ -32,6 +34,14 @@ public class IngameUI : UIBase
     {
         btnSetting.interactable = false;
     }
+    protected void OnInit()
+    {
+        for (int i = 0; i < allBossters.Length; i++)
+        {
+            allBossters[i].OnInit(GameData.Instance.BoosterData.GetData(allBossters[i].BoosterType));
+        }
+    }
+
     private void ClickSetting()
     {
         // open setting ui 

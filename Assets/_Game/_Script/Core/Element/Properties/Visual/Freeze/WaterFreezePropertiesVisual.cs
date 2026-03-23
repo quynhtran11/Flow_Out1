@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class WaterFreezePropertiesVisual : FreezePropertiesVisual<WaterElement>
 {
-    public override void OnInit(WaterElement data)
+    public override void OnInit(WaterElement data,FreezeProperties pro)
     {
-        base.OnInit(data);
+        base.OnInit(data, pro);
         this.amount = data.Data.freezeData.amount;
         ChangeTextAmount();
     }
@@ -16,5 +16,6 @@ public class WaterFreezePropertiesVisual : FreezePropertiesVisual<WaterElement>
         if (!IsBreak()) return;
         data.StopFreeze();
         OnExit();
+        data.RemoveProperties(pro);
     }
 }

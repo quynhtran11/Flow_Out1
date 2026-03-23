@@ -105,4 +105,9 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     {
         visual.StopHidden();
     }
+    public void Shuffle(EColorType type)
+    {
+        this.color = type;
+        visual.Shuffle(color);
+    }
 }

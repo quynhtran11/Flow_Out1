@@ -106,7 +106,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 65
   m_TargetDisplay: 0
 --- !u!114 &1430879269016224967
 MonoBehaviour:
@@ -215,8 +215,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '?'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aa83d83cb509fed4a9025b0621df2fd5, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 2bafc7ad0f29f5c4d8b95149fa9dc1e9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0c6257a29470ab4489d7855627c4f2be, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 52f981c80afa4084e884a926e63d5579, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

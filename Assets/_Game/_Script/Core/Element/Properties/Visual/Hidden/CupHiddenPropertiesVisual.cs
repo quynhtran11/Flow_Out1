@@ -20,5 +20,6 @@ public class CupHiddenPropertiesVisual : HiddenPropertiesVisual<CupElement>
 param.cup != data) return;
         OnExit();
         data.StopHidden();
+        data.RemoveProperties(pro);
     }
 }

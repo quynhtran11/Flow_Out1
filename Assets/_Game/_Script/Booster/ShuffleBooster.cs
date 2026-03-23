@@ -15,7 +15,12 @@ public class ShuffleBooster : IBooster
 
     public void OnInit()
     {
-        Debug.LogError("init");
+        //var vfx 
+        //var prefab = GameData.Instance.BoosterData.GetData(boosterType).visual;
+        //var vfx = GameObject.Instantiate(prefab);
+        EventDispatcher.Dispatch(new ShuffleEvent() { });
+
+        EventDispatcher.Dispatch(new ExitBoosterGuidEvent() { });
     }
 
     public void OnUpdate(Action callBack)

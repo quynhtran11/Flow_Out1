@@ -11,7 +11,7 @@ public class FreezeProperties : IProperties
             var hidden = value.GetComponent<WaterFreezePropertiesVisual>();
             hidden.Tf.SetParent(water.Visual.Mesh.transform);
             hidden.Tf.localPosition = Vector3.zero;
-            hidden.OnInit(water);
+            hidden.OnInit(water,this);
         }
     }
 }

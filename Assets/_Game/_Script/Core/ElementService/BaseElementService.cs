@@ -11,8 +11,4 @@ public abstract class BaseElementService<A>
         allElements.Add(value);
     }
     public abstract void InitElement(LevelInfor level);
-    public BaseElementService()
-    {
-        RegisterEvent();
-    }
 }

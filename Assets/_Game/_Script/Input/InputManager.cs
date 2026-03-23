@@ -40,10 +40,8 @@ public class InputManager : BLBMono
     {
         if (endGame) return;
         timePress += Time.deltaTime;
-        Debug.LogError("press");
         if (timePress >= maxTimePress && !isPress)
         {
-            Debug.LogError("pressTrue");
             EventDispatcher.Dispatch(new IncreaseSpeedGameForTapEvent()
             {
                 isAddSpeed = true
@@ -53,7 +51,6 @@ public class InputManager : BLBMono
     }
     private void UnPressScreen()
     {
-        Debug.LogError("1pressFalse");
         if (endGame) return;
         if (!isPress) return;
         EventDispatcher.Dispatch(new IncreaseSpeedGameForTapEvent()

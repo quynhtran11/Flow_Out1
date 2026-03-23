@@ -11,4 +11,9 @@ public static class Constans
     public static string KeySound = "KeySound";
     public static string KeyMusic = "KeyMusic";
     public static string KeyVibrate = "KeyVibrate";
+
+
+    public static string KeyShuffle = "KeyShuffleBooster";
+    public static string KeyPickUp = "KeyPickUp";
+    public static string KeyInstallFill = "KeyInstallFillBooster";
 }

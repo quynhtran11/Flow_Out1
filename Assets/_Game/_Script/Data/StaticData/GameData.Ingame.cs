@@ -17,17 +17,20 @@ public partial class GameData
     [SerializeField] private float delayCallWinUI;
     [SerializeField] private float delayCallLoseUI;
     [SerializeField] private float sizePaddingCam;
+    [SerializeField] private int defaulBooster;
     [SerializeField] private SoundInfor soundData;
     [SerializeField] private ColorInfor colorData;
     [SerializeField] private ElementInfor elementInfor;
     [SerializeField] private VFXInfor vfxInfor;
     [SerializeField] private PropetiesInfor propetiesInfor;
+    [SerializeField] private BoosterInfor boosterData;
     #region Properties
     public SoundInfor SoundData => soundData;
     public ColorInfor ColorData => colorData;
     public ElementInfor ElementInfor => elementInfor;
     public VFXInfor VfxInfor => vfxInfor;
     public PropetiesInfor PropetiesInfor => propetiesInfor;
+    public BoosterInfor BoosterData => boosterData;
     public bool LoadResouces=>loadResouces;
     public float ClickRadius => clickRadius;
     public float CoinLevelReward => coinLevelReward;
@@ -37,6 +40,8 @@ public partial class GameData
     public float SizePaddingCam => sizePaddingCam;
     public int InitSlot => initSlot;
     public int MaxLevel => maxLevel;
+
+    public int DefaulBooster => defaulBooster;
 
     #endregion
     private void OnValidate()

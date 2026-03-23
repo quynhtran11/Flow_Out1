@@ -10,7 +10,7 @@ public class HiddenProperties : IProperties
             var hidden = value.GetComponent<WaterHiddenPropertiesVisual>();
             hidden.Tf.SetParent(water.Visual.Mesh.transform);
             hidden.Tf.localPosition = Vector3.zero;
-            hidden.OnInit(water);
+            hidden.OnInit(water,this);
         }
         if(data is CupElement cup)
         {
@@ -19,7 +19,7 @@ public class HiddenProperties : IProperties
             var hidden = value.GetComponent<CupHiddenPropertiesVisual>();
             hidden.Tf.SetParent(cup.Visual.Skin.transform);
             hidden.Tf.localPosition = Vector3.zero;
-            hidden.OnInit(cup);
+            hidden.OnInit(cup,this);
         }
     }
 }

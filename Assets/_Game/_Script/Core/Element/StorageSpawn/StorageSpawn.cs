@@ -1,7 +1,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class StorageSpawn
 {
     private Transform tf;
@@ -31,7 +31,7 @@ public class StorageSpawn
             water.Initilize(data.waterDatas[i]);
             //water.Tf.position = // TODO
             float size = spacing * (i);
-            Vector3 pos = new Vector3(tf.position.x, (tf.position.y+ size)+(-offset), tf.position.z);
+            Vector3 pos = new Vector3(tf.position.x, (tf.position.y + size) + (-offset), tf.position.z);
             water.Tf.position = pos;
             allWaters.Add(water);
             allPos.Add(pos);
@@ -42,7 +42,7 @@ public class StorageSpawn
         for (int i = 0; i < allWaters.Count; i++)
         {
             allWaters[i].OnInit();
-            allWaters[i].RegisterTarget(targetEnd,i>=allWaters.Count-1);
+            allWaters[i].RegisterTarget(targetEnd, i >= allWaters.Count - 1);
         }
     }
     public void CalculatorPosition(bool isFill = false)
@@ -77,5 +77,10 @@ public class StorageSpawn
         {
             allWaters[i].ChangeSpeedWater();
         }
+    }
+    public WaterElement GetFirstWater()
+    {
+        if (allWaters == null || allWaters.Count <= 0) return null;
+        return allWaters[0];
     }
 }

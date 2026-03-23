@@ -5,12 +5,19 @@ public class CupElementService : BaseElementService<CupElement>
     private CupElement[,] maxtrix;
     private Vector3[,] centerPos;
     private Vector2Int lenghtMatrix;
+    public CupElementService()
+    {
+        allElements.Clear();
+        RegisterEvent();
+    }
     protected override void RegisterEvent()
     {
         EventDispatcher.RemoveEvent<TouchSuccessCupEvent>(OnTouchSuccessCup);
-        EventDispatcher.RegisterEvent<TouchSuccessCupEvent>(OnTouchSuccessCup);
+        EventDispatcher.RemoveEvent<ShuffleEvent>(OnShuffle);
         EventDispatcher.RemoveEvent<TouchFailedCupEvent>(OnTouchFailCup);
+        EventDispatcher.RegisterEvent<TouchSuccessCupEvent>(OnTouchSuccessCup);
         EventDispatcher.RegisterEvent<TouchFailedCupEvent>(OnTouchFailCup);
+        EventDispatcher.RegisterEvent<ShuffleEvent>(OnShuffle);
     }
     private void OnTouchSuccessCup(TouchSuccessCupEvent param)
     {
@@ -41,6 +48,34 @@ public class CupElementService : BaseElementService<CupElement>
     private void OnTouchFailCup(TouchFailedCupEvent param)
     {
         param.cup.MoveFailed();
+    }
+    private void OnShuffle(ShuffleEvent param)
+    {
+        if (allElements == null || allElements.Count <= 0) return;
+        List<EColorType> colorCups  = new List<EColorType>();
+        List<WaterElement> waters = new List<WaterElement>();
+        for (int i = 0; i < allElements.Count; i++)
+        {
+            if (allElements[i].HasProperties()) continue;
+            colorCups.Add(allElements[i].Color);
+        }
+        EventDispatcher.Dispatch(new GetShuffleObjectEvent()
+        {
+            callBack = (x) =>
+            {
+                waters = x;
+            }
+        });
+        for (int i = 0; i < allElements.Count; i++) // test case random 
+        {
+            if (allElements[i].HasProperties()) continue;
+            int rand = Random.Range(0, colorCups.Count);
+            allElements[i].Shuffle(colorCups[rand]);
+            colorCups.RemoveAt(rand);
+        }
+        Debug.LogError("coloir_" + colorCups.Count);
+        Debug.LogError("waters_" + waters.Count);
+
     }
     private void CalculatorMatrix(CupElement block)
     {

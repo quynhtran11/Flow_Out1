@@ -20,7 +20,7 @@ public class ToggleColorProperties : IProperties
             var toggle = value.GetComponent<CupToggleColorPropertiesVisual>();
             toggle.Tf.SetParent(cup.Tf);
             toggle.Tf.localPosition = Vector3.zero;
-            toggle.OnInit(cup);
+            toggle.OnInit(cup,this);
             toggle.AddOposite(cupOpsite);
         }
     }

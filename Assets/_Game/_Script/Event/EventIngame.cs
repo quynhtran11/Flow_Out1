@@ -130,3 +130,20 @@ public struct CupPlaceSlotEvent : IEvenParam  // call khi cup di chyen den o moi
     public EColorType colorType;
     public float timeDelay;
 }
+public struct ClickBoosterGuidEvent : IEvenParam // call when click booster 
+{
+    public BoosterData data;
+}
+public struct ExitBoosterGuidEvent : IEvenParam // call when exit booster guid
+{
+
+}
+
+public struct ShuffleEvent : IEvenParam // call when use shuffle 
+{
+
+}
+public struct GetShuffleObjectEvent : IEvenParam // call khi lay cacs water trong storage
+{
+    public Action<List<WaterElement>> callBack;
+}

@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class ToggleColorPropertiesVisual<T> : BasePropertiesVisual<T>
+public class ToggleColorPropertiesVisual<T> : BasePropertiesVisual<T,ToggleColorProperties>
 {
     [SerializeField] protected SpriteRenderer icon;
     protected EColorType color1;
@@ -11,9 +11,9 @@ public class ToggleColorPropertiesVisual<T> : BasePropertiesVisual<T>
     protected T dataOposite;
     protected bool isChange = false;
     protected bool isPause = false;
-    public override void OnInit(T data)
+    public override void OnInit(T data, ToggleColorProperties pro)
     {
-        base.OnInit(data);
+        base.OnInit(data,pro);
         isChange = false;
     }
     protected override void OnRegister()

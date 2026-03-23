@@ -10,6 +10,6 @@ public class LevelListener : BLBMono
     }
     public void OnInit()
     {
-        textLevel.text = "Lv " + UserData.CurrentLevel();
+        textLevel.text = "Level " + UserData.CurrentLevel();
     }
 }

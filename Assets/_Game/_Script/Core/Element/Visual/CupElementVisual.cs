@@ -64,65 +64,23 @@ public class CupElementVisual : BaseElementVisual<CupData>
     }
     private void LoadColor(EColorType type)
     {
-
-        //if (matBlock == null)
-        //{
-        //    matBlock = new MaterialPropertyBlock();
-        //}
-        //if (matBlock2 == null)
-        //{
-        //    matBlock2 = new MaterialPropertyBlock();
-        //}
-        //if (matWater == null)
-        //{
-        //    matWater = new MaterialPropertyBlock();
-        //}
-        //matBlock.Clear();
-        //matBlock.SetColor("_BaseColor", c);
-        //mesh.SetPropertyBlock(matBlock, 0);
-        //matBlock.Clear();
-        //var colorR = Mathf.Lerp(Color.white.r, c.r, .4f);
-        //var colorG = Mathf.Lerp(Color.white.g, c.g, .4f);
-        //var colorB = Mathf.Lerp(Color.white.b, c.b, .4f);
-        //Color color = c;
-        //color.a = .4f;
-        //matBlock.SetColor("_BaseColor", color);
-        //mesh.SetPropertyBlock(matBlock, 1);
-
-        //mesh2.GetPropertyBlock(matBlock2, 0);
-        //matBlock2.SetColor("_BaseColor", c);
-        //mesh2.SetPropertyBlock(matBlock2, 0);
-
-        //waterMesh.GetPropertyBlock(matWater);
-        //matWater.SetColor("_BaseColor", c);
-        //waterMesh.SetPropertyBlock(matWater);
         Color c = GameData.Instance.ColorData.GetData(type).color;
         skinBoder.color = c;
         parentWater.transform.localScale = new Vector3(.8f, 0, .8f);
         water.color = c;
         skinBoderClose.color = c;
 
-        float r = Mathf.Lerp(c.r, Color.white.r, .7f);
-        float g = Mathf.Lerp(c.g, Color.white.g, .7f);
-        float b = Mathf.Lerp(c.b, Color.white.b, .7f);
+        float r = Mathf.Lerp(c.r, Color.white.r, .9f);
+        float g = Mathf.Lerp(c.g, Color.white.g, .9f);
+        float b = Mathf.Lerp(c.b, Color.white.b, .9f);
         Color col = new Color(r, g, b, 1);
         if (color == EColorType.Black) return;
         for (int i = 0; i < subSkins.Length; i++)
         {
             subSkins[i].color = col;
         }
- 
-        // use shader 
-        //waterMesh.GetPropertyBlock(matWater);
-        //matWater.SetColor("Color_E9C3FC1D", c); // top color 
-
-        //matWater.SetColor("Color_1B2A4228", c*.8f); // bottom color 
-        //matWater.SetColor("Color_12DEDFED", c);// foam color
-        //matWater.SetFloat("Vector1_86B367DE", 2f); // fill 
-        //waterMesh.SetPropertyBlock(matWater);
-
-
     }
+
     private void ChangeTextAmount(int text)
     {
         textAmount.SetText(text.ToString());
@@ -185,7 +143,6 @@ public class CupElementVisual : BaseElementVisual<CupData>
             starVFX = VFXManager.Instance.GetObject(EVfxType.VFX_Star);
             starVFX.gameObject.transform.SetParent(Tf);
             starVFX.gameObject.transform.localPosition = new Vector2(0f, 1f);
-            Debug.LogError("fasf");
             //skin.transform.localEulerAngles = new Vector3(-50f, 0, 0);
         }
         textAmount.transform.localScale = Vector3.one;
@@ -193,14 +150,6 @@ public class CupElementVisual : BaseElementVisual<CupData>
     private void ActiveInteract(bool isBusy)
     {
         ActiveTextAmount(isBusy);
-        //if (isBusy) return;
-        //float delay = (float)data.id * .05f;
-        ////skin.DOKill();
-        //Vector3 scaleInit = new Vector3(.98f, .95f, 1f);
-        //Vector3 scaleAfter = new Vector3(1.03f, 1.05f, 1f);
-        //skin.transform.localScale = scaleInit;
-        //skin.DOScaleX(scaleAfter.x, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay);
-        //skin.DOScaleY(scaleAfter.y, 1.15f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).SetDelay(delay + .2f);
     }
     private void CupShake()
     {
@@ -212,29 +161,17 @@ public class CupElementVisual : BaseElementVisual<CupData>
         float delay = t * .3f;
 
         Tf.DOShakeRotation(
-            0.2f,
-            10f,
-            20,
-            90f,
+            0.3f,
+            8f,
+            15,
+            20f,
             true
         )
         .SetDelay(delay)
-        .SetLoops(Mathf.CeilToInt((t - delay) / 0.2f));
+        .SetLoops(Mathf.CeilToInt((t - delay) / 0.3f));
     }
     IEnumerator FillWater(float target)
     {
-        //waterMesh.GetPropertyBlock(matWater);
-        //float current = matWater.GetFloat("Vector1_86B367DE");
-
-        //float t = 0;
-        //while (t < 1)
-        //{
-        //    t += Time.deltaTime * 3f;
-        //    float value = Mathf.Lerp(current, target, t);
-        //    matWater.SetFloat("Vector1_86B367DE", value);
-        //    waterMesh.SetPropertyBlock(matWater);
-        //    yield return null;
-        //}
         yield return null;
         mask.transform.DOKill();
         float t = GameData.Instance.GetSpeedWaterFill();
@@ -297,9 +234,6 @@ public class CupElementVisual : BaseElementVisual<CupData>
         StarVFX star = starVFX.GetComponent<StarVFX>();
         if (star == null) return;
         star.DisableVFX();
-        //Tf.DOKill();
-        //Vector3 pos = new Vector3(Tf.position.x, Tf.position.y, Tf.position.z + 5f);
-        //Tf.DOMove(pos, 1f);
     }
     public void MoveToConveyor(Vector3 pos, Action callBack)
     {
@@ -322,12 +256,6 @@ public class CupElementVisual : BaseElementVisual<CupData>
             Tf.DOScale(new Vector3(1.1f, 0.85f, 1.1f), 0.08f)
               .SetEase(Ease.OutQuad)
         );
-
-        //seq.Join(
-        //    Tf.DOLocalMoveY(startY - 0.15f, 0.08f)
-        //      .SetEase(Ease.InQuad)
-        //);
-
         seq.Append(
             Tf.DOScale(new Vector3(0.9f, 1.15f, 0.9f), 0.1f)
               .SetEase(Ease.OutQuad)
@@ -402,6 +330,24 @@ public class CupElementVisual : BaseElementVisual<CupData>
         waterSin.OnInit(c,t, (maxAmount - amount));
         //var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpin).GetComponent<BubleSpin>();
         //vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0, lerpY2, 0), Tf, c, amount);
+    }
+    public void Shuffle(EColorType type)
+    {
+        StartCoroutine(ShuffleEffect(type));
+    }
+    private IEnumerator ShuffleEffect(EColorType finalType)
+    {
+        int shuffleCount = 5;
+
+        for (int i = 0; i < shuffleCount; i++)
+        {
+            EColorType rand = (EColorType)UnityEngine.Random.Range(0, (int)EColorType.Black);
+            LoadColor(rand);
+
+            yield return new WaitForSeconds(0.1f);
+        }
+        this.color = finalType;
+        LoadColor(finalType);
     }
     public void Toggle(EColorType type, int amount)
     {

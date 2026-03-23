@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FreezePropertiesVisual<T> : BasePropertiesVisual<T>
+public class FreezePropertiesVisual<T> : BasePropertiesVisual<T,FreezeProperties>
 {
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private SpriteRenderer freezeIcon;
@@ -21,10 +21,6 @@ public class FreezePropertiesVisual<T> : BasePropertiesVisual<T>
     }
     protected virtual void OnClearSuccessWater(ClearSuccessWaterEvent param)
     {
-    }
-    public override void OnInit(T data)
-    {
-        base.OnInit(data);
     }
     protected bool IsBreak()
     {

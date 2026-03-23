@@ -32,4 +32,17 @@ public static class GameUntilities
         }
         return size;
     }
+    public static string GetKeyBooster(EBoosterType boosterType)
+    {
+        switch (boosterType)
+        {
+            case EBoosterType.Shuffle:
+                return Constans.KeyShuffle;
+            case EBoosterType.InstantFill:
+                return Constans.KeyPickUp;
+            case EBoosterType.PickUp:
+                return Constans.KeyInstallFill;
+        }
+        return string.Empty;
+    }
 }

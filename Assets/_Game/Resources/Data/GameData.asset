@@ -26,9 +26,11 @@ MonoBehaviour:
   timeActiveFillEndGame: 0.18
   delayCallWinUI: 1.5
   delayCallLoseUI: 1.5
-  sizePaddingCam: 16
+  sizePaddingCam: 19
+  defaulBooster: 2
   soundData: {fileID: 11400000, guid: 3ad0abf10ad569d4c8921a8d867233ad, type: 2}
   colorData: {fileID: 11400000, guid: 73fca6e8f53d47c46b9bfc192623fdce, type: 2}
   elementInfor: {fileID: 11400000, guid: f8e37a27c944efb45a07e5f492bcb5ab, type: 2}
   vfxInfor: {fileID: 11400000, guid: 387e4983b0e6fe04a9c88625a5b126fa, type: 2}
   propetiesInfor: {fileID: 11400000, guid: 84c43b8e883ec734aad8bc41eb27ba8e, type: 2}
+  boosterData: {fileID: 11400000, guid: a741db1a117176d4ca677c82903ea6a3, type: 2}
