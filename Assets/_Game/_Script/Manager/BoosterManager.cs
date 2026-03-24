@@ -1,25 +1,28 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BoosterManager : BLBMono
 {
+    [SerializeField] private SpriteRenderer mask;
     private List<IBooster> allBooster = new List<IBooster>();
     private void OnEnable()
     {
         EventDispatcher.RegisterEvent<ClickBoosterGuidEvent>(OnClickBoosterGuid);
         EventDispatcher.RegisterEvent<ExitBoosterGuidEvent>(OnExitBoosterGuid);
-
+        EventDispatcher.RegisterEvent<ActiveMaskBoosterEvent>(OnActiveMaskBooster);
+        allBooster.Clear();
     }
     private void OnDisable()
     {
         EventDispatcher.RemoveEvent<ClickBoosterGuidEvent>(OnClickBoosterGuid);
         EventDispatcher.RemoveEvent<ExitBoosterGuidEvent>(OnExitBoosterGuid);
-
+        EventDispatcher.RemoveEvent<ActiveMaskBoosterEvent>(OnActiveMaskBooster);
     }
     private void Update()
     {
-        for (int i = allBooster.Count-1; i < 0; i--)
+        for (int i = allBooster.Count - 1; i >= 0; i--)
         {
             int index = i;
             if (allBooster.Count <= 0) return;
@@ -27,7 +30,8 @@ public class BoosterManager : BLBMono
             if (allBooster[index] == null) continue;
             allBooster[index].OnUpdate(() =>
             {
-
+                EventDispatcher.Dispatch(new ActiveMaskBoosterEvent() { isActive = false });
+                ClearBooster(allBooster[index]);
             });
         }
     }
@@ -44,7 +48,32 @@ public class BoosterManager : BLBMono
             allBooster[index].OnExit();
         }
         allBooster.Clear();
+        EventDispatcher.Dispatch(new ActiveMaskBoosterEvent() { isActive = false });
         //EventDispatcher.Dispatch(new ContinueGameEvent() { });
+    }
+    private void OnActiveMaskBooster(ActiveMaskBoosterEvent param)
+    {
+        if (mask == null) return;
+        mask.DOKill();
+        mask.gameObject.SetActive(true);
+        if (param.isActive)
+        {
+            mask.sortingOrder = GameData.Instance.DefaulSortingMaskBooster;
+            Color c = new Color(0, 0, 0, 0);
+            mask.color = c;
+            mask.DOFade(.8f, .35f).SetEase(Ease.Linear);
+        }
+        else
+        {
+            Color c = new Color(0, 0, 0, .8f);
+            mask.color = c;
+            mask.DOFade(0, .35f).SetEase(Ease.Linear);
+        }
+    }
+    private void ClearBooster(IBooster booster)
+    {
+        if (!allBooster.Contains(booster)) return;
+        allBooster.Remove(booster);
     }
     private IEnumerator AddBooster(EBoosterType boosterType)
     {

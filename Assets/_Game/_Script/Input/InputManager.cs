@@ -3,7 +3,7 @@ using UnityEngine;
 public class InputManager : BLBMono
 {
     private bool showClickGizmo = false;
-    private bool isTouch;
+    private bool isBusy;
     private Vector3 lastClickPos;
     private float timePress;
     private float maxTimePress;
@@ -14,14 +14,18 @@ public class InputManager : BLBMono
         timePress = 0;
         maxTimePress = 1;
         endGame = false;
+        isBusy = false;
         EventDispatcher.RegisterEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedGame);
+        EventDispatcher.RegisterEvent<ActiveMaskBoosterEvent>(OnActiveMaskBooster);
     }
     private void OnDisable()
     {
         EventDispatcher.RemoveEvent<IncreaseSpeedWaterEvent>(OnIncreaseSpeedGame);
+        EventDispatcher.RemoveEvent<ActiveMaskBoosterEvent>(OnActiveMaskBooster);
     }
     private void Update()
     {
+        if (isBusy) return;
         if (Input.GetMouseButtonUp(0))
         {
             ClickObject();
@@ -31,6 +35,10 @@ public class InputManager : BLBMono
         {
             PressScreen();
         }
+    }
+    private void OnActiveMaskBooster(ActiveMaskBoosterEvent param)
+    {
+        isBusy = param.isActive;
     }
     private void OnIncreaseSpeedGame(IncreaseSpeedWaterEvent param)
     {

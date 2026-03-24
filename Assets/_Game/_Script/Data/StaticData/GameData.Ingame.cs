@@ -17,7 +17,9 @@ public partial class GameData
     [SerializeField] private float delayCallWinUI;
     [SerializeField] private float delayCallLoseUI;
     [SerializeField] private float sizePaddingCam;
+    [SerializeField] private float timeShuffle;
     [SerializeField] private int defaulBooster;
+    [SerializeField] private int defaulSortingMaskBooster;
     [SerializeField] private SoundInfor soundData;
     [SerializeField] private ColorInfor colorData;
     [SerializeField] private ElementInfor elementInfor;
@@ -38,10 +40,12 @@ public partial class GameData
     public float DelayCallLoseUI => delayCallLoseUI;
     public float DistanceCheckFill => distanceCheckFill;
     public float SizePaddingCam => sizePaddingCam;
+    public float TimeShuffle => timeShuffle;
     public int InitSlot => initSlot;
     public int MaxLevel => maxLevel;
 
     public int DefaulBooster => defaulBooster;
+    public int DefaulSortingMaskBooster => defaulSortingMaskBooster;
 
     #endregion
     private void OnValidate()

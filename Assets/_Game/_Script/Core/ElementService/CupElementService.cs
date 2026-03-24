@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+[System.Serializable]
 public class CupElementService : BaseElementService<CupElement>
 {
     private CupElement[,] maxtrix;
@@ -13,11 +14,16 @@ public class CupElementService : BaseElementService<CupElement>
     protected override void RegisterEvent()
     {
         EventDispatcher.RemoveEvent<TouchSuccessCupEvent>(OnTouchSuccessCup);
-        EventDispatcher.RemoveEvent<ShuffleEvent>(OnShuffle);
+        EventDispatcher.RemoveEvent<UseShuffleEvent>(OnShuffle);
         EventDispatcher.RemoveEvent<TouchFailedCupEvent>(OnTouchFailCup);
+        EventDispatcher.RemoveEvent<PrePickUpEvent>(OnPrePickUp);
+        EventDispatcher.RemoveEvent<UsePickUpEvent>(OnUsePickUp);
+        EventDispatcher.RegisterEvent<PrePickUpEvent>(OnPrePickUp);
         EventDispatcher.RegisterEvent<TouchSuccessCupEvent>(OnTouchSuccessCup);
         EventDispatcher.RegisterEvent<TouchFailedCupEvent>(OnTouchFailCup);
-        EventDispatcher.RegisterEvent<ShuffleEvent>(OnShuffle);
+        EventDispatcher.RegisterEvent<UseShuffleEvent>(OnShuffle);
+        EventDispatcher.RegisterEvent<UsePickUpEvent>(OnUsePickUp);
+
     }
     private void OnTouchSuccessCup(TouchSuccessCupEvent param)
     {
@@ -49,7 +55,7 @@ public class CupElementService : BaseElementService<CupElement>
     {
         param.cup.MoveFailed();
     }
-    private void OnShuffle(ShuffleEvent param)
+    private void OnShuffle(UseShuffleEvent param)
     {
         if (allElements == null || allElements.Count <= 0) return;
         List<EColorType> colorCups  = new List<EColorType>();
@@ -66,9 +72,11 @@ public class CupElementService : BaseElementService<CupElement>
                 waters = x;
             }
         });
+
+
         for (int i = 0; i < allElements.Count; i++) // test case random 
         {
-            if (allElements[i].HasProperties()) continue;
+            if (allElements[i] == null) continue;
             int rand = Random.Range(0, colorCups.Count);
             allElements[i].Shuffle(colorCups[rand]);
             colorCups.RemoveAt(rand);
@@ -77,11 +85,33 @@ public class CupElementService : BaseElementService<CupElement>
         Debug.LogError("waters_" + waters.Count);
 
     }
-    private void CalculatorMatrix(CupElement block)
+    private void OnUsePickUp(UsePickUpEvent param)
     {
-        int row = block.Matrix.x;
-        maxtrix[block.Matrix.x, block.Matrix.y] = null;
-        block.OutMatrix(); // test
+        if (param.cup == null || !allElements.Contains(param.cup)) return;
+        for (int i = 0; i < allElements.Count; i++)
+        {
+            if (allElements[i] == param.cup) continue;
+            allElements[i].PopSorting();
+        }
+        param.cup.SetBusy(false);
+        CalculatorMatrix(param.cup);
+        allElements.Remove(param.cup);
+    }
+    private void OnPrePickUp(PrePickUpEvent param)
+    {
+        if (allElements == null || allElements.Count <= 0) return;
+        for (int i = 0; i < allElements.Count; i++)
+        {
+            allElements[i].PushSorting();
+        }
+    }
+    private void CalculatorMatrix(CupElement cup)
+    {
+        if (cup == null) return; 
+        int row = cup.Matrix.x;
+        Debug.LogError("_" + cup.Matrix);
+        maxtrix[cup.Matrix.x, cup.Matrix.y] = null;
+        cup.OutMatrix(); // test
         Queue<CupElement> queueBlocks = new Queue<CupElement>();
         for (int i = 0; i < lenghtMatrix.y; i++)
         {
@@ -98,11 +128,13 @@ public class CupElementService : BaseElementService<CupElement>
             }
             else
             {
-                t += .05f;
                 var value = queueBlocks.Dequeue();
+                if (cup.Matrix.y > i) continue;
+                Debug.LogError("ii_" + i);
+                t += .05f;
+                if(value ==null || value.Matrix.y<=0) continue;
                 Vector2Int newMatrix = new Vector2Int(value.Matrix.x, value.Matrix.y - 1);
-                value.NextMatrix(newMatrix,
-                    centerPos[newMatrix.x, newMatrix.y],t);
+                value.NextMatrix(newMatrix,centerPos[newMatrix.x, newMatrix.y],t);
                 maxtrix[row, i] = value;
             }
         }

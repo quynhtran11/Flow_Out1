@@ -18,7 +18,7 @@ public class ShuffleBooster : IBooster
         //var vfx 
         //var prefab = GameData.Instance.BoosterData.GetData(boosterType).visual;
         //var vfx = GameObject.Instantiate(prefab);
-        EventDispatcher.Dispatch(new ShuffleEvent() { });
+        EventDispatcher.Dispatch(new UseShuffleEvent() { });
 
         EventDispatcher.Dispatch(new ExitBoosterGuidEvent() { });
     }

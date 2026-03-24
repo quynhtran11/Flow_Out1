@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+[System.Serializable]
 public class StorageElementService : BaseElementService<StorageElement>
 {
     public StorageElementService()

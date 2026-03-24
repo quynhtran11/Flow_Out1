@@ -27,6 +27,7 @@ public class Conveyor : BLBMono
         EventDispatcher.RegisterEvent<AddSlotEvent>(OnAddSlot);
         EventDispatcher.RegisterEvent<FillPauseGameEvent>(OnFillPauseGame);
         EventDispatcher.RegisterEvent<FillContinueGame>(OnFillContinueGame);
+        EventDispatcher.RegisterEvent<PreInstantFillEvent>(OnPreInstantFill);
     }
     private void OnDisable()
     {
@@ -40,13 +41,14 @@ public class Conveyor : BLBMono
         EventDispatcher.RemoveEvent<AddSlotEvent>(OnAddSlot);
         EventDispatcher.RemoveEvent<FillPauseGameEvent>(OnFillPauseGame);
         EventDispatcher.RemoveEvent<FillContinueGame>(OnFillContinueGame);
+        EventDispatcher.RemoveEvent<PreInstantFillEvent>(OnPreInstantFill);
     }
     private void Update()
     {
         if (GameManager.Instance.GameState != EGameState.Playing /*|| IsFill()*/) return;
         if (isBusy || isPause) return;
-        if (maxAllSlots == null || maxAllSlots.Count <= 0|| allConveyorBows == null||
-            allConveyorBows.Count<=0) return;
+        if (maxAllSlots == null || maxAllSlots.Count <= 0 || allConveyorBows == null ||
+            allConveyorBows.Count <= 0) return;
         for (int i = maxAllSlots.Count - 1; i >= 0; i--)
         {
             if (maxAllSlots[i] == null) continue;
@@ -209,9 +211,9 @@ public class Conveyor : BLBMono
         param.cup.DOKill();
         ConveyorSlotElement c = GetConveyorSlotQualified();
         if (c == null) return;
-        c.RegisterObject(param.cup);
         Vector3 pos = new Vector3(c.Tf.position.x, c.Tf.position.y + .5f,
             c.Tf.position.z);
+        c.RegisterObject(param.cup);
         param.cup.MoveToConveyor(pos);
         currentSlot++;
         currentAllSlots.Add(c);
@@ -310,6 +312,10 @@ public class Conveyor : BLBMono
     private void OnFillContinueGame(FillContinueGame param)
     {
         currentFill--;
+    }
+    private void OnPreInstantFill(PreInstantFillEvent param)
+    {
+
     }
     private bool IsFill()
     {

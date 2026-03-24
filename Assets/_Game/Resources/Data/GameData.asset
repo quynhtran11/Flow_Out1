@@ -27,7 +27,9 @@ MonoBehaviour:
   delayCallWinUI: 1.5
   delayCallLoseUI: 1.5
   sizePaddingCam: 19
+  timeShuffle: 1.25
   defaulBooster: 2
+  defaulSortingMaskBooster: 500
   soundData: {fileID: 11400000, guid: 3ad0abf10ad569d4c8921a8d867233ad, type: 2}
   colorData: {fileID: 11400000, guid: 73fca6e8f53d47c46b9bfc192623fdce, type: 2}
   elementInfor: {fileID: 11400000, guid: f8e37a27c944efb45a07e5f492bcb5ab, type: 2}

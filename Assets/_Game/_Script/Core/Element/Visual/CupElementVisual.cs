@@ -25,6 +25,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     [SerializeField] private RectTransform textPosUnclick;
     [SerializeField] private RectTransform textPosClick;
     [SerializeField] private RectTransform textPosConveyor;
+    [SerializeField] protected CupSkinVisual skinVisualAll;
     private Transform parent;
     private ParticleSystem starVFX;
     private int amount;
@@ -51,12 +52,15 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Tf.parent = parent;
         Tf.transform.DOJump(new Vector3(Tf.position.x, Tf.position.y + 3, Tf.position.z), 1, 1, .3f).OnComplete(() =>
         {
-            Tf.DOScale(Vector3.zero, .4f).SetEase(Ease.InBack).OnComplete(() =>
+            CancelInvoke();
+            float t = .4f;
+            Invoke(nameof(ClearCup), t-.05f);
+            Tf.DOScale(Vector3.zero, t).SetEase(Ease.InBack).OnComplete(() =>
             {
-                ClearCup();
             });
         });
     }
+
     private void ClearCup()
     {
         ParticleSystem go = VFXManager.Instance.GetObject(EVfxType.VFX_Explode);
@@ -70,10 +74,10 @@ public class CupElementVisual : BaseElementVisual<CupData>
         water.color = c;
         skinBoderClose.color = c;
 
-        float r = Mathf.Lerp(c.r, Color.white.r, .9f);
-        float g = Mathf.Lerp(c.g, Color.white.g, .9f);
-        float b = Mathf.Lerp(c.b, Color.white.b, .9f);
-        Color col = new Color(r, g, b, 1);
+        float r = Mathf.Lerp(c.r, Color.white.r, 1f);
+        float g = Mathf.Lerp(c.g, Color.white.g, 1f);
+        float b = Mathf.Lerp(c.b, Color.white.b, 1f);
+        Color col = new Color(r, g, b, (200f/255f));
         if (color == EColorType.Black) return;
         for (int i = 0; i < subSkins.Length; i++)
         {
@@ -231,6 +235,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
     }
     public void OutMatrix() // test
     {
+        if(starVFX == null) return; 
         StarVFX star = starVFX.GetComponent<StarVFX>();
         if (star == null) return;
         star.DisableVFX();
@@ -252,35 +257,14 @@ public class CupElementVisual : BaseElementVisual<CupData>
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(
-            Tf.DOScale(new Vector3(1.1f, 0.85f, 1.1f), 0.08f)
-              .SetEase(Ease.OutQuad)
-        );
-        seq.Append(
-            Tf.DOScale(new Vector3(0.9f, 1.15f, 0.9f), 0.1f)
-              .SetEase(Ease.OutQuad)
-        );
+        seq.Append(Tf.DOScale(new Vector3(1.035f, 0.93f, 1.035f), 0.08f).SetEase(Ease.OutQuad));
+        seq.Append(Tf.DOScale(new Vector3(0.935f, 1.02f, 0.935f), 0.1f).SetEase(Ease.OutQuad));
+        seq.Join(Tf.DOLocalMoveY(startY, 0.1f).SetEase(Ease.OutQuad));
+        seq.Append(Tf.DOLocalJump(new Vector3(0, timeMove, -.5f), 2.5f, 1, 0.45f).SetEase(Ease.OutCubic));
+        seq.Join(Tf.DOLocalRotate(new Vector3(60, 0, 0), .3f));
+        seq.Insert(seq.Duration() - 0.12f,Tf.DOScale(new Vector3(1.035f, 0.92f, 1.035f), 0.1f).SetEase(Ease.InQuad));
 
-        seq.Join(
-            Tf.DOLocalMoveY(startY, 0.1f)
-              .SetEase(Ease.OutQuad)
-        );
-        seq.Append(
-            Tf.DOLocalJump(new Vector3(0, timeMove, -.5f), 2.5f, 1, 0.45f)
-              .SetEase(Ease.OutCubic)
-        );
-        seq.Join(
-    Tf.DOLocalRotate(new Vector3(60, 0, 0), .3f));
-
-        seq.Insert(seq.Duration() - 0.12f,
-            Tf.DOScale(new Vector3(1.15f, 0.85f, 1.15f), 0.1f)
-              .SetEase(Ease.InQuad)
-        );
-
-        seq.Append(
-            Tf.DOScale(Vector3.one, 0.15f)
-              .SetEase(Ease.OutBack)
-        );
+        seq.Append(Tf.DOScale(Vector3.one, 0.15f).SetEase(Ease.OutBack));
 
         seq.OnComplete(() =>
         {
@@ -294,13 +278,7 @@ public class CupElementVisual : BaseElementVisual<CupData>
         Tf.DOKill();
         Tf.localRotation = Quaternion.Euler(currentPos);
 
-        Tf.DOShakeRotation(
-            0.25f,
-            14f,
-            20,
-            90f,
-            true
-        );
+        Tf.DOShakeRotation(0.25f,14f,20,90f,true);
     }
     public void WaterFill()
     {
@@ -331,20 +309,35 @@ public class CupElementVisual : BaseElementVisual<CupData>
         //var vfx = VFXManager.Instance.GetObject(EVfxType.VFX_BubleSpin).GetComponent<BubleSpin>();
         //vfx.OnInit(new Vector3(0, lerpY, 0), new Vector3(0, lerpY2, 0), Tf, c, amount);
     }
+    public void PushSorting()
+    {
+        skinVisualAll.PushSorting();
+        if (open == null || close == null) return;
+        open.gameObject.SetActive(true);
+        close.gameObject.SetActive(false);
+    }
+    public void PopSorting()
+    {
+        skinVisualAll.PopSorting();
+        if (open == null || close == null) return;
+        open.gameObject.SetActive(false);
+        close.gameObject.SetActive(true);
+    }
     public void Shuffle(EColorType type)
     {
         StartCoroutine(ShuffleEffect(type));
     }
     private IEnumerator ShuffleEffect(EColorType finalType)
     {
-        int shuffleCount = 5;
+        float t = GameData.Instance.TimeShuffle / 0.05f;
+        int shuffleCount = (int)t;
 
         for (int i = 0; i < shuffleCount; i++)
         {
             EColorType rand = (EColorType)UnityEngine.Random.Range(0, (int)EColorType.Black);
             LoadColor(rand);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
         this.color = finalType;
         LoadColor(finalType);

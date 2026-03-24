@@ -7,12 +7,14 @@ public class GameHUD : HUD
         EventDispatcher.RegisterEvent<WinGameEvent>(OnWinGame);
         EventDispatcher.RegisterEvent<LoseGameEvent>(OnLoseGame);
         EventDispatcher.RegisterEvent<ReviveGameEvent>(OnReviveGame);
+        EventDispatcher.RegisterEvent<UseShuffleEvent>(OnUseShuffle);
     }
     private void OnDisable()
     {
         EventDispatcher.RemoveEvent<WinGameEvent>(OnWinGame);
         EventDispatcher.RemoveEvent<LoseGameEvent>(OnLoseGame);
         EventDispatcher.RemoveEvent<ReviveGameEvent>(OnReviveGame);
+        EventDispatcher.RemoveEvent<UseShuffleEvent>(OnUseShuffle);
     }
     private void DelayOpenWinUI()
     {
@@ -38,6 +40,13 @@ public class GameHUD : HUD
     }
     private void OnReviveGame(ReviveGameEvent param)
     {
-        GameHUD.Instance.CloseUI<LoseGameUI>();
+        CloseUI<LoseGameUI>();
+    }
+    private void OnUseShuffle(UseShuffleEvent param)
+    {
+        var ui = Get<ShuffleBoosterUI>();
+        if (ui == null) return;
+        OpenUI<ShuffleBoosterUI>();
+        ui.OnInit();
     }
 }

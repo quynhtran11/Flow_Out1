@@ -100,10 +100,6 @@ public struct AddSlotEvent : IEvenParam // call when add slot
 {
 
 }
-public struct UseShuffleEvent : IEvenParam // call when use shuffle
-{
-
-}
 public struct FillPauseGameEvent : IEvenParam // call when fill 
 {
 
@@ -138,12 +134,27 @@ public struct ExitBoosterGuidEvent : IEvenParam // call when exit booster guid
 {
 
 }
-
-public struct ShuffleEvent : IEvenParam // call when use shuffle 
+public struct ActiveMaskBoosterEvent : IEvenParam // call khi bam su dung booster pick up va instant fill
+{
+    public bool isActive;
+}
+public struct UseShuffleEvent : IEvenParam // call when use shuffle 
 {
 
 }
 public struct GetShuffleObjectEvent : IEvenParam // call khi lay cacs water trong storage
 {
     public Action<List<WaterElement>> callBack;
+}
+public struct PrePickUpEvent : IEvenParam // call khi bam vao pick up nhung chua dung
+{
+
+}
+public struct UsePickUpEvent : IEvenParam // call khi bam vao coc su dung booster pickup
+{
+    public CupElement cup;
+}
+public struct PreInstantFillEvent : IEvenParam // call khi bam vao instant nhung chua su dung
+{
+
 }

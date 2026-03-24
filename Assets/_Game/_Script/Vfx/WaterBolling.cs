@@ -10,7 +10,8 @@ public class WaterBolling : BaseVFX
         var v = vfx.emission;
         v.enabled = false;
         var vfxJump = jumpingFx.main;
-        vfxJump.startColor = c;
+        Color color = Color.Lerp(c, Color.white, .7f);
+        vfxJump.startColor = color;
     }
     public void SetPos(Vector3 pos, int index)
     {

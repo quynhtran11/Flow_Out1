@@ -91,6 +91,16 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
             cup = visual
         });
     }
+    public void PushSorting()
+    {
+        if (matrix.y <= 0 || HasProperties()) return;
+        visual.PushSorting();
+    }
+    public void PopSorting()
+    {
+        if (matrix.y <= 0 || HasProperties()) return;
+        visual.PopSorting();
+    }
     public void ToggleCup(EColorType type,int max)
     {
         this.color = type;
@@ -107,6 +117,7 @@ public class CupElement : BaseElement<CupElementVisual, CupData>
     }
     public void Shuffle(EColorType type)
     {
+        if (visual == null|| HasProperties()) return;
         this.color = type;
         visual.Shuffle(color);
     }

@@ -436,7 +436,7 @@ SpriteRenderer:
   m_SortingOrder: 40
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: c33e1090105490d4f9e4b9c119e27ef8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1100,6 +1100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7471166275793031373}
+  - component: {fileID: 2291779139560564254}
   m_Layer: 0
   m_Name: Skin
   m_TagString: Untagged
@@ -1125,6 +1126,28 @@ Transform:
   - {fileID: 3839416991707060374}
   m_Father: {fileID: 1179402701204307808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2291779139560564254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5370787016627960658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9088b262ce39aa24692e79b02a511bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CupSkinVisual
+  allSkins:
+  - {fileID: 3623072254379556527}
+  - {fileID: 5598342799913302179}
+  - {fileID: 377111966065977790}
+  - {fileID: 4894913753854950257}
+  - {fileID: 8676428885558884495}
+  - {fileID: 2447279442908542048}
+  - {fileID: 313986346575975847}
+  - {fileID: 7842287100990069074}
+  - {fileID: 4102563608387412607}
 --- !u!1 &5793693647423305581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,6 +1325,7 @@ MonoBehaviour:
   textPosUnclick: {fileID: 7981436398072795621}
   textPosClick: {fileID: 4284802389997257141}
   textPosConveyor: {fileID: 8401925086183560353}
+  skinVisualAll: {fileID: 2291779139560564254}
 --- !u!65 &7297910298764296503
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1352,7 +1376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &407664725542534840
 Transform:
   m_ObjectHideFlags: 0
@@ -1575,7 +1599,7 @@ SpriteRenderer:
   m_SortingOrder: 37
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 0e42c65f418676349855070cc67c9de0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1600,7 +1624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &145430370912840024
 Transform:
   m_ObjectHideFlags: 0
