@@ -150,7 +150,11 @@ public struct PrePickUpEvent : IEvenParam // call khi bam vao pick up nhung chua
 {
 
 }
-public struct UsePickUpEvent : IEvenParam // call khi bam vao coc su dung booster pickup
+public struct UsePickUpUIEvent : IEvenParam// call khi bam vao coc su dung booster pickup
+{
+
+}
+public struct UsePickUpEvent : IEvenParam // call khi ui pickup da chay xong anim 
 {
     public CupElement cup;
 }

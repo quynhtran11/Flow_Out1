@@ -101,6 +101,6 @@ public class WaterFill : BaseVFX
     }
     private void Update()
     {
-        line.material.SetTextureOffset("_MainTex", new Vector2(-speedOffset * Time.time, 0));
+        //line.material.SetTextureOffset("_MainTex", new Vector2(-speedOffset * Time.time, 0));
     }
 }

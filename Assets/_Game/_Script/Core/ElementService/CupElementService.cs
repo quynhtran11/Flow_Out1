@@ -109,7 +109,6 @@ public class CupElementService : BaseElementService<CupElement>
     {
         if (cup == null) return; 
         int row = cup.Matrix.x;
-        Debug.LogError("_" + cup.Matrix);
         maxtrix[cup.Matrix.x, cup.Matrix.y] = null;
         cup.OutMatrix(); // test
         Queue<CupElement> queueBlocks = new Queue<CupElement>();
@@ -130,7 +129,6 @@ public class CupElementService : BaseElementService<CupElement>
             {
                 var value = queueBlocks.Dequeue();
                 if (cup.Matrix.y > i) continue;
-                Debug.LogError("ii_" + i);
                 t += .05f;
                 if(value ==null || value.Matrix.y<=0) continue;
                 Vector2Int newMatrix = new Vector2Int(value.Matrix.x, value.Matrix.y - 1);

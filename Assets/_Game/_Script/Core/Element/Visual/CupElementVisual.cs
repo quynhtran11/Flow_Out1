@@ -359,6 +359,5 @@ public class CupElementVisual : BaseElementVisual<CupData>
     {
         LoadColor(color);
         ScaleText(true);
-        Debug.LogError("aff2");
     }
 }

@@ -114,7 +114,6 @@ public class InputManager : BLBMono
                 });
                 if (nearestBlock.IsBusy || isFull)
                 {
-                    Debug.LogError("touchFail");
                     EventDispatcher.Dispatch(new TouchFailedCupEvent()
                     {
                         cup = nearestBlock,
@@ -126,7 +125,6 @@ public class InputManager : BLBMono
                     {
                         cup = nearestBlock,
                     });
-                    Debug.LogError("touchSuccess");
                 }
             }
         }
